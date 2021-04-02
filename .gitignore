@@ -58,3 +58,14 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Assets/GUI/PSDs.meta
+Assets/GUI/PSDs/Background.psd
+Assets/GUI/PSDs/Background.psd.meta
+Assets/GUI/PSDs/Box.psd
+Assets/GUI/PSDs/Box.psd.meta
+Assets/GUI/PSDs/Glyphs.psd
+Assets/GUI/PSDs/Glyphs.psd.meta
+Assets/GUI/PSDs/Overlay.psd
+Assets/GUI/PSDs/Overlay.psd.meta
+Assets/GUI/PSDs/TeamBox.psd
+Assets/GUI/PSDs/TeamBox.psd.meta

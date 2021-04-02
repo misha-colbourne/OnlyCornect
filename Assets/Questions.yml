@@ -1,0 +1,234 @@
+# --------------------------------------------------------------------------------------------------------------------------------------
+ConnectionRound:
+
+    - Connection: This is a test question
+      Clues:
+        - Testing
+        - One
+        - Two
+        - Here is a clue with a good deal more text than usual
+
+    - Connection: Fates of Sean Bean characters
+      Clues:
+        - Quartered by horses
+        - Beheaded
+        - Three arrows to the chest
+        - Crushed by a burning antenna
+
+    - Connection: Hope
+      Clues:
+        - Cape of Good Hope
+        - Hope Diamond
+        - Bob Hope
+        - "Star Wars: Episode IV - <nobr>A New Hope</nobr>"
+
+    - Connection: Channel Island anagrams
+      Clues:
+        - US Energy
+        - Nantes
+        - J Reyes
+        - Arks
+
+    - Connection: Synonyms of card games
+      Clues:
+        - Sovereignty
+        - One
+        - Japanese cuisine depart!
+        - "Sorcery: The Congregation"
+
+    - Connection: Fools or Jesters
+      Clues:
+        - First (or last)<br>of the Major Arcana
+        - Puck
+        - Falconhoof's associate
+        - Roland the Farter
+
+    - Connection: Towns/Cities in the original Pokémon games
+      Clues:
+        - Fuschia City
+        - Pewter City
+        - Lavender Town
+        - Pallet Town
+
+    - Connection: Neapolitan
+      Clues:
+        - Chord
+        - Mastiff
+        - Ice Cream
+        - Naples
+
+    - Connection: "Rhyming mnemonics, acronym-ified"
+      Clues:
+        - "ROB, VL<br>ROY, KAF"
+        - IBE, EAC
+        - DBD, DBS
+        - NESW
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+SequencesRound:
+
+    - Connection: Countries word chain
+      Clues:
+        - Moldova → Vanuatu
+        - Vanuatu → Turkmenistan
+        - Turkmenistan → Angola
+        - Angola → Laos/Latvia
+
+    - Connection: Planetary Greek/Roman god equivalents
+      Clues:
+        - Poseidon (Greek)
+        - Caelus (Roman)
+        - Cronus (Greek)
+        - Zeus (Greek)
+
+    - Connection: Last four Dota 2 heroes alphabetically
+      Clues:
+        - Zeus
+        - Wraith King
+        - Witch Doctor
+        - Winter Wyvern
+
+    - Connection: "'cester Towns with decreasing prefix lengths"
+      Clues:
+        - Cirencester
+        - Gloucester
+        - Leicester
+        - Alcester/Bicester
+
+    - Connection: First 4 Monopoly properties and their costs in £
+      Clues:
+        - TAI 100
+        - KCS 200
+        - WR 60
+        - OKR 60
+
+    - Connection: The Simpsons characters with increasing numbers of eyes
+      Clues:
+        - Horatio McAllister
+        - Kang
+        - Seymour Skinner
+        - Blinky
+
+    - Connection: Words with two fewer As each time
+      Clues:
+        - Taramasalata
+        - Madagascar
+        - Radar
+        - e.g Rhythm
+
+    - Connection: Compass directions missing from band names
+      Clues:
+        - lane
+        - 17
+        - The Beautiful
+        - e.g. Go
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+WallRound:
+
+    -   - Connection: Star ____
+          Clues:
+            - Gate
+            - Sky and Hutch
+            - Trek
+            - Girl
+
+        - Connection: Chocolate bars with rotated letters
+          Clues:
+            - Liou
+            - Wars
+            - Freppo
+            - Todic
+
+        - Connection: Models of Ford cars
+          Clues:
+            - Galaxy
+            - Orion
+            - Taurus
+            - Puma
+
+        - Connection: Big cats
+          Clues:
+            - Cougar
+            - Lynx
+            - Leopard
+            - Jaguar
+
+    -   - Connection: ____ Point
+          Clues:
+            - Lizard
+            - Vanishing
+            - Lagrangian
+            - Bodkin
+
+        - Connection: Lists
+          Clues:
+            - Bullet
+            - Hit
+            - Wish
+            - Bucket
+
+        - Connection: Seas
+          Clues:
+            - Dead
+            - Sargasso
+            - North
+            - Red
+
+        - Connection: Colours in the CMYK model
+          Clues:
+            - Cyan
+            - Magenta
+            - Yellow
+            - Black
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+MissingVowelsRound:
+
+    - Connection: London Underground stations
+      Clues:
+        - "Paddington"
+        - "Tottenham Court Road"
+        - "Oval"
+        - "Heathrow Terminal Five"
+        - "King's Cross St. Pancras"
+
+    - Connection: Quotes from Peep Show
+      Clues:
+        - "Four naan, Jeremy? Four? That's insane"
+        - "I'm not on the child protection register... yet!"
+        - "This is outrageous! This is contagious!"
+        - "I've accidentally run to Windsor"
+        - "You're a fuckhead! That's what you are - a fucking shithead!"
+
+    - Connection: Two overlapping film titles
+      Clues:
+        - "Million Dollar Baby Driver"
+        - "The Hateful Eight-Legged Freaks"
+        - "The Spy Who Loved Me, Myself and Irene"
+
+    - Connection: Three overlapping film titles
+      Clues:
+        - "American Beauty and the Beast of Eden"
+        - "Dr. No Time To Die Another Day"
+        - "The Dark Knight of the Living Dead Poet's Society"
+
+    - Connection: Four overlapping film titles
+      Clues:
+        - "The Railway Children of Men in Black Hawk Down"
+
+    - Connection: Wonders of the World
+      Clues:
+        - "Hagia Sophia"
+        - "Great Pyramid of Giza"
+        - "St. Basil's Cathedral"
+        - "Machu Picchu"
+        - "Hanging Gardens of Babylon"
+
+    - Connection: Song titles with the wrong colours
+      Clues:
+        - "Goodbye Grey Brick Road"
+        - "Orange Submarine"
+        - "White White Wine"
+        - "Supermassive Brown Hole"
+        - "Welcome to the Pink Parade"
