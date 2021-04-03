@@ -15,7 +15,7 @@ namespace OnlyCornect
     {
         public static QuizData ParseQuiz()
         {
-            string filepath = @"C:\Users\Misha\Documents\Unity\OnlyCornect\Assets\Questions.yml";
+            string filepath = Application.streamingAssetsPath + "/Questions.yml";
             QuizData quiz = null;
 
             using (StreamReader reader = new StreamReader(filepath))

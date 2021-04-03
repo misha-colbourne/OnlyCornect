@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using OnlyCornect;
 using UnityEngine;
 
 public class UtilitiesForUI : MonoBehaviour
 {
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public static UtilitiesForUI Instance
     {
         get
@@ -17,25 +21,36 @@ public class UtilitiesForUI : MonoBehaviour
     private static UtilitiesForUI instance;
 
     // --------------------------------------------------------------------------------------------------------------------------------------
+    public const int CLUE_PICTURE_WIDTH = 1680;
+    public const int CLUE_PICTURE_HEIGHT = 960;
+
     public Color OVERLAY_LIGHT;
     public Color OVERLAY_TIME;
     public Color OVERLAY_TEAM;
     public Color OVERLAY_DARK;
 
-    //public static string OVERLAY_LIGHT = "#60C4FD";
-    //public const string OVERLAY_TIME = "#04517D";
-    //public const string OVERLAY_TEAM = "#383B3C";
-    //public const string OVERLAY_DARK = "#1C2429";
+    public static Dictionary<string, Sprite> Pictures = new Dictionary<string, Sprite>();
 
-    // Start is called before the first frame update
-    void Start()
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    public static void LoadPictures(QuizData quiz)
     {
-        
-    }
+        //Create an array of file paths from which to choose
+        string folderPath = Application.streamingAssetsPath + "/Pictures/";
+        string[] filePaths = Directory.GetFiles(folderPath, "*.png");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < filePaths.Length; i++)
+        {
+            //Converts desired path into byte array
+            byte[] pngBytes = System.IO.File.ReadAllBytes(filePaths[i]);
+
+            //Creates texture and loads byte array data to create image
+            Texture2D tex = new Texture2D(CLUE_PICTURE_WIDTH, CLUE_PICTURE_HEIGHT);
+            tex.LoadImage(pngBytes);
+
+            //Creates a new Sprite based on the Texture2D
+            Sprite sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+
+            Pictures.Add(Path.GetFileNameWithoutExtension(filePaths[i]), sprite);
+        }
     }
 }

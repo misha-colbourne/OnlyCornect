@@ -1,19 +1,14 @@
+# Place pictures as .png files in /Pictures, ideally as 1680x960
+
 # --------------------------------------------------------------------------------------------------------------------------------------
 ConnectionRound:
 
-    - Connection: This is a test question
-      Clues:
-        - Behold!
-        - It'll be just like Only Connect
-        - With easier questions
-        - Should be fun to play as teams too, I hope
-
-    - Connection: Fates of Sean Bean characters
-      Clues:
-        - Quartered by horses
-        - Beheaded
-        - Three arrows to the chest
-        - Crushed by a burning antenna
+    # - Connection: This is a test question
+    #   Clues:
+    #     - Behold!
+    #     - It'll be just like Only Connect
+    #     - With easier questions
+    #     - Should be fun to play as teams too, I hope
 
     - Connection: Hope
       Clues:
@@ -27,26 +22,19 @@ ConnectionRound:
         - Hope_Bob
         - Hope_StarWars
 
+    - Connection: Fates of Sean Bean characters
+      Clues:
+        - Quartered by horses
+        - Beheaded
+        - Three arrows to the chest
+        - Crushed by a burning antenna
+
     - Connection: Channel Island anagrams
       Clues:
         - US Energy
         - Nantes
         - J Reyes
         - Arks
-
-    - Connection: Synonyms of card games
-      Clues:
-        - Sovereignty
-        - One
-        - Japanese cuisine depart!
-        - "Sorcery: The Congregation"
-
-    - Connection: Fools or Jesters
-      Clues:
-        - First (or last)<br>of the Major Arcana
-        - Puck
-        - Falconhoof's associate
-        - Roland the Farter
 
     - Connection: Towns/Cities in the original Pokémon games
       Clues:
@@ -59,6 +47,20 @@ ConnectionRound:
         - Pokemon_Pewter
         - Pokemon_Lavender
         - Pokemon_Pallet
+
+    - Connection: Fools or Jesters
+      Clues:
+        - First (or last)<br>of the Major Arcana
+        - Puck
+        - Falconhoof's associate
+        - Roland the Farter
+
+    - Connection: Synonyms of card games
+      Clues:
+        - Sovereignty
+        - One
+        - Japanese cuisine depart!
+        - "Sorcery: The Congregation"
 
     - Connection: Neapolitan
       Clues:

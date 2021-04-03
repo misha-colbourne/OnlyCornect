@@ -33,6 +33,8 @@ namespace OnlyCornect
             GlyphSelection.Init();
             ConnectionRound.Init(quiz.ConnectionRound);
 
+            UtilitiesForUI.LoadPictures(quiz);
+
             StartCoroutine(Utilities.WaitAFrameThenRun(MoveToQuestionSelection));
         }
 

@@ -12,9 +12,11 @@ namespace OnlyCornect
         public TMP_Text Text;
         public Button SelectableButton;
         public Image FlashLayer;
+        public Image Picture;
 
         [HideInInspector]
         public bool Selected = false;
+
         private bool flashing = false;
 
         // --------------------------------------------------------------------------------------------------------------------------------------

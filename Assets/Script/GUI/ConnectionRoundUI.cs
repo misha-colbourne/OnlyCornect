@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using OnlyCornect;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace OnlyCornect
 {
     public class ConnectionRoundUI : MonoBehaviour
     {
         public TimeBoxUI TimeBox;
-        [SerializeField] private Vector3 TimeBoxSpacing;
+        public Image BigPicture;
+        [SerializeField] private GameObject BoxesSpacer;
+
         public List<ClueUI> Clues;
         [SerializeField] private List<int> Scores;
 
@@ -58,11 +61,31 @@ namespace OnlyCornect
         public void NextQuestion()
         {
             ConnectionQuestion question = connectionRound[currentQuestion];
+            bool isPictureRound = false;
+
             for (int i = 0; i < question.Clues.Count; i++)
             {
-                Clues[i].Text.text = question.Clues[i];
                 Clues[i].gameObject.SetVisible(false);
+                Clues[i].Text.text = question.Clues[i];
+                Clues[i].Text.gameObject.SetActive(true);
+
+                if (question.Pictures != null && i < question.Pictures.Count && UtilitiesForUI.Pictures.ContainsKey(question.Pictures[i])) 
+                {
+                    Clues[i].Picture.gameObject.SetActive(true);
+                    Clues[i].Picture.sprite = UtilitiesForUI.Pictures[question.Pictures[i]];
+                    Clues[i].Text.gameObject.SetActive(false);
+                    isPictureRound = true;
+                }
+                else
+                {
+                    Clues[i].Picture.gameObject.SetActive(false);
+                }
             }
+
+            // Set big pic container to on if picture round
+            BigPicture.transform.parent.gameObject.SetActive(isPictureRound);
+            // Disable spacer for centering if picture round
+            BoxesSpacer.gameObject.SetActive(!isPictureRound);
 
             currentQuestion++;
             currentClue = 0;
@@ -85,9 +108,14 @@ namespace OnlyCornect
                 Clues[currentClue].gameObject.SetVisible(true);
                 new List<TweenHandler>(Clues[currentClue].GetComponents<TweenHandler>()).ForEach(x => x.Begin());
 
+                if (Clues[currentClue].Picture.isActiveAndEnabled)
+                {
+                    BigPicture.sprite = Clues[currentClue].Picture.sprite;
+                }
+
                 // Reposition timebox to new clue
                 var clueContainerPos = Clues[currentClue].transform.parent.position;
-                TimeBox.transform.position = clueContainerPos + TimeBoxSpacing;
+                TimeBox.transform.position = new Vector3 (clueContainerPos.x, TimeBox.transform.position.y, clueContainerPos.z);
 
                 // Animate moving of timebox to new clue 
                 if (currentClue > 0)
