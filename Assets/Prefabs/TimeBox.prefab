@@ -99,9 +99,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 40
   Delay: 0
-  useSpecifiedFrom: 0
-  From: {x: 0, y: 0, z: 0}
+  useSpecifiedFrom: 1
+  From: {x: -420, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &4197100264775146942
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +370,8 @@ MonoBehaviour:
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &7264881512327356320
 GameObject:
   m_ObjectHideFlags: 0

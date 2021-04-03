@@ -8,12 +8,14 @@ using UnityEngine;
 
 public static class Utilities
 {
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public static void SetVisible(this GameObject go, bool visible)
     {
         CanvasGroup cg = go.GetComponent<CanvasGroup>();
         cg.alpha = visible ? 1 : 0;
     }
 
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public static IEnumerator WaitAFrameThenRun(Action action)
     {
         yield return null;

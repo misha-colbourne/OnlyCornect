@@ -76,7 +76,6 @@ namespace OnlyCornect
             // Start time bar ticking down
             if (currentClue == 0)
             {
-                TimeBox.gameObject.SetVisible(true);
                 new List<TweenHandler>(TimeBox.FillBar.GetComponents<TweenHandler>()).ForEach(x => x.Begin());
             }
 
@@ -102,6 +101,12 @@ namespace OnlyCornect
 
                 currentClue++;
             }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void StopTimeBar()
+        {
+            new List<TweenHandler>(TimeBox.FillBar.GetComponents<TweenHandler>()).ForEach(x => x.Cancel());
         }
 
     }

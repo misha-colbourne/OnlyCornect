@@ -8,11 +8,16 @@ namespace OnlyCornect
     {
         public List<ClueUI> GlyphBoxes;
 
+        [HideInInspector]
+        public bool SelectionMade = false;
+
+        private 
+
         // --------------------------------------------------------------------------------------------------------------------------------------
         // Start is called before the first frame update
         void Start()
         {
-
+            
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -25,7 +30,11 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void Init()
         {
-            
+            foreach (var gbox in GlyphBoxes)
+            {
+                if (gbox.SelectableButton != null)
+                    gbox.SelectableButton.onClick.AddListener(delegate { GlyphSelected(gbox); });
+            }
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -34,7 +43,12 @@ namespace OnlyCornect
             gameObject.SetActive(true);
 
             foreach (var gbox in GlyphBoxes)
-                gbox.gameObject.SetVisible(true);
+            {
+                gbox.SelectableButton.interactable = !gbox.Selected;
+                gbox.Overlay.color = gbox.Selected ? UtilitiesForUI.Instance.OVERLAY_LIGHT : UtilitiesForUI.Instance.OVERLAY_DARK;
+            }
+
+            SelectionMade = false;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +57,16 @@ namespace OnlyCornect
             gameObject.SetActive(false);
 
             foreach (var gbox in GlyphBoxes)
-                gbox.gameObject.SetVisible(false);
+            {
+                gbox.SetFlash(false);
+            }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void GlyphSelected(ClueUI gbox)
+        {
+            SelectionMade = true;
+            gbox.SetFlash(true);
         }
     }
 }

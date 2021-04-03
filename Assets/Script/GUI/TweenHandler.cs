@@ -26,6 +26,8 @@ public class TweenHandler : MonoBehaviour
     public bool useSpecifiedFrom = true;
     public Vector3 From;
     public Vector3 To;
+    public bool Loop;
+    public bool PingPong;
 
     private LTDescr _tweenObject;
 
@@ -33,7 +35,7 @@ public class TweenHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TweenProperty = (TweenAction)_tweenProperty;
+        
     }
 
     // Update is called once per frame
@@ -45,6 +47,8 @@ public class TweenHandler : MonoBehaviour
     // --------------------------------------------------------------------------------------------------------------------------------------
     public void Begin()
     {
+        TweenProperty = (TweenAction)_tweenProperty;
+
         switch (TweenProperty)
         {
             case TweenAction.MOVE_LOCAL:
@@ -67,7 +71,17 @@ public class TweenHandler : MonoBehaviour
             _tweenObject.setEase(EaseType);
             if (EaseType == LeanTweenType.animationCurve)
                 _tweenObject.setEase(Curve);
+
+            if (Loop)
+                _tweenObject.setLoopClamp();
+            if (PingPong)
+                _tweenObject.setLoopPingPong();
         }
+    }
+
+    public void Cancel()
+    {
+        LeanTween.cancel(gameObject);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------

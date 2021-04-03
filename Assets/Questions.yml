@@ -3,10 +3,10 @@ ConnectionRound:
 
     - Connection: This is a test question
       Clues:
-        - Testing
-        - One
-        - Two
-        - Here is a clue with a good deal more text than usual
+        - Behold!
+        - It'll be just like Only Connect
+        - With easier questions
+        - Should be fun to play as teams too, I hope
 
     - Connection: Fates of Sean Bean characters
       Clues:
@@ -21,6 +21,11 @@ ConnectionRound:
         - Hope Diamond
         - Bob Hope
         - "Star Wars: Episode IV - <nobr>A New Hope</nobr>"
+      Pictures:
+        - Hope_Cape
+        - Hope_Diamond
+        - Hope_Bob
+        - Hope_StarWars
 
     - Connection: Channel Island anagrams
       Clues:
@@ -49,6 +54,11 @@ ConnectionRound:
         - Pewter City
         - Lavender Town
         - Pallet Town
+      Pictures:
+        - Pokemon_Fuschia
+        - Pokemon_Pewter
+        - Pokemon_Lavender
+        - Pokemon_Pallet
 
     - Connection: Neapolitan
       Clues:
@@ -56,6 +66,11 @@ ConnectionRound:
         - Mastiff
         - Ice Cream
         - Naples
+      Pictures:
+        - Neapolitan_Chord
+        - Neapolitan_Mastiff
+        - Neapolitan_IceCream
+        - Neapolitan_Naples
 
     - Connection: "Rhyming mnemonics, acronym-ified"
       Clues:
@@ -67,26 +82,12 @@ ConnectionRound:
 # --------------------------------------------------------------------------------------------------------------------------------------
 SequencesRound:
 
-    - Connection: Countries word chain
+    - Connection: Pirates of the Caribbean last word synonyms
       Clues:
-        - Moldova → Vanuatu
-        - Vanuatu → Turkmenistan
-        - Turkmenistan → Angola
-        - Angola → Laos/Latvia
-
-    - Connection: Planetary Greek/Roman god equivalents
-      Clues:
-        - Poseidon (Greek)
-        - Caelus (Roman)
-        - Cronus (Greek)
-        - Zeus (Greek)
-
-    - Connection: Last four Dota 2 heroes alphabetically
-      Clues:
-        - Zeus
-        - Wraith King
-        - Witch Doctor
-        - Winter Wyvern
+        - Oceanic ebb<br>and flow
+        - Conclusion
+        - Treasure box
+        - e.g. Spherical mollusc byproduct
 
     - Connection: "'cester Towns with decreasing prefix lengths"
       Clues:
@@ -94,6 +95,11 @@ SequencesRound:
         - Gloucester
         - Leicester
         - Alcester/Bicester
+      Pictures:
+        - Cester_Cirencester
+        - Cester_Gloucester
+        - Cester_Leicester
+        - Cester_AlcesterBicester
 
     - Connection: First 4 Monopoly properties and their costs in £
       Clues:
@@ -102,7 +108,7 @@ SequencesRound:
         - WR 60
         - OKR 60
 
-    - Connection: The Simpsons characters with increasing numbers of eyes
+    - Connection: The Simpsons characters with increasing numbers of <i>real</i> eyes
       Clues:
         - Horatio McAllister
         - Kang
@@ -114,18 +120,38 @@ SequencesRound:
         - Taramasalata
         - Madagascar
         - Radar
-        - e.g Rhythm
+        - e.g. Lynx
+      Pictures:
+        - As_Taramasalata
+        - As_Madagascar
+        - As_Radar
+        - As_Lynx
 
-    - Connection: Compass directions missing from band names
+    - Connection: Planetary Greek/Roman god equivalents
       Clues:
-        - lane
+        - Poseidon (Greek)
+        - Caelus (Roman)
+        - Cronus (Greek)
+        - Zeus (Greek)
+
+    - Connection: Countries word chain
+      Clues:
+        - Moldova →<br>Vanuatu
+        - Vanuatu →<br>Turkmenistan
+        - Turkmenistan →<br>Angola
+        - Angola →<br>Laos/Latvia
+
+    - Connection: Band/Artist names missing compass directions
+      Clues:
+        - Anna of the
         - 17
         - The Beautiful
-        - e.g. Go
+        - e.g. life
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 WallRound:
 
+    # Wall 1
     -   - Connection: Star ____
           Clues:
             - Gate
@@ -154,33 +180,34 @@ WallRound:
             - Leopard
             - Jaguar
 
+    # Wall 2
     -   - Connection: ____ Point
           Clues:
             - Lizard
             - Vanishing
-            - Lagrangian
+            - Match
             - Bodkin
 
         - Connection: Lists
           Clues:
             - Bullet
             - Hit
-            - Wish
+            - Check
             - Bucket
 
         - Connection: Seas
           Clues:
             - Dead
-            - Sargasso
+            - Black
             - North
             - Red
 
-        - Connection: Colours in the CMYK model
+        - Connection: CMYK colour model
           Clues:
             - Cyan
             - Magenta
             - Yellow
-            - Black
+            - Key
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 MissingVowelsRound:
@@ -191,7 +218,7 @@ MissingVowelsRound:
         - "Tottenham Court Road"
         - "Oval"
         - "Heathrow Terminal Five"
-        - "King's Cross St. Pancras"
+        - "Euston"
 
     - Connection: Quotes from Peep Show
       Clues:
@@ -203,8 +230,8 @@ MissingVowelsRound:
 
     - Connection: Two overlapping film titles
       Clues:
-        - "Million Dollar Baby Driver"
         - "The Hateful Eight-Legged Freaks"
+        - "Million Dollar Baby Driver"
         - "The Spy Who Loved Me, Myself and Irene"
 
     - Connection: Three overlapping film titles

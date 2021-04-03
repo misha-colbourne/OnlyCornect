@@ -66,15 +66,36 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void HandleInput()
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (currentPhase == EPhase.QuestionSelection)
             {
-                if (!ConnectionRound.IsOutOfCluesForCurrentQuestion)
-                    ConnectionRound.NextClue();
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    if (GlyphSelection.SelectionMade)
+                    {
+                        GlyphSelection.SelectionMade = false;
+                        NextQuestion();
+                    }
+                }
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (currentPhase == EPhase.ConnectionRound)
             {
-                MoveToQuestionSelection();
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    if (!ConnectionRound.IsOutOfCluesForCurrentQuestion)
+                        ConnectionRound.NextClue();
+                }
+
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    ConnectionRound.StopTimeBar();
+                    MoveToQuestionSelection();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    ConnectionRound.StopTimeBar();
+                }
             }
         }
     }
