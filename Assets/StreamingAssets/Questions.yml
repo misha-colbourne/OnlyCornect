@@ -96,12 +96,12 @@ SequencesRound:
         - Cirencester
         - Gloucester
         - Leicester
-        - Alcester/Bicester
+        - e.g. Bicester
       Pictures:
         - Cester_Cirencester
         - Cester_Gloucester
         - Cester_Leicester
-        - Cester_AlcesterBicester
+        - Cester_Bicester
 
     - Connection: First 4 Monopoly properties and their costs in £
       Clues:
@@ -120,14 +120,14 @@ SequencesRound:
     - Connection: Words with two fewer As each time
       Clues:
         - Taramasalata
-        - Madagascar
-        - Radar
-        - e.g. Lynx
+        - Katakana
+        - Llamas
+        - e.g. Crypt
       Pictures:
         - As_Taramasalata
-        - As_Madagascar
-        - As_Radar
-        - As_Lynx
+        - As_Katakana
+        - As_Llamas
+        - As_Crypt
 
     - Connection: Planetary Greek/Roman god equivalents
       Clues:
