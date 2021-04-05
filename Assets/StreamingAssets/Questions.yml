@@ -9,17 +9,17 @@ ConnectionRound:
     #     - With easier questions
     #     - Should be fun to play as teams too, I hope
 
-    # - Connection: Hope
-    #   Clues:
-    #     - Cape of Good Hope
-    #     - Hope Diamond
-    #     - Bob Hope
-    #     - "Star Wars: Episode IV - <nobr>A New Hope</nobr>"
-    #   Pictures:
-    #     - Hope_Cape
-    #     - Hope_Diamond
-    #     - Hope_Bob
-    #     - Hope_StarWars
+    - Connection: Hope
+      Clues:
+        - Cape of Good Hope
+        - Hope Diamond
+        - Bob Hope
+        - "Star Wars: Episode IV - <nobr>A New Hope</nobr>"
+      Pictures:
+        - Hope_Cape
+        - Hope_Diamond
+        - Hope_Bob
+        - Hope_StarWars
 
     - Connection: Fates of Sean Bean characters
       Clues:

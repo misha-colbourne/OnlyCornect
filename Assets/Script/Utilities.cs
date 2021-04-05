@@ -12,6 +12,8 @@ public static class Utilities
     public static void SetVisible(this GameObject go, bool visible)
     {
         CanvasGroup cg = go.GetComponent<CanvasGroup>();
+        if (cg == null)
+            cg = go.AddComponent<CanvasGroup>();
         cg.alpha = visible ? 1 : 0;
     }
 

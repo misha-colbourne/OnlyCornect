@@ -10,15 +10,16 @@ namespace OnlyCornect
 {
     public class ConnectionRoundUI : MonoBehaviour
     {
+        public GameObject BoxesContainer;
         public GameObject CluesAndTimeBoxContainer;
         public TimeBoxUI TimeBox;
-
-        public GameObject BigPictureContainer;
-        public Image BigPicture;
 
         public GameObject AnswerContainer;
         public GameObject AnswerBox;
         public TMP_Text AnswerText;
+
+        public GameObject BigPictureContainer;
+        public Image BigPicture;
 
         public List<ClueUI> Clues;
         [SerializeField] private List<int> Scores;
@@ -81,6 +82,7 @@ namespace OnlyCornect
 
             // Set big pic container to on if picture round
             BigPictureContainer.SetActive(isPictureRound);
+            BigPictureContainer.SetVisible(isPictureRound);
 
             currentQuestion++;
             currentClue = 0;
@@ -95,8 +97,7 @@ namespace OnlyCornect
             if (currentClue == 0)
             {
                 timeBarRunning = true;
-                foreach (var tween in TimeBox.FillBar.GetComponents<TweenHandler>())
-                    tween.Begin();
+                TimeBox.FillBar.GetComponent<TweenHandler>().Begin();
             }
 
             if (currentClue < Clues.Count)
@@ -121,8 +122,7 @@ namespace OnlyCornect
                     if (currentClue > 0)
                     {
                         TimeBox.gameObject.SetVisible(false);
-                        foreach (var tween in TimeBox.GetComponents<TweenHandler>())
-                            tween.Begin();
+                        TimeBox.GetComponent<TweenHandler>().Begin();
                     }
 
                     int score = Scores[currentClue];
@@ -137,17 +137,18 @@ namespace OnlyCornect
         public void StopTimeBar()
         {
             timeBarRunning = false;
-            foreach (var tween in TimeBox.FillBar.GetComponents<TweenHandler>())
-                tween.Cancel();
+            TimeBox.FillBar.GetComponent<TweenHandler>().Cancel();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void ShowAnswer()
+        public IEnumerator ShowAnswer()
         {
             if (!timeBarRunning)
             {
+                if (BigPictureContainer.activeInHierarchy)
+                    yield return ShrinkBigPic();
+
                 AnswerContainer.SetActive(true);
-                BigPictureContainer.SetActive(false);
 
                 while (!IsOutOfCluesForCurrentQuestion)
                     NextClue();
@@ -170,7 +171,28 @@ namespace OnlyCornect
                         tween.Begin();
                     }
                 }
+
+                // TODO pic answer overlays
             }
+
+            yield return null;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public IEnumerator ShrinkBigPic()
+        {
+            BigPictureContainer.GetComponent<TweenHandler>().Begin(onComplete: delegate
+            {
+                BoxesContainer.GetComponent<LayoutElement>().ignoreLayout = true;
+                BoxesContainer.GetComponent<TweenHandler>().Begin(onComplete: delegate
+                {
+                    BigPictureContainer.SetActive(false);
+                    BoxesContainer.GetComponent<LayoutElement>().ignoreLayout = false;
+                });
+            });
+
+            while (BigPictureContainer.LeanIsTweening() || BoxesContainer.LeanIsTweening())
+                yield return null;
         }
     }
 }

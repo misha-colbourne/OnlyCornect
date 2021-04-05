@@ -6,6 +6,8 @@ namespace OnlyCornect
 {
     public class GlyphSelectionUI : MonoBehaviour
     {
+        private const float DISABLED_ALPHA = 0.6f;
+
         public List<ClueUI> GlyphBoxes;
 
         [HideInInspector]
@@ -32,7 +34,7 @@ namespace OnlyCornect
                 gbox.Overlay.color = gbox.Selected ? UtilitiesForUI.Instance.OVERLAY_LIGHT : UtilitiesForUI.Instance.OVERLAY_DARK;
 
                 CanvasGroup cg = gbox.GetComponent<CanvasGroup>();
-                cg.alpha = gbox.Selected ? 0.6f : 1;
+                cg.alpha = gbox.Selected ? DISABLED_ALPHA : 1;
             }
 
             SelectionMade = false;

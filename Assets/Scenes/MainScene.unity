@@ -1293,6 +1293,7 @@ GameObject:
   - component: {fileID: 698640437}
   - component: {fileID: 698640439}
   - component: {fileID: 698640438}
+  - component: {fileID: 698640440}
   m_Layer: 5
   m_Name: Boxes Container
   m_TagString: Untagged
@@ -1367,6 +1368,34 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &698640440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698640436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectsToTween: []
+  TweenProperty: 4
+  EaseType: 14
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!114 &742283589 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7940861776006022763, guid: 30d08969422463f4cb39f1f2a7bb95a3, type: 3}
@@ -1596,7 +1625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 680c20e93dbb6b24da4f2f857c7650a2, type: 2}
-  m_Color: {r: 0.39409044, g: 0.55033964, b: 0.6792453, a: 1}
+  m_Color: {r: 0.3457636, g: 0.55205667, b: 0.6981132, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1798,13 +1827,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b14ad06e9896a4fb6cfe7003661c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BoxesContainer: {fileID: 698640436}
   CluesAndTimeBoxContainer: {fileID: 1528687545}
   TimeBox: {fileID: 1096976597}
-  BigPictureContainer: {fileID: 1835062978}
-  BigPicture: {fileID: 675460806}
   AnswerContainer: {fileID: 2047456527}
   AnswerBox: {fileID: 1652449666}
   AnswerText: {fileID: 246687705}
+  BigPictureContainer: {fileID: 1835062978}
+  BigPicture: {fileID: 675460806}
   Clues:
   - {fileID: 1836003053}
   - {fileID: 1688212665}
@@ -3020,7 +3050,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Duration: 0.2
+  Duration: 0.15
   Delay: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
@@ -3847,23 +3877,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1835062978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.3
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!114 &1835062981
 MonoBehaviour:
   m_ObjectHideFlags: 0

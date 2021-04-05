@@ -101,7 +101,7 @@ namespace OnlyCornect
 
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    ConnectionRound.ShowAnswer();
+                    StartCoroutine(ConnectionRound.ShowAnswer());
                 }
             }
         }
