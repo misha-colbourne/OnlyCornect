@@ -7,17 +7,18 @@ public class TweenHandler : MonoBehaviour
 {
     public enum ETweenProperty
     {
-        Move = 35,
-        Rotate = 38,
-        Scale = 39,
-        Fade = 23
+        Move = TweenAction.MOVE_LOCAL,
+        MoveX = TweenAction.MOVE_LOCAL_X,
+        MoveY = TweenAction.MOVE_LOCAL_Y,
+        Rotate = TweenAction.ROTATE_LOCAL,
+        Scale = TweenAction.SCALE,
+        Fade = TweenAction.CANVAS_ALPHA,
+        Size = TweenAction.CANVAS_SIZEDELTA
     }
 
-    [SerializeField]
-    private ETweenProperty _tweenProperty;
-    [HideInInspector]
-    public TweenAction TweenProperty;
-
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    public List<GameObject> ObjectsToTween;
+    public ETweenProperty TweenProperty;
     public LeanTweenType EaseType;
     public AnimationCurve Curve;
     public float Duration;
@@ -27,188 +28,140 @@ public class TweenHandler : MonoBehaviour
     public Vector3 From;
     public Vector3 To;
     public bool Loop;
-    public bool PingPong;
+    public int PingPong;
 
     private LTDescr _tweenObject;
 
-    // --------------------------------------------------------------------------------------------------------------------------------------
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        // Use own gameobject if tween targets unspecified
+        if (ObjectsToTween == null || ObjectsToTween.Count == 0)
+            ObjectsToTween = new List<GameObject>() { gameObject };
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public void Begin()
+    public void Begin(Action onComplete = null)
     {
-        TweenProperty = (TweenAction)_tweenProperty;
-
-        switch (TweenProperty)
+        foreach (var toTween in ObjectsToTween)
         {
-            case TweenAction.MOVE_LOCAL:
-                Move();
-                break;
-            case TweenAction.ROTATE_LOCAL:
-                Rotate();
-                break;
-            case TweenAction.SCALE:
-                Scale();
-                break;
-            case TweenAction.CANVAS_ALPHA:
-                Fade();
-                break;
-        }
+            switch (TweenProperty)
+            {
+                case ETweenProperty.Move:
+                    Move(toTween);
+                    break;
+                case ETweenProperty.MoveX:
+                    Move(toTween);
+                    break;
+                case ETweenProperty.MoveY:
+                    Move(toTween);
+                    break;
+                case ETweenProperty.Rotate:
+                    Rotate(toTween);
+                    break;
+                case ETweenProperty.Scale:
+                    Scale(toTween);
+                    break;
+                case ETweenProperty.Fade:
+                    Fade(toTween);
+                    break;
+                case ETweenProperty.Size:
+                    Size(toTween);
+                    break;
+            }
 
-        if (_tweenObject != null)
-        {
-            _tweenObject.setDelay(Delay);
-            _tweenObject.setEase(EaseType);
-            if (EaseType == LeanTweenType.animationCurve)
-                _tweenObject.setEase(Curve);
+            if (_tweenObject != null)
+            {
+                _tweenObject.setDelay(Delay);
+                _tweenObject.setEase(EaseType);
+                if (EaseType == LeanTweenType.animationCurve)
+                    _tweenObject.setEase(Curve);
 
-            if (Loop)
-                _tweenObject.setLoopClamp();
-            if (PingPong)
-                _tweenObject.setLoopPingPong();
+                if (Loop)
+                    _tweenObject.setLoopClamp();
+
+                if (PingPong > 0)
+                    _tweenObject.setLoopPingPong(PingPong);
+                else if (PingPong == -1)
+                    _tweenObject.setLoopPingPong();
+
+                if (onComplete != null)
+                    _tweenObject.setOnComplete(onComplete);
+            }
         }
     }
 
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public void Cancel()
     {
-        LeanTween.cancel(gameObject);
+        foreach (var toTween in ObjectsToTween)
+            LeanTween.cancel(toTween);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public void Move()
+    public void Move(GameObject toTween)
     {
         if (useSpecifiedFrom)
-            gameObject.transform.localPosition = From;
+            toTween.transform.localPosition = From;
 
-        _tweenObject = LeanTween.moveLocal(gameObject, To, Duration);
+        if (TweenProperty == ETweenProperty.MoveX)
+            _tweenObject = LeanTween.moveLocalX(toTween, To.x, Duration);
+        else if (TweenProperty == ETweenProperty.MoveY)
+            _tweenObject = LeanTween.moveLocalY(toTween, To.y, Duration);
+        else
+            _tweenObject = LeanTween.moveLocal(toTween, To, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public void Rotate()
+    public void Rotate(GameObject toTween)
     {
         if (useSpecifiedFrom)
-            gameObject.transform.localEulerAngles = From;
+            toTween.transform.localEulerAngles = From;
 
-        _tweenObject = LeanTween.rotateLocal(gameObject, To, Duration);
+        _tweenObject = LeanTween.rotateLocal(toTween, To, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public void Scale()
+    public void Scale(GameObject toTween)
     {
         if (useSpecifiedFrom)
-            gameObject.transform.localScale = From;
+            toTween.transform.localScale = From;
 
-        _tweenObject = LeanTween.scale(gameObject, To, Duration);
+        _tweenObject = LeanTween.scale(toTween, To, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public void Fade()
+    public void Fade(GameObject toTween)
     {
-        if (gameObject.GetComponent<CanvasGroup>() == null)
-            gameObject.AddComponent<CanvasGroup>();
-
-        var cg = gameObject.GetComponent<CanvasGroup>();
+        CanvasGroup cg = toTween.GetComponent<CanvasGroup>();
+        if (cg == null)
+            cg = toTween.AddComponent<CanvasGroup>();
 
         if (useSpecifiedFrom)
             cg.alpha = From.x;
 
-        _tweenObject = LeanTween.alphaCanvas(gameObject.GetComponent<CanvasGroup>(), To.x, Duration);
+        _tweenObject = LeanTween.alphaCanvas(toTween.GetComponent<CanvasGroup>(), To.x, Duration);
     }
 
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    public void Size(GameObject toTween)
+    {
+        var rt = toTween.transform as RectTransform;
 
+        Vector2 to = new Vector2(
+            (To.x == -1) ? rt.sizeDelta.x : To.x,
+            (To.y == -1) ? rt.sizeDelta.y : To.y
+        );
 
-    //[HideInInspector]
-    //public float Elapsed = 0;
+        if (useSpecifiedFrom)
+        {
+            Vector2 from = new Vector2(
+                (From.x == -1) ? rt.sizeDelta.x : From.x,
+                (From.y == -1) ? rt.sizeDelta.y : From.y
+            );
 
-    //private IEnumerator coroutine;
-    //private Quaternion startQ;
-    //private Quaternion endQ;
-    //private CanvasGroup canvasGroup;
+            rt.sizeDelta = from;
+        }
 
-    //// --------------------------------------------------------------------------------------------------------------------------------------
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    if (TweenProperty == ETweenProperty.Position)
-    //    {
-    //        if (UseOwnPosAsFrom)
-    //            from = transform.localPosition;
-    //    }
-
-    //    if (TweenProperty == ETweenProperty.Rotation)
-    //    {
-    //        startQ = Quaternion.Euler(from);
-    //        endQ = Quaternion.Euler(to);
-    //    }
-
-    //    if (TweenProperty == ETweenProperty.Visibility)
-    //    {
-    //        canvasGroup = GetComponent<CanvasGroup>();
-    //    }
-
-    //    coroutine = Lerp();
-    //}
-
-    //// --------------------------------------------------------------------------------------------------------------------------------------
-    //public void BeginLerp()
-    //{
-    //    StopCoroutine(coroutine);
-
-    //    Elapsed = 0;
-    //    coroutine = Lerp();
-
-    //    StartCoroutine(coroutine);
-    //}
-
-    //// --------------------------------------------------------------------------------------------------------------------------------------
-    //IEnumerator Lerp()
-    //{
-    //    yield return new WaitForSeconds(Delay);
-
-    //    while (Elapsed < Duration)
-    //    {
-    //        float t = Elapsed / Duration;
-
-    //        switch (TweenProperty)
-    //        {
-    //            case (ETweenProperty.Position):
-    //                transform.localPosition = Vector3.Lerp(from, to, t);
-    //                break;
-    //            case (ETweenProperty.Rotation):
-    //                transform.localRotation = Quaternion.Lerp(startQ, endQ, t);
-    //                break;
-    //            case (ETweenProperty.Visibility):
-    //                canvasGroup.alpha = Mathf.Lerp(from.x, to.x, t);
-    //                break;
-    //        }
-
-    //        Elapsed += Time.deltaTime;
-    //        yield return null;
-    //    }
-
-    //    // Final pass 
-    //    switch (TweenProperty)
-    //    {
-    //        case (ETweenProperty.Position):
-    //            transform.localPosition = to;
-    //            break;
-    //        case (ETweenProperty.Rotation):
-    //            transform.localRotation = endQ;
-    //            break;
-    //        case (ETweenProperty.Visibility):
-    //            canvasGroup.alpha = to.x;
-    //            break;
-    //    }
-    //}
-
+        _tweenObject = LeanTween.size(rt, To, Duration);
+    }
 }

@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tweenProperty: 23
-  TweenProperty: 0
+  ObjectsToTween: []
+  TweenProperty: 23
   EaseType: 4
   Curve:
     serializedVersion: 2
@@ -104,7 +104,7 @@ MonoBehaviour:
   From: {x: 0, y: 0, z: 0}
   To: {x: 0.8, y: 0, z: 0}
   Loop: 0
-  PingPong: 1
+  PingPong: -1
 --- !u!1 &2562432704938408004
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 6dcc2ba678f02b64ba18ae4226a25c3f, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -286,8 +286,8 @@ GameObject:
   - component: {fileID: 7254833983822889743}
   - component: {fileID: 3706353877269039368}
   - component: {fileID: 1996990848504842613}
-  - component: {fileID: 1748534021353447629}
   - component: {fileID: 8898290469793127050}
+  - component: {fileID: 1748534021353447629}
   m_Layer: 5
   m_Name: Clue
   m_TagString: Untagged
@@ -418,8 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tweenProperty: 35
-  TweenProperty: 0
+  ObjectsToTween: []
+  TweenProperty: 35
   EaseType: 38
   Curve:
     serializedVersion: 2
@@ -491,8 +491,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tweenProperty: 38
-  TweenProperty: 0
+  ObjectsToTween: []
+  TweenProperty: 38
   EaseType: 38
   Curve:
     serializedVersion: 2
@@ -543,34 +543,6 @@ MonoBehaviour:
   To: {x: 0, y: 0, z: 0}
   Loop: 0
   PingPong: 0
---- !u!114 &1748534021353447629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7264881512196825189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tweenProperty: 23
-  TweenProperty: 0
-  EaseType: 6
-  Curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  Duration: 0.3
-  Delay: 0.1
-  useSpecifiedFrom: 1
-  From: {x: 0, y: 0, z: 0}
-  To: {x: 1, y: 0, z: 0}
-  Loop: 0
-  PingPong: 0
 --- !u!114 &8898290469793127050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,8 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tweenProperty: 39
-  TweenProperty: 0
+  ObjectsToTween: []
+  TweenProperty: 39
   EaseType: 0
   Curve:
     serializedVersion: 2
@@ -597,6 +569,34 @@ MonoBehaviour:
   useSpecifiedFrom: 1
   From: {x: 0.8, y: 0.8, z: 0.8}
   To: {x: 1, y: 1, z: 1}
+  Loop: 0
+  PingPong: 0
+--- !u!114 &1748534021353447629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264881512196825189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 6
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.3
+  Delay: 0.1
+  useSpecifiedFrom: 1
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 1, y: 0, z: 0}
   Loop: 0
   PingPong: 0
 --- !u!1 &7264881512327356320

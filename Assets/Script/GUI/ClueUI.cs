@@ -46,12 +46,14 @@ namespace OnlyCornect
             if (flash)
             {
                 FlashLayer.gameObject.SetActive(true);
-                FlashLayer.GetComponent<TweenHandler>().Begin();
+                foreach (var tween in FlashLayer.GetComponents<TweenHandler>())
+                    tween.Begin();
             }
             else if (flashing)
             {
                 FlashLayer.gameObject.SetActive(false);
-                FlashLayer.GetComponent<TweenHandler>().Cancel();
+                foreach (var tween in FlashLayer.GetComponents<TweenHandler>())
+                    tween.Cancel();
             }
 
             flashing = flash;

@@ -88,7 +88,7 @@ namespace OnlyCornect
                         ConnectionRound.NextClue();
                 }
 
-                if (Input.GetKeyDown(KeyCode.UpArrow))
+                if (Input.GetKeyDown(KeyCode.Backspace))
                 {
                     ConnectionRound.StopTimeBar();
                     MoveToQuestionSelection();
@@ -97,6 +97,11 @@ namespace OnlyCornect
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     ConnectionRound.StopTimeBar();
+                }
+
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    ConnectionRound.ShowAnswer();
                 }
             }
         }

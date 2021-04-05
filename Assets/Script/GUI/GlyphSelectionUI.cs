@@ -11,22 +11,6 @@ namespace OnlyCornect
         [HideInInspector]
         public bool SelectionMade = false;
 
-        private 
-
-        // --------------------------------------------------------------------------------------------------------------------------------------
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
-
-        // --------------------------------------------------------------------------------------------------------------------------------------
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void Init()
         {
@@ -46,6 +30,9 @@ namespace OnlyCornect
             {
                 gbox.SelectableButton.interactable = !gbox.Selected;
                 gbox.Overlay.color = gbox.Selected ? UtilitiesForUI.Instance.OVERLAY_LIGHT : UtilitiesForUI.Instance.OVERLAY_DARK;
+
+                CanvasGroup cg = gbox.GetComponent<CanvasGroup>();
+                cg.alpha = gbox.Selected ? 0.6f : 1;
             }
 
             SelectionMade = false;

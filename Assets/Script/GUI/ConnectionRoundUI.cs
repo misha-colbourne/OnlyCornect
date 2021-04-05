@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using OnlyCornect;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,37 +10,30 @@ namespace OnlyCornect
 {
     public class ConnectionRoundUI : MonoBehaviour
     {
+        public GameObject CluesAndTimeBoxContainer;
         public TimeBoxUI TimeBox;
+
+        public GameObject BigPictureContainer;
         public Image BigPicture;
-        [SerializeField] private GameObject BoxesSpacer;
+
+        public GameObject AnswerContainer;
+        public GameObject AnswerBox;
+        public TMP_Text AnswerText;
 
         public List<ClueUI> Clues;
         [SerializeField] private List<int> Scores;
 
         public bool IsOutOfCluesForCurrentQuestion { get { return currentClue >= Clues.Count; } }
 
-
         private int currentQuestion;
         private int currentClue;
+        private bool timeBarRunning;
         private List<ConnectionQuestion> connectionRound;
-
-        // --------------------------------------------------------------------------------------------------------------------------------------
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void Init(List<ConnectionQuestion> connectionRoundList)
         {
-            this.connectionRound = connectionRoundList;
+            connectionRound = connectionRoundList;
 
             currentQuestion = 0;
             currentClue = 0;
@@ -82,10 +76,11 @@ namespace OnlyCornect
                 }
             }
 
+            AnswerContainer.SetActive(false);
+            AnswerText.text = question.Connection;
+
             // Set big pic container to on if picture round
-            BigPicture.transform.parent.gameObject.SetActive(isPictureRound);
-            // Disable spacer for centering if picture round
-            BoxesSpacer.gameObject.SetActive(!isPictureRound);
+            BigPictureContainer.SetActive(isPictureRound);
 
             currentQuestion++;
             currentClue = 0;
@@ -99,33 +94,40 @@ namespace OnlyCornect
             // Start time bar ticking down
             if (currentClue == 0)
             {
-                new List<TweenHandler>(TimeBox.FillBar.GetComponents<TweenHandler>()).ForEach(x => x.Begin());
+                timeBarRunning = true;
+                foreach (var tween in TimeBox.FillBar.GetComponents<TweenHandler>())
+                    tween.Begin();
             }
 
             if (currentClue < Clues.Count)
             {
                 // New clue anim start and position
                 Clues[currentClue].gameObject.SetVisible(true);
-                new List<TweenHandler>(Clues[currentClue].GetComponents<TweenHandler>()).ForEach(x => x.Begin());
+                foreach (var tween in Clues[currentClue].GetComponents<TweenHandler>())
+                    tween.Begin();
 
-                if (Clues[currentClue].Picture.isActiveAndEnabled)
+                if (Clues[currentClue].Picture.gameObject.activeInHierarchy)
                 {
                     BigPicture.sprite = Clues[currentClue].Picture.sprite;
                 }
 
-                // Reposition timebox to new clue
-                var clueContainerPos = Clues[currentClue].transform.parent.position;
-                TimeBox.transform.position = new Vector3 (clueContainerPos.x, TimeBox.transform.position.y, clueContainerPos.z);
-
-                // Animate moving of timebox to new clue 
-                if (currentClue > 0)
+                if (!AnswerContainer.activeInHierarchy)
                 {
-                    TimeBox.gameObject.SetVisible(false);
-                    new List<TweenHandler>(TimeBox.GetComponents<TweenHandler>()).ForEach(x => x.Begin());
-                }
+                    // Reposition timebox to new clue
+                    var clueContainerPos = Clues[currentClue].transform.parent.position;
+                    TimeBox.transform.position = new Vector3 (clueContainerPos.x, TimeBox.transform.position.y, clueContainerPos.z);
 
-                int score = Scores[currentClue];
-                TimeBox.Text.text = score + " " + (score != 1 ? "Points" : "Point");
+                    // Animate moving of timebox to new clue
+                    if (currentClue > 0)
+                    {
+                        TimeBox.gameObject.SetVisible(false);
+                        foreach (var tween in TimeBox.GetComponents<TweenHandler>())
+                            tween.Begin();
+                    }
+
+                    int score = Scores[currentClue];
+                    TimeBox.Text.text = score + " " + (score != 1 ? "Points" : "Point");
+                }
 
                 currentClue++;
             }
@@ -134,8 +136,41 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void StopTimeBar()
         {
-            new List<TweenHandler>(TimeBox.FillBar.GetComponents<TweenHandler>()).ForEach(x => x.Cancel());
+            timeBarRunning = false;
+            foreach (var tween in TimeBox.FillBar.GetComponents<TweenHandler>())
+                tween.Cancel();
         }
 
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void ShowAnswer()
+        {
+            if (!timeBarRunning)
+            {
+                AnswerContainer.SetActive(true);
+                BigPictureContainer.SetActive(false);
+
+                while (!IsOutOfCluesForCurrentQuestion)
+                    NextClue();
+
+                bool first = true;
+                foreach (var tween in AnswerBox.GetComponents<TweenHandler>())
+                {
+                    if (first)
+                    {
+                        tween.Begin(onComplete: delegate 
+                        {
+                            foreach (var tween2 in CluesAndTimeBoxContainer.GetComponents<TweenHandler>())
+                            {
+                                tween2.Begin();
+                            }
+                        });
+                    }
+                    else
+                    {
+                        tween.Begin();
+                    }
+                }
+            }
+        }
     }
 }
