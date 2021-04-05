@@ -9,6 +9,18 @@ using UnityEngine;
 public static class Utilities
 {
     // --------------------------------------------------------------------------------------------------------------------------------------
+    public static void Show(this MonoBehaviour mb)
+    {
+        mb.gameObject.SetActive(true);
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    public static void Hide(this MonoBehaviour mb)
+    {
+        mb.gameObject.SetActive(false);
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public static void SetVisible(this GameObject go, bool visible)
     {
         CanvasGroup cg = go.GetComponent<CanvasGroup>();
@@ -32,4 +44,5 @@ public static class Utilities
         yield return null;
         action.Invoke();
     }
+
 }

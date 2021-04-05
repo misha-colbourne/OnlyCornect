@@ -2,12 +2,17 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 ConnectionRound:
 
-    # - Connection: Cats
-    #   Clues:
-    #     - Behold!
-    #     - It'll be just like Only Connect
-    #     - With easier questions
-    #     - Should be fun to play as teams too, I hope
+    - Connection: Matt
+      Clues:
+        - Matt
+        - Matt
+        - Matt
+        - Matt
+      Pictures:
+        - Matt1
+        - Matt2
+        - Matt3
+        - Matt4
 
     - Connection: Hope
       Clues:
@@ -64,7 +69,7 @@ ConnectionRound:
         - First (or last)<br>of the Major Arcana
         - Puck
         - Falconhoof's associate
-        - Roland the Farter
+        - Roland the<br>Farter
 
     - Connection: Synonyms of card games
       Clues:
@@ -75,9 +80,9 @@ ConnectionRound:
 
     - Connection: Neapolitan
       Clues:
-        - Chord
-        - Mastiff
-        - Ice Cream
+        - Neapolitan Chord
+        - Neapolitan Mastiff
+        - Neapolitan Ice Cream
         - Naples
       Pictures:
         - Neapolitan_Chord
