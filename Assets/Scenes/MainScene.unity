@@ -1389,7 +1389,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Duration: 0.8
+  Duration: 0.6
   Delay: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}

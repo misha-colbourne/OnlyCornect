@@ -18,6 +18,15 @@ public static class Utilities
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
+    public static void SetVisible(this GameObject go, float alpha)
+    {
+        CanvasGroup cg = go.GetComponent<CanvasGroup>();
+        if (cg == null)
+            cg = go.AddComponent<CanvasGroup>();
+        cg.alpha = alpha;
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public static IEnumerator WaitAFrameThenRun(Action action)
     {
         yield return null;

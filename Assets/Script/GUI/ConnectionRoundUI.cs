@@ -29,6 +29,7 @@ namespace OnlyCornect
         private int currentQuestion;
         private int currentClue;
         private bool timeBarRunning;
+        private bool isPictureRound;
         private List<ConnectionQuestion> connectionRound;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -56,13 +57,14 @@ namespace OnlyCornect
         public void NextQuestion()
         {
             ConnectionQuestion question = connectionRound[currentQuestion];
-            bool isPictureRound = false;
+            isPictureRound = false;
 
             for (int i = 0; i < question.Clues.Count; i++)
             {
                 Clues[i].gameObject.SetVisible(false);
                 Clues[i].Text.text = question.Clues[i];
                 Clues[i].Text.gameObject.SetActive(true);
+                Clues[i].FlashLayer.gameObject.SetActive(false);
 
                 if (question.Pictures != null && i < question.Pictures.Count && UtilitiesForUI.Pictures.ContainsKey(question.Pictures[i])) 
                 {
@@ -145,7 +147,7 @@ namespace OnlyCornect
         {
             if (!timeBarRunning)
             {
-                if (BigPictureContainer.activeInHierarchy)
+                if (isPictureRound)
                     yield return ShrinkBigPic();
 
                 AnswerContainer.SetActive(true);
@@ -153,33 +155,25 @@ namespace OnlyCornect
                 while (!IsOutOfCluesForCurrentQuestion)
                     NextClue();
 
-                bool first = true;
-                foreach (var tween in AnswerBox.GetComponents<TweenHandler>())
+                yield return AnswerReveal();
+
+                if (isPictureRound)
                 {
-                    if (first)
+                    foreach (var clue in Clues)
                     {
-                        tween.Begin(onComplete: delegate 
-                        {
-                            foreach (var tween2 in CluesAndTimeBoxContainer.GetComponents<TweenHandler>())
-                            {
-                                tween2.Begin();
-                            }
-                        });
-                    }
-                    else
-                    {
-                        tween.Begin();
+                        clue.Text.gameObject.SetActive(true);
+                        clue.FlashLayer.gameObject.SetActive(true);
+                        clue.FlashLayer.gameObject.SetVisible(0.65f);
+                        clue.FlashLayer.transform.parent.GetComponent<TweenHandler>().Begin();
                     }
                 }
-
-                // TODO pic answer overlays
             }
 
             yield return null;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public IEnumerator ShrinkBigPic()
+        private IEnumerator ShrinkBigPic()
         {
             BigPictureContainer.GetComponent<TweenHandler>().Begin(onComplete: delegate
             {
@@ -192,6 +186,32 @@ namespace OnlyCornect
             });
 
             while (BigPictureContainer.LeanIsTweening() || BoxesContainer.LeanIsTweening())
+                yield return null;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        private IEnumerator AnswerReveal()
+        {
+            bool first = true;
+            foreach (var tween in AnswerBox.GetComponents<TweenHandler>())
+            {
+                if (first)
+                {
+                    tween.Begin(onComplete: delegate
+                    {
+                        foreach (var tween2 in CluesAndTimeBoxContainer.GetComponents<TweenHandler>())
+                        {
+                            tween2.Begin();
+                        }
+                    });
+                }
+                else
+                {
+                    tween.Begin();
+                }
+            }
+
+            while (AnswerBox.LeanIsTweening() || CluesAndTimeBoxContainer.LeanIsTweening())
                 yield return null;
         }
     }
