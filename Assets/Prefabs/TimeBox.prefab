@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TweenDescription: Timebox fill bar over time
   ObjectsToTween: []
   TweenProperty: 35
   EaseType: 0
@@ -329,9 +330,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe605f1002418a44a76375448f967d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Overlay: {fileID: 7264881512327356326}
   Text: {fileID: 5113446378233994862}
   FillBar: {fileID: 3779795096686860877}
+  Overlay: {fileID: 7264881512327356326}
 --- !u!225 &1653162150554427361
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -356,6 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TweenDescription: ' Pre-next-clue-move timebox fade'
   ObjectsToTween: []
   TweenProperty: 23
   EaseType: 0

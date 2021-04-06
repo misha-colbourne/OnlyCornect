@@ -24,9 +24,10 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public (string, string) GetTeamNames()
+        public void SetTeamNames(GameManager.Team teamA, GameManager.Team teamB)
         {
-            return (TeamNameEntryA.text, TeamNameEntryB.text);
+            teamA.Name = TeamNameEntryA.text;
+            teamB.Name = TeamNameEntryB.text;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------

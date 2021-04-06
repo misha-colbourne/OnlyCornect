@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TweenDescription: Glyph selection flash loop
   ObjectsToTween: []
   TweenProperty: 23
   EaseType: 4
@@ -258,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TweenDescription: Picture round fade in over pics
   ObjectsToTween: []
   TweenProperty: 23
   EaseType: 4
@@ -496,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TweenDescription: Clue reveal
   ObjectsToTween: []
   TweenProperty: 35
   EaseType: 38
@@ -569,6 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TweenDescription: Clue reveal
   ObjectsToTween: []
   TweenProperty: 38
   EaseType: 38
@@ -633,6 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TweenDescription: Clue reveal
   ObjectsToTween: []
   TweenProperty: 39
   EaseType: 0
@@ -661,6 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TweenDescription: Clue reveal
   ObjectsToTween: []
   TweenProperty: 23
   EaseType: 6

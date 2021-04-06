@@ -18,6 +18,7 @@ public class TweenHandler : MonoBehaviour
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
+    public string TweenDescription;
     public List<GameObject> ObjectsToTween;
     public ETweenProperty TweenProperty;
     public LeanTweenType EaseType;

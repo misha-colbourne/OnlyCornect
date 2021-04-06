@@ -9,12 +9,13 @@ namespace OnlyCornect
 {
     public class RoundNameScreenUI : MonoBehaviour
     {
-        [SerializeField] private TMP_Text RoundName;
+        [SerializeField] private TMP_Text RoundNameText;
+        [SerializeField] private List<string> RoundNames;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void SetText(string text)
+        public void NextRoundNameText(GameManager.ERound round)
         {
-            RoundName.text = text;
+            RoundNameText.text = RoundNames[(int)round];
         }
     }
 }

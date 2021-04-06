@@ -6,28 +6,13 @@ namespace OnlyCornect
 {
     public class GlyphSelectionUI : MonoBehaviour
     {
-        private const float DISABLED_ALPHA = 0.6f;
-
+        [SerializeField] private float DISABLED_ALPHA = 0.6f;
         public List<ClueUI> GlyphBoxes;
-
-        [HideInInspector]
-        public bool SelectionMade = false;
+        [HideInInspector] public bool SelectionMade = false;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void Init()
+        private void OnEnable()
         {
-            foreach (var gbox in GlyphBoxes)
-            {
-                if (gbox.SelectableButton != null)
-                    gbox.SelectableButton.onClick.AddListener(delegate { GlyphSelected(gbox); });
-            }
-        }
-
-        // --------------------------------------------------------------------------------------------------------------------------------------
-        public void Show()
-        {
-            gameObject.SetActive(true);
-
             foreach (var gbox in GlyphBoxes)
             {
                 gbox.SelectableButton.interactable = !gbox.Selected;
@@ -41,13 +26,21 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void Hide()
+        private void OnDisable()
         {
-            gameObject.SetActive(false);
-
             foreach (var gbox in GlyphBoxes)
             {
                 gbox.SetFlash(false);
+            }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void Init()
+        {
+            foreach (var gbox in GlyphBoxes)
+            {
+                if (gbox.SelectableButton != null)
+                    gbox.SelectableButton.onClick.AddListener(delegate { GlyphSelected(gbox); });
             }
         }
 

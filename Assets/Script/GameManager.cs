@@ -46,7 +46,9 @@ namespace OnlyCornect
         public EORTeamScoresUI EORTeamScoresScreen;
         public ConnectionRoundUI ConnectionRoundScreen;
 
-        private QuizData quiz;
+        [SerializeField] private bool skipTeamNaming;
+
+        private QuizData quizData;
         private EPhase currentPhase;
         private ERound currentRound;
 
@@ -58,10 +60,10 @@ namespace OnlyCornect
         void Start()
         {
             Application.targetFrameRate = TARGET_FRAME_RATE;
-            quiz = YmlParser.ParseQuiz();
+            quizData = YmlParser.ParseQuiz();
 
             GlyphSelectionScreen.Init();
-            ConnectionRoundScreen.Init(quiz.ConnectionRound);
+            ConnectionRoundScreen.Init(quizData.ConnectionRound);
 
             GlyphSelectionScreen.Hide();
             RoundNameScreen.Hide();
@@ -69,9 +71,18 @@ namespace OnlyCornect
             ConnectionRoundScreen.Hide();
             EORTeamScoresScreen.Hide();
 
-            UtilitiesForUI.LoadPictures(quiz);
+            UtilitiesForUI.LoadPictures(quizData);
 
-            StartCoroutine(Utilities.WaitAFrameThenRun(MoveToTeamNameEntry));
+            if (skipTeamNaming)
+            {
+                teamA.Name = "Team A";
+                teamB.Name = "Team B";
+                StartCoroutine(Utilities.WaitAFrameThenRun(MoveToNextRoundNameScreen));
+            }
+            else
+            {
+                StartCoroutine(Utilities.WaitAFrameThenRun(MoveToTeamNameEntry));
+            }
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -92,13 +103,13 @@ namespace OnlyCornect
                     break;
                 case EPhase.TeamNameEntry:
                     {
+                        TeamNameEntryScreen.SetTeamNames(teamA, teamB);
                         TeamNameEntryScreen.Hide();
-                        MoveToRoundNameScreen();
+                        MoveToNextRoundNameScreen();
                     }
                     break;
                 case EPhase.RoundNameScreen:
                     {
-                        currentRound++;
                         RoundNameScreen.Hide();
                         MoveToQuestionSelection();
                     }
@@ -134,7 +145,7 @@ namespace OnlyCornect
                 case EPhase.EORTeamScoresScreen:
                     {
                         EORTeamScoresScreen.Hide();
-                        MoveToRoundNameScreen();
+                        MoveToNextRoundNameScreen();
                     }
                     break;
                 default:
@@ -153,9 +164,11 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void MoveToRoundNameScreen()
+        public void MoveToNextRoundNameScreen()
         {
             currentPhase = EPhase.RoundNameScreen;
+            RoundNameScreen.NextRoundNameText(currentRound);
+            currentRound++;
             RoundNameScreen.Show();
         }
 

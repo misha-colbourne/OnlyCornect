@@ -2,29 +2,17 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 ConnectionRound:
 
-    - Connection: Matt
-      Clues:
-        - Matt
-        - Matt
-        - Matt
-        - Matt
-      Pictures:
-        - Matt1
-        - Matt2
-        - Matt3
-        - Matt4
-
-    - Connection: Hope
-      Clues:
-        - Cape of Good Hope
-        - Hope Diamond
-        - Bob Hope
-        - "Star Wars: Episode IV - <nobr>A New Hope</nobr>"
-      Pictures:
-        - Hope_Cape
-        - Hope_Diamond
-        - Hope_Bob
-        - Hope_StarWars
+    # - Connection: Matt
+    #   Clues:
+    #     - Matt
+    #     - Matt
+    #     - Matt
+    #     - Matt
+    #   Pictures:
+    #     - Matt1
+    #     - Matt2
+    #     - Matt3
+    #     - Matt4
 
     - Connection: Fates of Sean Bean characters
       Clues:
