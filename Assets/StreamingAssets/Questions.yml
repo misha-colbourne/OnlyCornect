@@ -88,12 +88,12 @@ ConnectionRound:
 # --------------------------------------------------------------------------------------------------------------------------------------
 SequencesRound:
 
-    - Connection: Pirates of the Caribbean last word synonyms
+    - Connection: Pirates of the Caribbean titles last word synonyms
       Clues:
-        - Oceanic ebb<br>and flow
-        - Conclusion
-        - Treasure box
-        - e.g. Spherical mollusc byproduct
+        - "Unfamiliar oceanic<br>ebb and flow"
+        - "Planetary conclusion"
+        - "Deceased male's treasure box"
+        - "e.g. Hex of the dark, spherical mollusc-byproduct"
 
     - Connection: "'cester Towns with decreasing prefix lengths"
       Clues:
@@ -107,7 +107,7 @@ SequencesRound:
         - Cester_Leicester
         - Cester_Bicester
 
-    - Connection: First 4 Monopoly properties and their costs in £
+    - Connection: First four Monopoly properties and their costs in £
       Clues:
         - TAI 100
         - KCS 200
@@ -118,34 +118,34 @@ SequencesRound:
       Clues:
         - Horatio McAllister
         - Kang
-        - Seymour Skinner
+        - Seymour<br>Skinner
         - Blinky
 
-    - Connection: Words with two fewer As each time
+    - Connection: One fewer A each time
       Clues:
         - Taramasalata
-        - Katakana
-        - Llamas
-        - e.g. Crypt
+        - Bananarama
+        - Balaclava
+        - e.g. Maracas
       Pictures:
         - As_Taramasalata
-        - As_Katakana
-        - As_Llamas
-        - As_Crypt
+        - As_Bananarama
+        - As_Balaclava
+        - As_Maracas
 
     - Connection: Planetary Greek/Roman god equivalents
       Clues:
-        - Poseidon (Greek)
-        - Caelus (Roman)
-        - Cronus (Greek)
-        - Zeus (Greek)
+        - "8: Poseidon"
+        - "7: Caelus"
+        - "6: Cronus"
+        - "5: Zeus"
 
     - Connection: Countries word chain
       Clues:
-        - Moldova →<br>Vanuatu
-        - Vanuatu →<br>Turkmenistan
-        - Turkmenistan →<br>Angola
-        - Angola →<br>Laos/Latvia
+        - Moldova<line-height=80%><br><size=150%>→</size></voffset><br>Vanuatu
+        - Vanuatu<line-height=80%><br><size=150%>→</size></voffset><br>Turkmenistan
+        - Turkmenistan<line-height=80%><br><size=150%>→</size></voffset><br>Angola
+        - Angola<line-height=80%><br><size=150%>→</size></voffset><br>Laos/Latvia
 
     - Connection: Band/Artist names missing compass directions
       Clues:

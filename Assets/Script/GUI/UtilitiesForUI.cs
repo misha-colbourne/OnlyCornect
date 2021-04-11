@@ -24,10 +24,15 @@ public class UtilitiesForUI : MonoBehaviour
     public const int CLUE_PICTURE_WIDTH = 1680;
     public const int CLUE_PICTURE_HEIGHT = 960;
 
+    public const float PICTURE_ANSWER_OVERLAY_ALPHA = 0.65f;
+
     public Color OVERLAY_LIGHT;
     public Color OVERLAY_TIME;
     public Color OVERLAY_TEAM;
     public Color OVERLAY_DARK;
+
+    public Sprite TEAM_BOX_A;
+    public Sprite TEAM_BOX_B;
 
     public static Dictionary<string, Sprite> Pictures = new Dictionary<string, Sprite>();
 

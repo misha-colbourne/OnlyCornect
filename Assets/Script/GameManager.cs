@@ -44,7 +44,9 @@ namespace OnlyCornect
         public RoundNameScreenUI RoundNameScreen;
         public TeamNameEntryUI TeamNameEntryScreen;
         public EORTeamScoresUI EORTeamScoresScreen;
-        public ConnectionRoundUI ConnectionRoundScreen;
+        public ConnectionAndSequenceRoundUI ConnectionAndSequencesRoundScreen;
+
+        public ScorePopupUI ScorePopup;
 
         [SerializeField] private bool skipTeamNaming;
 
@@ -54,6 +56,8 @@ namespace OnlyCornect
 
         private Team teamA;
         private Team teamB;
+        private bool activeTeamIsA;
+        private bool scoreGrantedThisQuestion;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         // Start is called before the first frame update
@@ -62,19 +66,17 @@ namespace OnlyCornect
             Application.targetFrameRate = TARGET_FRAME_RATE;
             quizData = YmlParser.ParseQuiz();
 
-            GlyphSelectionScreen.Init();
-            ConnectionRoundScreen.Init(quizData.ConnectionRound);
-
             GlyphSelectionScreen.Hide();
             RoundNameScreen.Hide();
             TeamNameEntryScreen.Hide();
-            ConnectionRoundScreen.Hide();
+            ConnectionAndSequencesRoundScreen.Hide();
             EORTeamScoresScreen.Hide();
 
             UtilitiesForUI.LoadPictures(quizData);
 
             if (skipTeamNaming)
             {
+                //currentRound++;
                 teamA.Name = "Team A";
                 teamB.Name = "Team B";
                 StartCoroutine(Utilities.WaitAFrameThenRun(MoveToNextRoundNameScreen));
@@ -103,14 +105,15 @@ namespace OnlyCornect
                     break;
                 case EPhase.TeamNameEntry:
                     {
-                        TeamNameEntryScreen.SetTeamNames(teamA, teamB);
                         TeamNameEntryScreen.Hide();
+                        TeamNameEntryScreen.SetTeamNames(teamA, teamB);
                         MoveToNextRoundNameScreen();
                     }
                     break;
                 case EPhase.RoundNameScreen:
                     {
                         RoundNameScreen.Hide();
+                        GlyphSelectionScreen.Init();
                         MoveToQuestionSelection();
                     }
                     break;
@@ -121,17 +124,14 @@ namespace OnlyCornect
                     }
                     break;
                 case EPhase.ConnectionQuestion:
+                case EPhase.SequencesQuestion:
                     {
-                        ConnectionRoundScreen.Hide();
+                        ConnectionAndSequencesRoundScreen.Hide();
 
                         if (GlyphSelectionScreen.GlyphBoxes.Any(x => !x.Selected))
                             MoveToQuestionSelection();
                         else
                             MoveToEORTeamScores();
-                    }
-                    break;
-                case EPhase.SequencesQuestion:
-                    {
                     }
                     break;
                 case EPhase.WallQuestion:
@@ -169,6 +169,17 @@ namespace OnlyCornect
             currentPhase = EPhase.RoundNameScreen;
             RoundNameScreen.NextRoundNameText(currentRound);
             currentRound++;
+
+            switch (currentRound)
+            {
+                case ERound.ConnectionRound:
+                    ConnectionAndSequencesRoundScreen.Init(quizData.ConnectionRound);
+                    break;
+                case ERound.SequencesRound:
+                    ConnectionAndSequencesRoundScreen.Init(quizData.SequencesRound);
+                    break;
+            }
+
             RoundNameScreen.Show();
         }
 
@@ -176,17 +187,22 @@ namespace OnlyCornect
         public void MoveToQuestionSelection()
         {
             currentPhase = EPhase.GlyphSelection;
+            activeTeamIsA = !activeTeamIsA;
             GlyphSelectionScreen.Show();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void MoveToNextQuestion()
         {
-            if (currentRound == ERound.ConnectionRound)
+            if (currentRound == ERound.ConnectionRound || currentRound == ERound.SequencesRound)
             {
-                currentPhase = EPhase.ConnectionQuestion;
-                ConnectionRoundScreen.Show();
-                ConnectionRoundScreen.NextQuestion();
+                if (currentRound == ERound.ConnectionRound)
+                    currentPhase = EPhase.ConnectionQuestion;
+                else if (currentRound == ERound.SequencesRound)
+                    currentPhase = EPhase.SequencesQuestion;
+
+                ConnectionAndSequencesRoundScreen.Show();
+                ConnectionAndSequencesRoundScreen.NextQuestion();
             }
         }
 
@@ -232,34 +248,52 @@ namespace OnlyCornect
                     }
                     break;
                 case EPhase.ConnectionQuestion:
+                case EPhase.SequencesQuestion:
                     {
                         if (Input.GetKeyDown(KeyCode.RightArrow))
                         {
-                            if (!ConnectionRoundScreen.IsOutOfCluesForCurrentQuestion)
-                                ConnectionRoundScreen.NextClue();
+                            ConnectionAndSequencesRoundScreen.NextClue();
                         }
 
                         if (Input.GetKeyDown(KeyCode.Space))
                         {
-                            ConnectionRoundScreen.StopTimeBar();
+                            ConnectionAndSequencesRoundScreen.StopTimeBar();
+                        }
+
+                        if (Input.GetKeyDown(KeyCode.UpArrow))
+                        {
+                            ConnectionAndSequencesRoundScreen.HandOverToOtherTeam();
+                            //
                         }
 
                         if (Input.GetKeyDown(KeyCode.A))
                         {
-                            StartCoroutine(ConnectionRoundScreen.ShowAnswer());
+                            StartCoroutine(ConnectionAndSequencesRoundScreen.ShowAnswer());
                         }
 
                         if (Input.GetKeyDown(KeyCode.Backspace))
                         {
-                            ConnectionRoundScreen.StopTimeBar();
-                            NextPhase();
+                            if (!scoreGrantedThisQuestion)
+                            {
+                                if (!ConnectionAndSequencesRoundScreen.TimeBarRunning)
+                                {
+                                    ScorePopup.ShowScoreChange(
+                                        activeTeamIsA ? teamA.Name : teamB.Name,
+                                        ConnectionAndSequencesRoundScreen.ScoreForCurrentQuestion,
+                                        activeTeamIsA
+                                    );
+                                    scoreGrantedThisQuestion = true;
+                                }
+                            }
+                            else
+                            {
+                                ConnectionAndSequencesRoundScreen.StopTimeBar();
+                                scoreGrantedThisQuestion = false;
+                                NextPhase();
+                            }
                         }
                     }
                     break;
-                //case EPhase.SequencesQuestion:
-                //    {
-                //    }
-                //    break;
                 //case EPhase.WallQuestion:
                 //    {
                 //    }

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace OnlyCornect
 {
-    public class ClueUI : MonoBehaviour
+    public class ClueUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Image Overlay;
         public TMP_Text Text;
@@ -14,8 +15,8 @@ namespace OnlyCornect
         public Image FlashLayer;
         public Image Picture;
 
-        [HideInInspector]
-        public bool Selected = false;
+        [SerializeField] private bool IsGlyph = false;
+        [HideInInspector] public bool Selected = false;
 
         private bool flashing = false;
 
@@ -24,13 +25,16 @@ namespace OnlyCornect
         void Start()
         {
             if (SelectableButton != null)
+            {
                 SelectableButton.onClick.AddListener(OnButtonClick);
+            }
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void OnButtonClick()
         {
             Selected = true;
+            Overlay.color = UtilitiesForUI.Instance.OVERLAY_DARK;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -51,6 +55,19 @@ namespace OnlyCornect
 
             flashing = flash;
         }
-    }
 
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (!Selected && IsGlyph)
+                Overlay.color = UtilitiesForUI.Instance.OVERLAY_TIME;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (!Selected && IsGlyph)
+                Overlay.color = UtilitiesForUI.Instance.OVERLAY_DARK;
+        }
+    }
 }

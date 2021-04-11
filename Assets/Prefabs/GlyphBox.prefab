@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 0.95, y: 0.95, z: 1}
   m_Children: []
   m_Father: {fileID: 3496066149539810022}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -131,11 +131,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2162267998489098180, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2941087891335333473, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207792702047972585, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
+      propertyPath: IsGlyph
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4207792702047972585, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: FlashLayer
@@ -148,6 +152,14 @@ PrefabInstance:
     - target: {fileID: 4454864421365446062, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4457968788929656554, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176026326106018898, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6552083999977890090, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: Duration

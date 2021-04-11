@@ -6,9 +6,20 @@ namespace OnlyCornect
 {
     public class GlyphSelectionUI : MonoBehaviour
     {
-        [SerializeField] private float DISABLED_ALPHA = 0.6f;
+        [SerializeField] private float DISABLED_ALPHA = 1.0f;
         public List<ClueUI> GlyphBoxes;
+
         [HideInInspector] public bool SelectionMade = false;
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        private void Awake()
+        {
+            foreach (var gbox in GlyphBoxes)
+            {
+                if (gbox.SelectableButton != null)
+                    gbox.SelectableButton.onClick.AddListener(delegate { GlyphSelected(gbox); });
+            }
+        }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void OnEnable()
@@ -39,8 +50,7 @@ namespace OnlyCornect
         {
             foreach (var gbox in GlyphBoxes)
             {
-                if (gbox.SelectableButton != null)
-                    gbox.SelectableButton.onClick.AddListener(delegate { GlyphSelected(gbox); });
+                gbox.Selected = false;
             }
         }
 
