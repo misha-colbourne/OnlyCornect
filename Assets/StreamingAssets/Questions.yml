@@ -161,9 +161,9 @@ WallRound:
     -   - Connection: Star ____
           Clues:
             - Gate
-            - Sky and Hutch
-            - Trek
             - Girl
+            - Trek
+            - Fox
 
         - Connection: Chocolate bars with rotated letters
           Clues:
@@ -203,10 +203,10 @@ WallRound:
 
         - Connection: Seas
           Clues:
-            - Dead
+            - Red
             - Black
             - North
-            - Red
+            - Dead
 
         - Connection: CMYK colour model
           Clues:

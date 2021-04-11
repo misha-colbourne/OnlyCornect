@@ -45,6 +45,7 @@ namespace OnlyCornect
         public TeamNameEntryUI TeamNameEntryScreen;
         public EORTeamScoresUI EORTeamScoresScreen;
         public ConnectionAndSequenceRoundUI ConnectionAndSequencesRoundScreen;
+        public WallRoundUI WallRoundScreen;
 
         public ScorePopupUI ScorePopup;
 
@@ -57,7 +58,7 @@ namespace OnlyCornect
         private Team teamA;
         private Team teamB;
         private bool activeTeamIsA;
-        private bool scoreGrantedThisQuestion;
+        private bool scoreHasBeenGrantedThisQuestion;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         // Start is called before the first frame update
@@ -69,14 +70,15 @@ namespace OnlyCornect
             GlyphSelectionScreen.Hide();
             RoundNameScreen.Hide();
             TeamNameEntryScreen.Hide();
-            ConnectionAndSequencesRoundScreen.Hide();
             EORTeamScoresScreen.Hide();
+            ConnectionAndSequencesRoundScreen.Hide();
+            WallRoundScreen.Hide();
 
-            UtilitiesForUI.LoadPictures(quizData);
+            //UtilitiesForUI.LoadPictures(quizData);
 
             if (skipTeamNaming)
             {
-                //currentRound++;
+                currentRound = ERound.SequencesRound;
                 teamA.Name = "Team A";
                 teamB.Name = "Team B";
                 StartCoroutine(Utilities.WaitAFrameThenRun(MoveToNextRoundNameScreen));
@@ -114,7 +116,11 @@ namespace OnlyCornect
                     {
                         RoundNameScreen.Hide();
                         GlyphSelectionScreen.Init();
-                        MoveToQuestionSelection();
+
+                        if (currentRound == ERound.WallRound)
+                            WallRoundScreen.Show();
+                        else
+                            MoveToQuestionSelection();
                     }
                     break;
                 case EPhase.GlyphSelection:
@@ -136,6 +142,7 @@ namespace OnlyCornect
                     break;
                 case EPhase.WallQuestion:
                     {
+                        WallRoundScreen.Hide();
                     }
                     break;
                 case EPhase.MissingVowelsQuestion:
@@ -178,6 +185,10 @@ namespace OnlyCornect
                 case ERound.SequencesRound:
                     ConnectionAndSequencesRoundScreen.Init(quizData.SequencesRound);
                     break;
+                case ERound.WallRound:
+                    break;
+                case ERound.MissingVowelsRound:
+                    break;
             }
 
             RoundNameScreen.Show();
@@ -188,6 +199,7 @@ namespace OnlyCornect
         {
             currentPhase = EPhase.GlyphSelection;
             activeTeamIsA = !activeTeamIsA;
+
             GlyphSelectionScreen.Show();
         }
 
@@ -273,7 +285,7 @@ namespace OnlyCornect
 
                         if (Input.GetKeyDown(KeyCode.Backspace))
                         {
-                            if (!scoreGrantedThisQuestion)
+                            if (!scoreHasBeenGrantedThisQuestion)
                             {
                                 if (!ConnectionAndSequencesRoundScreen.TimeBarRunning)
                                 {
@@ -282,22 +294,22 @@ namespace OnlyCornect
                                         ConnectionAndSequencesRoundScreen.ScoreForCurrentQuestion,
                                         activeTeamIsA
                                     );
-                                    scoreGrantedThisQuestion = true;
+                                    scoreHasBeenGrantedThisQuestion = true;
                                 }
                             }
                             else
                             {
                                 ConnectionAndSequencesRoundScreen.StopTimeBar();
-                                scoreGrantedThisQuestion = false;
+                                scoreHasBeenGrantedThisQuestion = false;
                                 NextPhase();
                             }
                         }
                     }
                     break;
-                //case EPhase.WallQuestion:
-                //    {
-                //    }
-                //    break;
+                case EPhase.WallQuestion:
+                    {
+                    }
+                    break;
                 //case EPhase.MissingVowelsQuestion:
                 //    {
                 //    }
