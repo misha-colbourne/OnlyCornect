@@ -2,18 +2,6 @@
 # --------------------------------------------------------------------------------------------------------------------------------------
 ConnectionRound:
 
-    # - Connection: Matt
-    #   Clues:
-    #     - Matt
-    #     - Matt
-    #     - Matt
-    #     - Matt
-    #   Pictures:
-    #     - Matt1
-    #     - Matt2
-    #     - Matt3
-    #     - Matt4
-
     - Connection: Fates of Sean Bean characters
       Clues:
         - Quartered by horses
@@ -121,6 +109,27 @@ SequencesRound:
         - Seymour<br>Skinner
         - Blinky
 
+    - Connection: Planetary Greek/Roman god equivalents
+      Clues:
+        - "8: Poseidon"
+        - "7: Caelus"
+        - "6: Cronus"
+        - "5: Zeus"
+
+    - Connection: Bands with 5/4/3/2 members
+      Clues:
+        - The Spice Girls
+        - Queen
+        - The Police
+        - e.g. The White Stripes
+
+    - Connection: Countries word chain
+      Clues:
+        - Moldova<line-height=80%><br><size=150%>→</size></voffset><br>Vanuatu
+        - Vanuatu<line-height=80%><br><size=150%>→</size></voffset><br>Turkmenistan
+        - Turkmenistan<line-height=80%><br><size=150%>→</size></voffset><br>Angola
+        - Angola<line-height=80%><br><size=150%>→</size></voffset><br>Laos/Latvia
+
     - Connection: One fewer A each time
       Clues:
         - Taramasalata
@@ -132,27 +141,6 @@ SequencesRound:
         - As_Bananarama
         - As_Balaclava
         - As_Maracas
-
-    - Connection: Planetary Greek/Roman god equivalents
-      Clues:
-        - "8: Poseidon"
-        - "7: Caelus"
-        - "6: Cronus"
-        - "5: Zeus"
-
-    - Connection: Countries word chain
-      Clues:
-        - Moldova<line-height=80%><br><size=150%>→</size></voffset><br>Vanuatu
-        - Vanuatu<line-height=80%><br><size=150%>→</size></voffset><br>Turkmenistan
-        - Turkmenistan<line-height=80%><br><size=150%>→</size></voffset><br>Angola
-        - Angola<line-height=80%><br><size=150%>→</size></voffset><br>Laos/Latvia
-
-    - Connection: Band/Artist names missing compass directions
-      Clues:
-        - Anna of the
-        - 17
-        - The Beautiful
-        - e.g. life
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 WallRound:
