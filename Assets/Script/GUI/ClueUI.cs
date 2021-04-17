@@ -47,14 +47,14 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void OnPointerEnter(PointerEventData eventData)
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
             if (!Selected && IsGlyph)
                 Overlay.color = UtilitiesForUI.Instance.OVERLAY_TIME;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void OnPointerExit(PointerEventData eventData)
+        public virtual void OnPointerExit(PointerEventData eventData)
         {
             if (!Selected && IsGlyph)
                 Overlay.color = UtilitiesForUI.Instance.OVERLAY_DARK;

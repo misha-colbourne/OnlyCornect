@@ -36,6 +36,9 @@ public class UtilitiesForUI : MonoBehaviour
     public Sprite TEAM_BOX_A;
     public Sprite TEAM_BOX_B;
 
+    public Sprite BOX_LIGHT;
+    public Sprite BOX_SELECTED;
+
     public static Dictionary<string, Sprite> Pictures = new Dictionary<string, Sprite>();
 
     // --------------------------------------------------------------------------------------------------------------------------------------
