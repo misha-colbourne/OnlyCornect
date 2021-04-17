@@ -23,14 +23,14 @@ ConnectionRound:
 
     - Connection: Channel Island anagrams
       Clues:
-        - US Energy
         - Nantes
+        - US Energy
         - J Reyes
         - Arks
 
     - Connection: Towns/Cities in the original Pokémon games
       Clues:
-        - Fuschia City
+        - Fuchsia City
         - Pewter City
         - Lavender Town
         - Pallet Town
@@ -44,7 +44,7 @@ ConnectionRound:
       Clues:
         - First (or last)<br>of the Major Arcana
         - Puck
-        - Falconhoof's associate
+        - Unpopular associate of Falconhoof
         - Roland the<br>Farter
 
     - Connection: Synonyms of card games
@@ -66,22 +66,22 @@ ConnectionRound:
         - Neapolitan_IceCream
         - Neapolitan_Naples
 
-    - Connection: "Rhyming mnemonics, acronym-ified"
+    - Connection: Means of initiating time travel
       Clues:
-        - "ROB, VL<br>ROY, KAF"
-        - IBE, EAC
-        - DBD, DBS
-        - NESW
+        - Dialing a<br>number
+        - Turning over the necklace core
+        - Removing or replacing sword in pedestal
+        - Reaching 88 miles per hour
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 SequencesRound:
 
     - Connection: Pirates of the Caribbean titles last word synonyms
       Clues:
-        - "Unfamiliar oceanic<br>ebb and flow"
-        - "Planetary conclusion"
+        - "In unfamiliar oceanic ebb<br>and flow"
+        - "At planetary conclusion"
         - "Deceased male's treasure box"
-        - "e.g. Hex of the dark, spherical mollusc-byproduct"
+        - "e.g. Hex of the dark spherical mollusc-byproduct"
 
     - Connection: "'cester Towns with decreasing prefix lengths"
       Clues:
@@ -164,15 +164,15 @@ WallRound:
           Clues:
             - Galaxy
             - Orion
-            - Taurus
+            - Sierra
             - Puma
 
-        - Connection: Big cats
+        - Connection: Constellations
           Clues:
-            - Cougar
-            - Lynx
-            - Leopard
-            - Jaguar
+            - Taurus
+            - Hercules
+            - Draco
+            - Pegasus
 
     # Wall 2
     -   - Connection: ____ Point
@@ -196,12 +196,12 @@ WallRound:
             - North
             - Dead
 
-        - Connection: CMYK colour model
+        - Connection: Hidden computer keys
           Clues:
-            - Cyan
-            - Magenta
-            - Yellow
-            - Key
+            - Land's End
+            - Baltic
+            - Shapeshifter
+            - Tableau
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 MissingVowelsRound:
@@ -211,8 +211,8 @@ MissingVowelsRound:
         - "Paddington"
         - "Tottenham Court Road"
         - "Oval"
-        - "Heathrow Terminal Five"
         - "Euston"
+        - "Heathrow Terminal Five"
 
     - Connection: Quotes from Peep Show
       Clues:
@@ -224,8 +224,8 @@ MissingVowelsRound:
 
     - Connection: Two overlapping film titles
       Clues:
-        - "The Hateful Eight-Legged Freaks"
         - "Million Dollar Baby Driver"
+        - "The Hateful Eight-Legged Freaks"
         - "The Spy Who Loved Me, Myself and Irene"
 
     - Connection: Three overlapping film titles
@@ -242,7 +242,7 @@ MissingVowelsRound:
       Clues:
         - "Hagia Sophia"
         - "Great Pyramid of Giza"
-        - "St. Basil's Cathedral"
+        - "Angkor Wat"
         - "Machu Picchu"
         - "Hanging Gardens of Babylon"
 

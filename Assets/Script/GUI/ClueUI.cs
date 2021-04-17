@@ -21,16 +21,6 @@ namespace OnlyCornect
         private bool flashing = false;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        // Start is called before the first frame update
-        void Start()
-        {
-            if (SelectableButton != null)
-            {
-                SelectableButton.onClick.AddListener(OnButtonClick);
-            }
-        }
-
-        // --------------------------------------------------------------------------------------------------------------------------------------
         public void OnButtonClick()
         {
             Selected = true;

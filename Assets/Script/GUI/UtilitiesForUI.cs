@@ -31,6 +31,8 @@ public class UtilitiesForUI : MonoBehaviour
     public Color OVERLAY_TEAM;
     public Color OVERLAY_DARK;
 
+    public Color TEXT_NORMAL_COLOUR;
+
     public Sprite TEAM_BOX_A;
     public Sprite TEAM_BOX_B;
 

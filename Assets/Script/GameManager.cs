@@ -186,6 +186,7 @@ namespace OnlyCornect
                     ConnectionAndSequencesRoundScreen.Init(quizData.SequencesRound);
                     break;
                 case ERound.WallRound:
+                    WallRoundScreen.Init(quizData.WallRound[0]);
                     break;
                 case ERound.MissingVowelsRound:
                     break;

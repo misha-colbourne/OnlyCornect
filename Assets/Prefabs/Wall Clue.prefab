@@ -29,8 +29,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 4ff4b4b6e1d9bc44d9612ab41b714d7b, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 99f257a491604874ab91a91b3ced1563, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 71ee149dd30a1204cae9a3d3875b6eaf, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: bb7ee74276123cd41b6563954bd4b8d3, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: bb7ee74276123cd41b6563954bd4b8d3, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: bb7ee74276123cd41b6563954bd4b8d3, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -43,6 +43,35 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6138044225896116439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031583184854677110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4549248822401366778}
+          m_TargetAssemblyTypeName: OnlyCornect.ClueUI, Assembly-CSharp
+          m_MethodName: OnButtonClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &380334920499992083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50,6 +79,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4207792702047972585, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
+      propertyPath: SelectableButton
+      value: 
+      objectReference: {fileID: 802342688094782087}
     - target: {fileID: 5113446378233994862, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_fontSize
       value: 48
@@ -161,6 +194,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7264881512196825189, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
   m_PrefabInstance: {fileID: 380334920499992083}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4549248822401366778 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4207792702047972585, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
+  m_PrefabInstance: {fileID: 380334920499992083}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031583184854677110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14576cc87bac30e4f9518167d21cc680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7031583184854677097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7264881512196825210, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
