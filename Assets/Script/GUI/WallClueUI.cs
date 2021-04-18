@@ -10,13 +10,14 @@ namespace OnlyCornect
 {
     public class WallClueUI : ClueUI, IPointerDownHandler
     {
+        public Toggle ToggleButton;
+
         [HideInInspector] public string Connection;
         [HideInInspector] public bool GroupFound;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void OnPointerDown(PointerEventData eventData)
         {
-            Selected = true;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------

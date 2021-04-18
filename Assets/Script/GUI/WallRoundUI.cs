@@ -23,7 +23,7 @@ namespace OnlyCornect
         {
             foreach (var clue in Clues)
             {
-                clue.SelectableButton.onClick.AddListener(delegate { OnClueClicked(clue); });
+                clue.ToggleButton.onValueChanged.AddListener(delegate { OnClueClicked(clue); });
             }
         }
 
@@ -38,9 +38,10 @@ namespace OnlyCornect
             {
                 foreach (string clue in wallQuestion.Clues)
                 {
-                    Clues[clueToSet].Text.text = clue;
+                    Clues[clueToSet].ToggleButton.SetIsOnWithoutNotify(false);
+                    Clues[clueToSet].ToggleButton.interactable = true;
                     Clues[clueToSet].Connection = wallQuestion.Connection;
-                    Clues[clueToSet].SelectableButton.interactable = true;
+                    Clues[clueToSet].Text.text = clue;
                     clueToSet++;
                 }
             }
@@ -56,41 +57,52 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void OnClueClicked(WallClueUI clue)
         {
-            clue.Text.color = Color.white;
-            clue.GetComponent<Image>().sprite = SelectedSprites[currentGroupIndex];
-            clue.Overlay.color = SelectedOverlays[currentGroupIndex];
-
-            SpriteState ss = clue.SelectableButton.spriteState;
-            ss.highlightedSprite = SelectedSprites[currentGroupIndex];
-            clue.SelectableButton.spriteState = ss;
-
             clue.GetComponents<TweenHandler>()[0].Begin();
 
-            List<WallClueUI> selectedClues = Clues.Where(x => x.Selected).ToList();
-            if (selectedClues.Count >= 4)
+            if (clue.ToggleButton.isOn)
             {
-                if (selectedClues.All(x => x.Connection == clue.Connection))
+                // Toggle on
+                clue.Text.color = Color.white;
+                clue.GetComponent<Image>().sprite = SelectedSprites[currentGroupIndex];
+                clue.Overlay.color = SelectedOverlays[currentGroupIndex];
+
+                SpriteState ss = clue.ToggleButton.spriteState;
+                ss.highlightedSprite = SelectedSprites[currentGroupIndex];
+                ss.pressedSprite = SelectedSprites[currentGroupIndex];
+                clue.ToggleButton.spriteState = ss;
+
+                List<WallClueUI> selectedClues = Clues.Where(x => x.ToggleButton.isOn).ToList();
+                if (selectedClues.Count >= 4)
                 {
-                    GroupFound(selectedClues);
+                    if (selectedClues.All(x => x.Connection == clue.Connection))
+                    {
+                        GroupFound(selectedClues);
+                    }
+                    else
+                    {
+                        StartCoroutine(ResetClues());
+                    }
                 }
-                else
-                {
-                    StartCoroutine(ResetClues());
-                }
+            }
+            else
+            {
+                // Toggle off
+                ResetClueColours(clue);
             }
         }
 
+        // --------------------------------------------------------------------------------------------------------------------------------------
         private void GroupFound(List<WallClueUI> selectedClues)
         {
             foreach (var selectedClue in selectedClues)
             {
                 selectedClue.GroupFound = true;
-                selectedClue.Selected = false;
-                selectedClue.SelectableButton.interactable = false;
+                selectedClue.ToggleButton.SetIsOnWithoutNotify(false);
+                selectedClue.ToggleButton.interactable = false;
 
-                SpriteState ss = selectedClue.SelectableButton.spriteState;
+                SpriteState ss = selectedClue.ToggleButton.spriteState;
                 ss.disabledSprite = SelectedSprites[currentGroupIndex];
-                selectedClue.SelectableButton.spriteState = ss;
+                selectedClue.ToggleButton.spriteState = ss;
             }
 
             currentGroupIndex++;
@@ -101,22 +113,27 @@ namespace OnlyCornect
         {
             yield return new WaitForSeconds(INCORRECT_GROUP_CLEAR_DELAY);
 
-            foreach (WallClueUI clue in Clues.Where(x => x.Selected))
+            foreach (WallClueUI clue in Clues.Where(x => x.ToggleButton.isOn))
             {
-                clue.Selected = false;
-                clue.Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
-
-                clue.GetComponent<Image>().sprite = UtilitiesForUI.Instance.BOX_LIGHT;
-                clue.Overlay.color = UtilitiesForUI.Instance.OVERLAY_LIGHT;
-
-                SpriteState ss = clue.SelectableButton.spriteState; 
-                ss.highlightedSprite = UtilitiesForUI.Instance.BOX_SELECTED;
-                clue.SelectableButton.spriteState = ss;
-
+                clue.ToggleButton.SetIsOnWithoutNotify(false);
+                ResetClueColours(clue);
                 clue.GetComponents<TweenHandler>()[1].Begin();
             }
             
             yield return null;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        private void ResetClueColours(WallClueUI clue)
+        {
+            clue.GetComponent<Image>().sprite = UtilitiesForUI.Instance.BOX_LIGHT;
+            clue.Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
+            clue.Overlay.color = UtilitiesForUI.Instance.OVERLAY_LIGHT;
+
+            SpriteState ss = clue.ToggleButton.spriteState;
+            ss.highlightedSprite = UtilitiesForUI.Instance.BOX_SELECTED;
+            ss.pressedSprite = UtilitiesForUI.Instance.BOX_SELECTED;
+            clue.ToggleButton.spriteState = ss;
         }
     }
 }

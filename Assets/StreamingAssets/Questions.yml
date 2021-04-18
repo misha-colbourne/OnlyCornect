@@ -146,6 +146,35 @@ SequencesRound:
 WallRound:
 
     # Wall 1
+    -   - Connection: a
+          Clues:
+            - Dictator
+            - Depression
+            - Bear
+            - Unwashed
+
+        - Connection: b
+          Clues:
+            - Skein
+            - Murder
+            - Charm
+            - Parliament
+
+        - Connection: c
+          Clues:
+            - Sheridan
+            - Sherman
+            - Challenger
+            - Centurion
+
+        - Connection: d
+          Clues:
+            - US Flag
+            - Sergeant
+            - Barber's Pole
+            - Tiger
+
+    # Wall 1
     -   - Connection: Star ____
           Clues:
             - Gate

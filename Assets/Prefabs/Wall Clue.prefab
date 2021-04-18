@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &802342688094782087
+--- !u!114 &2803520128066499631
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7031583184854677110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -40,21 +40,13 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 7031583184854677097}
-  m_OnClick:
+  toggleTransition: 1
+  graphic: {fileID: 0}
+  m_Group: {fileID: 0}
+  onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7249930236018158124}
-        m_TargetAssemblyTypeName: OnlyCornect.ClueUI, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  m_IsOn: 0
 --- !u!114 &7249930236018158124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,11 +61,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Overlay: {fileID: 7031583184714664373}
   Text: {fileID: 4877861272863967357}
-  SelectableButton: {fileID: 802342688094782087}
+  SelectableButton: {fileID: 0}
   FlashLayer: {fileID: 4078812547849527545}
   Picture: {fileID: 9144400188215911889}
   IsGlyph: 0
   Selected: 0
+  ToggleButton: {fileID: 2803520128066499631}
+  Connection: 
+  GroupFound: 0
 --- !u!1001 &380334920499992083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83,7 +78,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1996990848504842613, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: To.x
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1996990848504842613, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: From.x
@@ -103,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1996990848504842613, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: PingPong
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1996990848504842613, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: TweenProperty
@@ -280,7 +275,7 @@ PrefabInstance:
     - target: {fileID: 4207792702047972585, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: SelectableButton
       value: 
-      objectReference: {fileID: 802342688094782087}
+      objectReference: {fileID: 0}
     - target: {fileID: 5113446378233994862, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_fontSize
       value: 48

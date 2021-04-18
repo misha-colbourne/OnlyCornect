@@ -290,7 +290,7 @@ MonoBehaviour:
   TEAM_BOX_A: {fileID: 21300000, guid: 71ee149dd30a1204cae9a3d3875b6eaf, type: 3}
   TEAM_BOX_B: {fileID: 21300000, guid: e1a6913415206ea458ac44be1ddedc9e, type: 3}
   BOX_LIGHT: {fileID: 21300000, guid: c4e17575df6c1c34782cb67fb138b9b6, type: 3}
-  BOX_SELECTED: {fileID: 0}
+  BOX_SELECTED: {fileID: 21300000, guid: 4ff4b4b6e1d9bc44d9612ab41b714d7b, type: 3}
 --- !u!4 &7181786
 Transform:
   m_ObjectHideFlags: 0
@@ -4547,7 +4547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2f5b329becc054d9a212c8d677dc5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  INCORRECT_GROUP_CLEAR_DELAY: 0.3
+  INCORRECT_GROUP_CLEAR_DELAY: 0.33
   Clues:
   - {fileID: 1724263635}
   - {fileID: 1110920293}
