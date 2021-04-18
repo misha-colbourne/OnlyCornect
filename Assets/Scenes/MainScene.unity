@@ -4547,6 +4547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2f5b329becc054d9a212c8d677dc5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  INCORRECT_GROUP_CLEAR_DELAY: 0.3
   Clues:
   - {fileID: 1724263635}
   - {fileID: 1110920293}
@@ -4570,10 +4571,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: af9bbf2b385d00f47a5d340e47acaa45, type: 3}
   - {fileID: 21300000, guid: bb0a5c7c33a92af4db52dcb268120ad4, type: 3}
   SelectedOverlays:
-  - {r: 0.10980392, g: 0.14117648, b: 0.16078432, a: 0}
-  - {r: 0.09411766, g: 0.43137258, b: 0.37647063, a: 0}
-  - {r: 0.34117648, g: 0.04705883, b: 0.18823531, a: 0}
-  - {r: 0.007843138, g: 0.4039216, b: 0.5137255, a: 0}
+  - {r: 0.10980392, g: 0.14117648, b: 0.16078432, a: 0.1254902}
+  - {r: 0.09411766, g: 0.43137258, b: 0.37647063, a: 0.1882353}
+  - {r: 0.34117648, g: 0.04705883, b: 0.18823531, a: 0.1882353}
+  - {r: 0.007843138, g: 0.4039216, b: 0.5137255, a: 0.1882353}
 --- !u!224 &924259128 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5050189796124360595, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
@@ -7228,6 +7229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2f5b329becc054d9a212c8d677dc5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  INCORRECT_GROUP_CLEAR_DELAY: 0.5
   Clues: []
   SelectedSprites: []
   SelectedOverlays: []

@@ -21,7 +21,7 @@ namespace OnlyCornect
         private bool flashing = false;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void OnButtonClick()
+        public virtual void OnButtonClick()
         {
             Selected = true;
             Overlay.color = UtilitiesForUI.Instance.OVERLAY_DARK;
