@@ -7128,7 +7128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1462123174}
-  - component: {fileID: 1462123177}
   - component: {fileID: 1462123176}
   - component: {fileID: 1462123175}
   m_Layer: 5
@@ -7217,22 +7216,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &1462123177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462123173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e2f5b329becc054d9a212c8d677dc5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  INCORRECT_GROUP_CLEAR_DELAY: 0.5
-  Clues: []
-  SelectedSprites: []
-  SelectedOverlays: []
 --- !u!1 &1519707097
 GameObject:
   m_ObjectHideFlags: 0

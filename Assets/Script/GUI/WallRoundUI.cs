@@ -10,6 +10,7 @@ namespace OnlyCornect
     public class WallRoundUI : MonoBehaviour
     {
         public float INCORRECT_GROUP_CLEAR_DELAY;
+        [HideInInspector] public int GROUP_SIZE = 4;
 
         [SerializeField] private List<WallClueUI> Clues;
         [SerializeField] private List<Sprite> SelectedSprites;
@@ -42,22 +43,24 @@ namespace OnlyCornect
                     Clues[clueToSet].ToggleButton.interactable = true;
                     Clues[clueToSet].Connection = wallQuestion.Connection;
                     Clues[clueToSet].Text.text = clue;
+                    Clues[clueToSet].GroupFound = false;
                     clueToSet++;
                 }
             }
 
-            foreach (WallClueUI clue in Clues)
+            List<int> indexList = Enumerable.Range(0, Clues.Count).OrderBy(x => UnityEngine.Random.value).ToList();
+            Clues = indexList.Select(x => Clues[x]).ToList();
+            for (int i = 0; i < Clues.Count; i++)
             {
-                int randomIndex = UnityEngine.Random.Range(0, Clues.Count - 1);
-                clue.transform.parent.SetSiblingIndex(randomIndex);
-                clue.Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
+                Clues[i].transform.parent.SetSiblingIndex(i);
+                Clues[i].Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
             }
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void OnClueClicked(WallClueUI clue)
         {
-            clue.GetComponents<TweenHandler>()[0].Begin();
+            clue.tweenShrinkOnClick.Begin();
 
             if (clue.ToggleButton.isOn)
             {
@@ -72,11 +75,40 @@ namespace OnlyCornect
                 clue.ToggleButton.spriteState = ss;
 
                 List<WallClueUI> selectedClues = Clues.Where(x => x.ToggleButton.isOn).ToList();
-                if (selectedClues.Count >= 4)
+                if (selectedClues.Count >= GROUP_SIZE)
                 {
                     if (selectedClues.All(x => x.Connection == clue.Connection))
                     {
-                        GroupFound(selectedClues);
+                        foreach (var selectedClue in selectedClues)
+                        {
+                            selectedClue.GroupFound = true;
+                            selectedClue.ToggleButton.SetIsOnWithoutNotify(false);
+                            selectedClue.ToggleButton.interactable = false;
+
+                            SpriteState ss2 = selectedClue.ToggleButton.spriteState;
+                            ss2.disabledSprite = SelectedSprites[currentGroupIndex];
+                            selectedClue.ToggleButton.spriteState = ss2;
+                        }
+
+                        selectedClues.OrderBy(x => x.transform.GetSiblingIndex());
+                        List<WallClueUI> remainingClues = Clues.Where(x => !x.GroupFound)
+                                                                 .OrderBy(x => x.transform.GetSiblingIndex())
+                                                                 .ToList();
+
+                        int siblingIndexOffset = currentGroupIndex * GROUP_SIZE;
+                        for (int i = 0; i < selectedClues.Count + remainingClues.Count; i++)
+                        {
+                            if (i < GROUP_SIZE)
+                            {
+                                selectedClues[i].transform.parent.SetSiblingIndex(i + siblingIndexOffset);
+                            }
+                            else
+                            {
+                                remainingClues[i - GROUP_SIZE].transform.parent.SetSiblingIndex(i + siblingIndexOffset);
+                            }
+                        }
+
+                        currentGroupIndex++;
                     }
                     else
                     {
@@ -92,23 +124,6 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        private void GroupFound(List<WallClueUI> selectedClues)
-        {
-            foreach (var selectedClue in selectedClues)
-            {
-                selectedClue.GroupFound = true;
-                selectedClue.ToggleButton.SetIsOnWithoutNotify(false);
-                selectedClue.ToggleButton.interactable = false;
-
-                SpriteState ss = selectedClue.ToggleButton.spriteState;
-                ss.disabledSprite = SelectedSprites[currentGroupIndex];
-                selectedClue.ToggleButton.spriteState = ss;
-            }
-
-            currentGroupIndex++;
-        }
-
-        // --------------------------------------------------------------------------------------------------------------------------------------
         private IEnumerator ResetClues()
         {
             yield return new WaitForSeconds(INCORRECT_GROUP_CLEAR_DELAY);
@@ -117,7 +132,7 @@ namespace OnlyCornect
             {
                 clue.ToggleButton.SetIsOnWithoutNotify(false);
                 ResetClueColours(clue);
-                clue.GetComponents<TweenHandler>()[1].Begin();
+                clue.tweenShakeOnIncorrectGroup.Begin();
             }
             
             yield return null;

@@ -148,31 +148,31 @@ WallRound:
     # Wall 1
     -   - Connection: a
           Clues:
-            - Dictator
-            - Depression
-            - Bear
-            - Unwashed
+            - aaaaaaa
+            - aaaaaaa
+            - aaaaaaa
+            - aaaaaaa
 
         - Connection: b
           Clues:
-            - Skein
-            - Murder
-            - Charm
-            - Parliament
+            - bbbbb
+            - bbbbb
+            - bbbbb
+            - bbbbb
 
         - Connection: c
           Clues:
-            - Sheridan
-            - Sherman
-            - Challenger
-            - Centurion
+            - ccc
+            - ccc
+            - ccc
+            - ccc
 
         - Connection: d
           Clues:
-            - US Flag
-            - Sergeant
-            - Barber's Pole
-            - Tiger
+            - z
+            - z
+            - z
+            - z
 
     # Wall 1
     -   - Connection: Star ____

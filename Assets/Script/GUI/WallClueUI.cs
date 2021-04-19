@@ -15,6 +15,10 @@ namespace OnlyCornect
         [HideInInspector] public string Connection;
         [HideInInspector] public bool GroupFound;
 
+        [HideInInspector] public TweenHandler tweenShrinkOnClick            { get { return GetComponents<TweenHandler>()[0]; } }
+        [HideInInspector] public TweenHandler tweenShakeOnIncorrectGroup    { get { return GetComponents<TweenHandler>()[1]; } }
+        [HideInInspector] public TweenHandler tweenMoveOnCorrectGroupFound  { get { return GetComponents<TweenHandler>()[2]; } }
+
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void OnPointerDown(PointerEventData eventData)
         {
