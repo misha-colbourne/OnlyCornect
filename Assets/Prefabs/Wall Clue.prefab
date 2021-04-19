@@ -298,19 +298,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_SizeDelta.x
@@ -394,15 +394,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8898290469793127050, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: From.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8898290469793127050, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: From.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8898290469793127050, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: From.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8898290469793127050, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: Duration
@@ -414,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8898290469793127050, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: TweenProperty
-      value: 35
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 8898290469793127050, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: TweenDescription
