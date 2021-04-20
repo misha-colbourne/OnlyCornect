@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace OnlyCornect
@@ -11,6 +12,8 @@ namespace OnlyCornect
     {
         public float INCORRECT_GROUP_CLEAR_DELAY;
         [HideInInspector] public int GROUP_SIZE = 4;
+
+        public GridLayoutGroup ClueGrid;
 
         [SerializeField] private List<WallClueUI> Clues;
         [SerializeField] private List<Sprite> SelectedSprites;
@@ -69,56 +72,77 @@ namespace OnlyCornect
                 clue.GetComponent<Image>().sprite = SelectedSprites[currentGroupIndex];
                 clue.Overlay.color = SelectedOverlays[currentGroupIndex];
 
-                SpriteState ss = clue.ToggleButton.spriteState;
-                ss.highlightedSprite = SelectedSprites[currentGroupIndex];
-                ss.pressedSprite = SelectedSprites[currentGroupIndex];
-                clue.ToggleButton.spriteState = ss;
+                SpriteState clickedClueSS = clue.ToggleButton.spriteState;
+                clickedClueSS.highlightedSprite = SelectedSprites[currentGroupIndex];
+                clickedClueSS.pressedSprite = SelectedSprites[currentGroupIndex];
+                clue.ToggleButton.spriteState = clickedClueSS;
 
+                // Selected group of four
                 List<WallClueUI> selectedClues = Clues.Where(x => x.ToggleButton.isOn).ToList();
                 if (selectedClues.Count >= GROUP_SIZE)
                 {
+                    // If all clues have the same connection, thus a valid group
                     if (selectedClues.All(x => x.Connection == clue.Connection))
                     {
+                        // Mark as found and lock in group colours
                         foreach (var selectedClue in selectedClues)
                         {
                             selectedClue.GroupFound = true;
                             selectedClue.ToggleButton.SetIsOnWithoutNotify(false);
                             selectedClue.ToggleButton.interactable = false;
 
-                            SpriteState ss2 = selectedClue.ToggleButton.spriteState;
-                            ss2.disabledSprite = SelectedSprites[currentGroupIndex];
-                            selectedClue.ToggleButton.spriteState = ss2;
+                            SpriteState ss = selectedClue.ToggleButton.spriteState;
+                            ss.disabledSprite = SelectedSprites[currentGroupIndex];
+                            selectedClue.ToggleButton.spriteState = ss;
                         }
 
+                        // Ensure ordering of selected and remaining clues matches hierarchy
                         selectedClues.OrderBy(x => x.transform.GetSiblingIndex());
                         List<WallClueUI> remainingClues = Clues.Where(x => !x.GroupFound)
                                                                  .OrderBy(x => x.transform.GetSiblingIndex())
                                                                  .ToList();
 
-                        int siblingIndexOffset = currentGroupIndex * GROUP_SIZE;
+                        // Set new clue container sibling indices to have group move to the top, store From position for move tween
+                        int switchoverIndex = selectedClues.Count + remainingClues.Count - GROUP_SIZE;
                         for (int i = 0; i < selectedClues.Count + remainingClues.Count; i++)
                         {
-                            if (i < GROUP_SIZE)
+                            if (i < switchoverIndex)
                             {
-                                selectedClues[i].transform.parent.SetSiblingIndex(i + siblingIndexOffset);
+                                remainingClues[i].tweenMoveOnCorrectGroupFound.From = remainingClues[i].transform.position;
+                                remainingClues[i].transform.parent.SetSiblingIndex(i);
                             }
                             else
                             {
-                                remainingClues[i - GROUP_SIZE].transform.parent.SetSiblingIndex(i + siblingIndexOffset);
+                                selectedClues[i - switchoverIndex].tweenMoveOnCorrectGroupFound.From = selectedClues[i - switchoverIndex].transform.position;
+                                selectedClues[i - switchoverIndex].transform.parent.SetSiblingIndex(i);
                             }
+                        }
+
+                        // Force clue grid layout to update new positions pre-tween
+                        ClueGrid.CalculateLayoutInputHorizontal();
+                        ClueGrid.CalculateLayoutInputVertical();
+                        ClueGrid.SetLayoutHorizontal();
+                        ClueGrid.SetLayoutVertical();
+
+                        // Assignment of To position for move tween and start tween anim
+                        foreach (var clueToMove in selectedClues.Concat(remainingClues))
+                        {
+                            clueToMove.tweenMoveOnCorrectGroupFound.To = clueToMove.transform.position;
+                            clueToMove.tweenMoveOnCorrectGroupFound.Begin();
                         }
 
                         currentGroupIndex++;
                     }
                     else
                     {
+                        // Clear invalid selection group
                         StartCoroutine(ResetClues());
                     }
                 }
             }
             else
             {
-                // Toggle off
+                // Deselecting a clue so clear selected colours
                 ResetClueColours(clue);
             }
         }
@@ -141,6 +165,7 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void ResetClueColours(WallClueUI clue)
         {
+
             clue.GetComponent<Image>().sprite = UtilitiesForUI.Instance.BOX_LIGHT;
             clue.Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
             clue.Overlay.color = UtilitiesForUI.Instance.OVERLAY_LIGHT;

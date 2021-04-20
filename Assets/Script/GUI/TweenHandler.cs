@@ -11,6 +11,7 @@ public class TweenHandler : MonoBehaviour
         Move = TweenAction.MOVE_LOCAL,
         MoveX = TweenAction.MOVE_LOCAL_X,
         MoveY = TweenAction.MOVE_LOCAL_Y,
+        MoveWorld = TweenAction.MOVE,
         Rotate = TweenAction.ROTATE_LOCAL,
         Scale = TweenAction.SCALE,
         Fade = TweenAction.CANVAS_ALPHA,
@@ -51,6 +52,9 @@ public class TweenHandler : MonoBehaviour
             {
                 case ETweenProperty.Move:
                     Move(toTween);
+                    break;
+                case ETweenProperty.MoveWorld:
+                    MoveWorld(toTween);
                     break;
                 case ETweenProperty.MoveX:
                     Move(toTween);
@@ -112,6 +116,15 @@ public class TweenHandler : MonoBehaviour
             _tweenObject = LeanTween.moveLocalY(toTween, To.y, Duration);
         else
             _tweenObject = LeanTween.moveLocal(toTween, To, Duration);
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    public void MoveWorld(GameObject toTween)
+    {
+        if (useSpecifiedFrom)
+            toTween.transform.position = From;
+
+        _tweenObject = LeanTween.move(toTween, To, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
