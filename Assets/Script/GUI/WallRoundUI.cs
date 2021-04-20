@@ -11,7 +11,9 @@ namespace OnlyCornect
     public class WallRoundUI : MonoBehaviour
     {
         public float INCORRECT_GROUP_CLEAR_DELAY;
+        public Vector3 GROUP_FOUND_SCALE_DELTA = new Vector3(0.1f, 0.1f, 0.1f);
         [HideInInspector] public int GROUP_SIZE = 4;
+
 
         public GridLayoutGroup ClueGrid;
 
@@ -110,11 +112,13 @@ namespace OnlyCornect
                             {
                                 remainingClues[i].tweenMoveOnCorrectGroupFound.From = remainingClues[i].transform.position;
                                 remainingClues[i].transform.parent.SetSiblingIndex(i);
+                                remainingClues[i].tweenScaleOnCorrectGroupFound.To = Vector3.one - GROUP_FOUND_SCALE_DELTA;
                             }
                             else
                             {
                                 selectedClues[i - switchoverIndex].tweenMoveOnCorrectGroupFound.From = selectedClues[i - switchoverIndex].transform.position;
                                 selectedClues[i - switchoverIndex].transform.parent.SetSiblingIndex(i);
+                                selectedClues[i - switchoverIndex].tweenScaleOnCorrectGroupFound.To = Vector3.one;
                             }
                         }
 
@@ -128,7 +132,9 @@ namespace OnlyCornect
                         foreach (var clueToMove in selectedClues.Concat(remainingClues))
                         {
                             clueToMove.tweenMoveOnCorrectGroupFound.To = clueToMove.transform.position;
+                            clueToMove.transform.position = clueToMove.tweenMoveOnCorrectGroupFound.From;
                             clueToMove.tweenMoveOnCorrectGroupFound.Begin();
+                            clueToMove.tweenScaleOnCorrectGroupFound.Begin();
                         }
 
                         currentGroupIndex++;
