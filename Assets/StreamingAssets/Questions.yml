@@ -40,19 +40,19 @@ ConnectionRound:
         - Pokemon_Lavender
         - Pokemon_Pallet
 
-    - Connection: Fools or Jesters
-      Clues:
-        - First (or last)<br>of the Major Arcana
-        - Puck
-        - Unpopular associate of Falconhoof
-        - Roland the<br>Farter
-
     - Connection: Synonyms of card games
       Clues:
         - Sovereignty
         - One
         - Japanese cuisine depart!
         - "Sorcery: The Congregation"
+
+    - Connection: Means of initiating time travel
+      Clues:
+        - Dialing a<br>number
+        - Turning over the necklace core
+        - Removing or replacing sword in pedestal
+        - Reaching 88 miles per hour
 
     - Connection: Neapolitan
       Clues:
@@ -66,20 +66,20 @@ ConnectionRound:
         - Neapolitan_IceCream
         - Neapolitan_Naples
 
-    - Connection: Means of initiating time travel
+    - Connection: Fools/Jesters
       Clues:
-        - Dialing a<br>number
-        - Turning over the necklace core
-        - Removing or replacing sword in pedestal
-        - Reaching 88 miles per hour
+        - First (or last)<br>of the Major Arcana
+        - Puck
+        - Falconhoof's unpopular associate
+        - Roland the<br>Farter
 
 # --------------------------------------------------------------------------------------------------------------------------------------
 SequencesRound:
 
     - Connection: Pirates of the Caribbean titles last word synonyms
       Clues:
-        - "In unfamiliar oceanic ebb<br>and flow"
-        - "At planetary conclusion"
+        - "Unfamiliar oceanic ebb<br>and flow"
+        - "Planetary conclusion"
         - "Deceased male's treasure box"
         - "e.g. Hex of the dark spherical mollusc-byproduct"
 
@@ -109,12 +109,12 @@ SequencesRound:
         - Seymour<br>Skinner
         - Blinky
 
-    - Connection: Planetary Greek/Roman god equivalents
+    - Connection: Countries word chain
       Clues:
-        - "8: Poseidon"
-        - "7: Caelus"
-        - "6: Cronus"
-        - "5: Zeus"
+        - Moldova<line-height=80%><br><size=150%>→</size></voffset><br>Vanuatu
+        - Vanuatu<line-height=80%><br><size=150%>→</size></voffset><br>Turkmenistan
+        - Turkmenistan<line-height=80%><br><size=150%>→</size></voffset><br>Angola
+        - Angola<line-height=80%><br><size=150%>→</size></voffset><br>Laos/Latvia
 
     - Connection: Bands with 5/4/3/2 members
       Clues:
@@ -122,13 +122,6 @@ SequencesRound:
         - Queen
         - The Police
         - e.g. The White Stripes
-
-    - Connection: Countries word chain
-      Clues:
-        - Moldova<line-height=80%><br><size=150%>→</size></voffset><br>Vanuatu
-        - Vanuatu<line-height=80%><br><size=150%>→</size></voffset><br>Turkmenistan
-        - Turkmenistan<line-height=80%><br><size=150%>→</size></voffset><br>Angola
-        - Angola<line-height=80%><br><size=150%>→</size></voffset><br>Laos/Latvia
 
     - Connection: One fewer A each time
       Clues:
@@ -142,6 +135,13 @@ SequencesRound:
         - As_Balaclava
         - As_Maracas
 
+    - Connection: Planetary Greek/Roman god equivalents
+      Clues:
+        - "8: Poseidon"
+        - "7: Caelus"
+        - "6: Cronus"
+        - "5: Zeus"
+        
 # --------------------------------------------------------------------------------------------------------------------------------------
 WallRound:
 

@@ -10,16 +10,21 @@ namespace OnlyCornect
 {
     public class WallRoundUI : MonoBehaviour
     {
-        public float INCORRECT_GROUP_CLEAR_DELAY;
+        public float INCORRECT_GROUP_CLEAR_DELAY = 0.33f;
+        public float LIVES_DISABLED_ALPHA = 0.2f;
         public Vector3 GROUP_FOUND_SCALE_DELTA = new Vector3(0.1f, 0.1f, 0.1f);
+
+        [Space]
+
         [HideInInspector] public int GROUP_SIZE = 4;
 
-
         public GridLayoutGroup ClueGrid;
+        public TimeBoxUI TimeBox;
+        public List<Image> Lives;
 
-        [SerializeField] private List<WallClueUI> Clues;
-        [SerializeField] private List<Sprite> SelectedSprites;
-        [SerializeField] private List<Color> SelectedOverlays;
+        public List<WallClueUI> Clues;
+        public List<Sprite> SelectedSprites;
+        public List<Color> SelectedOverlays;
 
         private List<WallQuestion> wallQuestions;
         private int currentGroupIndex;
@@ -112,13 +117,13 @@ namespace OnlyCornect
                             {
                                 remainingClues[i].tweenMoveOnCorrectGroupFound.From = remainingClues[i].transform.position;
                                 remainingClues[i].transform.parent.SetSiblingIndex(i);
-                                remainingClues[i].tweenScaleOnCorrectGroupFound.To = Vector3.one - GROUP_FOUND_SCALE_DELTA;
+                                //remainingClues[i].tweenScaleOnCorrectGroupFound.To = Vector3.one - GROUP_FOUND_SCALE_DELTA;
                             }
                             else
                             {
                                 selectedClues[i - switchoverIndex].tweenMoveOnCorrectGroupFound.From = selectedClues[i - switchoverIndex].transform.position;
                                 selectedClues[i - switchoverIndex].transform.parent.SetSiblingIndex(i);
-                                selectedClues[i - switchoverIndex].tweenScaleOnCorrectGroupFound.To = Vector3.one;
+                                //selectedClues[i - switchoverIndex].tweenScaleOnCorrectGroupFound.To = Vector3.one;
                             }
                         }
 
@@ -134,7 +139,7 @@ namespace OnlyCornect
                             clueToMove.tweenMoveOnCorrectGroupFound.To = clueToMove.transform.position;
                             clueToMove.transform.position = clueToMove.tweenMoveOnCorrectGroupFound.From;
                             clueToMove.tweenMoveOnCorrectGroupFound.Begin();
-                            clueToMove.tweenScaleOnCorrectGroupFound.Begin();
+                            //clueToMove.tweenScaleOnCorrectGroupFound.Begin();
                         }
 
                         currentGroupIndex++;

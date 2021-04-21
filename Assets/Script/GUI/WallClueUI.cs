@@ -18,7 +18,7 @@ namespace OnlyCornect
         [HideInInspector] public TweenHandler tweenShrinkOnClick            { get { return GetComponents<TweenHandler>()[0]; } }
         [HideInInspector] public TweenHandler tweenShakeOnIncorrectGroup    { get { return GetComponents<TweenHandler>()[1]; } }
         [HideInInspector] public TweenHandler tweenMoveOnCorrectGroupFound  { get { return GetComponents<TweenHandler>()[2]; } }
-        [HideInInspector] public TweenHandler tweenScaleOnCorrectGroupFound { get { return GetComponents<TweenHandler>()[3]; } }
+        //[HideInInspector] public TweenHandler tweenScaleOnCorrectGroupFound { get { return GetComponents<TweenHandler>()[3]; } }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void OnPointerDown(PointerEventData eventData)
