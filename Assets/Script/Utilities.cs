@@ -39,6 +39,12 @@ public static class Utilities
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
+    public static RectTransform GetRectTransform(this GameObject go)
+    {
+        return go.transform as RectTransform;
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public static IEnumerator WaitAFrameThenRun(Action action)
     {
         yield return null;

@@ -115,12 +115,9 @@ namespace OnlyCornect
                 case EPhase.RoundNameScreen:
                     {
                         RoundNameScreen.Hide();
-                        GlyphSelectionScreen.Init();
+                        GlyphSelectionScreen.Init(currentRound == ERound.WallRound);
 
-                        if (currentRound == ERound.WallRound)
-                            WallRoundScreen.Show();
-                        else
-                            MoveToQuestionSelection();
+                        MoveToQuestionSelection();
                     }
                     break;
                 case EPhase.GlyphSelection:
@@ -217,6 +214,13 @@ namespace OnlyCornect
                 ConnectionAndSequencesRoundScreen.Show();
                 ConnectionAndSequencesRoundScreen.NextQuestion();
             }
+            else if (currentRound == ERound.WallRound)
+            {
+                currentPhase = EPhase.WallQuestion;
+
+                WallRoundScreen.Show();
+                WallRoundScreen.StartTimeBar();
+            }
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -276,7 +280,6 @@ namespace OnlyCornect
                         if (Input.GetKeyDown(KeyCode.UpArrow))
                         {
                             ConnectionAndSequencesRoundScreen.HandOverToOtherTeam();
-                            //
                         }
 
                         if (Input.GetKeyDown(KeyCode.A))
@@ -284,26 +287,24 @@ namespace OnlyCornect
                             StartCoroutine(ConnectionAndSequencesRoundScreen.ShowAnswer());
                         }
 
+                        if (Input.GetKeyDown(KeyCode.P))
+                        {
+                            if (!scoreHasBeenGrantedThisQuestion && !ConnectionAndSequencesRoundScreen.TimeBarRunning)
+                            {
+                                ScorePopup.ShowScoreChange(
+                                    activeTeamIsA ? teamA.Name : teamB.Name,
+                                    ConnectionAndSequencesRoundScreen.ScoreForCurrentQuestion,
+                                    activeTeamIsA
+                                );
+                                scoreHasBeenGrantedThisQuestion = true;
+                            }
+                        }
+
                         if (Input.GetKeyDown(KeyCode.Backspace))
                         {
-                            if (!scoreHasBeenGrantedThisQuestion)
-                            {
-                                if (!ConnectionAndSequencesRoundScreen.TimeBarRunning)
-                                {
-                                    ScorePopup.ShowScoreChange(
-                                        activeTeamIsA ? teamA.Name : teamB.Name,
-                                        ConnectionAndSequencesRoundScreen.ScoreForCurrentQuestion,
-                                        activeTeamIsA
-                                    );
-                                    scoreHasBeenGrantedThisQuestion = true;
-                                }
-                            }
-                            else
-                            {
-                                ConnectionAndSequencesRoundScreen.StopTimeBar();
-                                scoreHasBeenGrantedThisQuestion = false;
-                                NextPhase();
-                            }
+                            ConnectionAndSequencesRoundScreen.StopTimeBar();
+                            scoreHasBeenGrantedThisQuestion = false;
+                            NextPhase();
                         }
                     }
                     break;

@@ -7,6 +7,7 @@ namespace OnlyCornect
     public class GlyphSelectionUI : MonoBehaviour
     {
         [SerializeField] private float DISABLED_ALPHA = 1.0f;
+        
         public List<ClueUI> GlyphBoxes;
 
         [HideInInspector] public bool SelectionMade = false;
@@ -24,15 +25,6 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void OnEnable()
         {
-            foreach (var gbox in GlyphBoxes)
-            {
-                gbox.SelectableButton.interactable = !gbox.Selected;
-                gbox.Overlay.color = gbox.Selected ? UtilitiesForUI.Instance.OVERLAY_LIGHT : UtilitiesForUI.Instance.OVERLAY_DARK;
-
-                CanvasGroup cg = gbox.GetComponent<CanvasGroup>();
-                cg.alpha = gbox.Selected ? DISABLED_ALPHA : 1;
-            }
-
             SelectionMade = false;
         }
 
@@ -46,11 +38,27 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void Init()
+        public void Init(bool isWallRound)
         {
-            foreach (var gbox in GlyphBoxes)
+            for (int i = 0; i < GlyphBoxes.Count; i++)
             {
-                gbox.Selected = false;
+                var gbox = GlyphBoxes[i];
+
+                if (!isWallRound || i < WallRoundUI.GLYPH_COUNT)
+                {
+                    gbox.transform.parent.gameObject.SetActive(true);
+                    gbox.Selected = false;
+                    gbox.SelectableButton.interactable = true;
+                    gbox.Overlay.color = gbox.Selected ? UtilitiesForUI.Instance.OVERLAY_LIGHT : UtilitiesForUI.Instance.OVERLAY_DARK;
+
+                    CanvasGroup cg = gbox.GetComponent<CanvasGroup>();
+                    cg.alpha = gbox.Selected ? DISABLED_ALPHA : 1;
+                }
+                else
+                {
+                    gbox.transform.parent.gameObject.SetActive(false);
+                    gbox.Selected = true;
+                }
             }
         }
 

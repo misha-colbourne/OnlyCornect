@@ -3783,6 +3783,7 @@ GameObject:
   - component: {fileID: 764098352}
   - component: {fileID: 764098353}
   - component: {fileID: 764098351}
+  - component: {fileID: 764098354}
   m_Layer: 5
   m_Name: Lives Container
   m_TagString: Untagged
@@ -3860,7 +3861,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Duration: 1
+  Duration: 1.2
   Delay: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
@@ -3899,6 +3900,35 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &764098354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764098348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Lives post fade in swell
+  ObjectsToTween: []
+  TweenProperty: 39
+  EaseType: 4
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.25
+  Delay: 1.25
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 1.1, y: 1.1, z: 1.1}
+  Loop: 0
+  PingPong: 1
 --- !u!1 &767231750
 GameObject:
   m_ObjectHideFlags: 0
@@ -4874,6 +4904,7 @@ MonoBehaviour:
   GROUP_SIZE: 4
   ClueGrid: {fileID: 1462123175}
   TimeBox: {fileID: 1360429567}
+  LivesContainer: {fileID: 764098348}
   Lives:
   - {fileID: 430721059}
   - {fileID: 336584441}
@@ -7124,6 +7155,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1515674539}
     m_Modifications:
+    - target: {fileID: 807867255067532208, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5113446378233994862, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: m_text
+      value: Time is up!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5113446378233994862, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5113446378233994862, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5929004547934501972, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5929004547934501972, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -7155,6 +7206,22 @@ PrefabInstance:
     - target: {fileID: 5929004547934501972, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263584207794804363, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: From.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263584207794804363, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: Duration
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263584207794804363, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: TweenProperty
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263584207794804363, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+      propertyPath: useSpecifiedFrom
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7264881512196825188, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
       propertyPath: m_Pivot.x
@@ -7258,9 +7325,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8196792851663649716, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3384963822462631505, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
 --- !u!224 &1360429566 stripped
 RectTransform:

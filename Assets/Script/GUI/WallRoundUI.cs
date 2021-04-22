@@ -16,10 +16,13 @@ namespace OnlyCornect
 
         [Space]
 
+        [HideInInspector] public const int GLYPH_COUNT = 2;
         [HideInInspector] public int GROUP_SIZE = 4;
+        private const int LIVES_COUNT = 3;
 
         public GridLayoutGroup ClueGrid;
         public TimeBoxUI TimeBox;
+        public GameObject LivesContainer;
         public List<Image> Lives;
 
         public List<WallClueUI> Clues;
@@ -28,6 +31,9 @@ namespace OnlyCornect
 
         private List<WallQuestion> wallQuestions;
         private int currentGroupIndex;
+        private bool timeBarRunning;
+        private bool onFinalPair;
+        private int livesRemaining;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void Awake()
@@ -43,6 +49,7 @@ namespace OnlyCornect
         {
             this.wallQuestions = wallQuestions;
             currentGroupIndex = 0;
+            onFinalPair = false;
 
             int clueToSet = 0;
             foreach (WallQuestion wallQuestion in wallQuestions)
@@ -64,6 +71,40 @@ namespace OnlyCornect
             {
                 Clues[i].transform.parent.SetSiblingIndex(i);
                 Clues[i].Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
+            }
+
+            livesRemaining = LIVES_COUNT;
+            LivesContainer.SetVisible(LIVES_DISABLED_ALPHA);
+            foreach (var life in Lives)
+                life.gameObject.SetVisible(true);
+
+            timeBarRunning = false;
+            TimeBox.FillBar.transform.localPosition = Vector3.zero;
+            TimeBox.Text.Hide();
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void StartTimeBar()
+        {
+            timeBarRunning = true;
+            var fillTween = TimeBox.FillBar.GetComponent<TweenHandler>();
+            fillTween.From = new Vector3(-TimeBox.GetComponent<LayoutElement>().preferredWidth, 0, 0);
+            fillTween.Begin(StopTimeBar);
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void StopTimeBar()
+        {
+            timeBarRunning = false;
+            var fillTween = TimeBox.FillBar.GetComponent<TweenHandler>();
+
+            if (TimeBox.FillBar.LeanIsTweening())
+            {
+                fillTween.Cancel();
+            }
+            else
+            {
+                TimeBox.Text.Show();
             }
         }
 
@@ -91,17 +132,7 @@ namespace OnlyCornect
                     // If all clues have the same connection, thus a valid group
                     if (selectedClues.All(x => x.Connection == clue.Connection))
                     {
-                        // Mark as found and lock in group colours
-                        foreach (var selectedClue in selectedClues)
-                        {
-                            selectedClue.GroupFound = true;
-                            selectedClue.ToggleButton.SetIsOnWithoutNotify(false);
-                            selectedClue.ToggleButton.interactable = false;
-
-                            SpriteState ss = selectedClue.ToggleButton.spriteState;
-                            ss.disabledSprite = SelectedSprites[currentGroupIndex];
-                            selectedClue.ToggleButton.spriteState = ss;
-                        }
+                        MarkAsCorrectGroup(selectedClues);
 
                         // Ensure ordering of selected and remaining clues matches hierarchy
                         selectedClues.OrderBy(x => x.transform.GetSiblingIndex());
@@ -117,13 +148,11 @@ namespace OnlyCornect
                             {
                                 remainingClues[i].tweenMoveOnCorrectGroupFound.From = remainingClues[i].transform.position;
                                 remainingClues[i].transform.parent.SetSiblingIndex(i);
-                                //remainingClues[i].tweenScaleOnCorrectGroupFound.To = Vector3.one - GROUP_FOUND_SCALE_DELTA;
                             }
                             else
                             {
                                 selectedClues[i - switchoverIndex].tweenMoveOnCorrectGroupFound.From = selectedClues[i - switchoverIndex].transform.position;
                                 selectedClues[i - switchoverIndex].transform.parent.SetSiblingIndex(i);
-                                //selectedClues[i - switchoverIndex].tweenScaleOnCorrectGroupFound.To = Vector3.one;
                             }
                         }
 
@@ -139,14 +168,26 @@ namespace OnlyCornect
                             clueToMove.tweenMoveOnCorrectGroupFound.To = clueToMove.transform.position;
                             clueToMove.transform.position = clueToMove.tweenMoveOnCorrectGroupFound.From;
                             clueToMove.tweenMoveOnCorrectGroupFound.Begin();
-                            //clueToMove.tweenScaleOnCorrectGroupFound.Begin();
                         }
 
                         currentGroupIndex++;
+
+                        if (remainingClues.Count == GROUP_SIZE * 2)
+                        {
+                            onFinalPair = true;
+                            foreach (var tween in LivesContainer.GetComponents<TweenHandler>())
+                                tween.Begin();
+                        }
+                        else if (remainingClues.Count == GROUP_SIZE)
+                        {
+                            StopTimeBar();
+                            MarkAsCorrectGroup(remainingClues);
+                        }
                     }
+                    // Invalid selected group
                     else
                     {
-                        // Clear invalid selection group
+                        // Clear selected clues
                         StartCoroutine(ResetClues());
                     }
                 }
@@ -155,6 +196,26 @@ namespace OnlyCornect
             {
                 // Deselecting a clue so clear selected colours
                 ResetClueColours(clue);
+            }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        private void MarkAsCorrectGroup(List<WallClueUI> clues)
+        {
+            // Mark as found and lock in group colours
+            foreach (var clue in clues)
+            {
+                clue.Text.color = Color.white;
+                clue.GetComponent<Image>().sprite = SelectedSprites[currentGroupIndex];
+                clue.Overlay.color = SelectedOverlays[currentGroupIndex];
+
+                clue.GroupFound = true;
+                clue.ToggleButton.SetIsOnWithoutNotify(false);
+                clue.ToggleButton.interactable = false;
+
+                SpriteState ss = clue.ToggleButton.spriteState;
+                ss.disabledSprite = SelectedSprites[currentGroupIndex];
+                clue.ToggleButton.spriteState = ss;
             }
         }
 
@@ -169,7 +230,13 @@ namespace OnlyCornect
                 ResetClueColours(clue);
                 clue.tweenShakeOnIncorrectGroup.Begin();
             }
-            
+
+            if (onFinalPair)
+            {
+                Lives[LIVES_COUNT - livesRemaining].gameObject.SetVisible(false);
+                livesRemaining--;
+            }
+
             yield return null;
         }
 
