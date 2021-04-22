@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Utilities
 {
@@ -49,6 +50,15 @@ public static class Utilities
     {
         yield return null;
         action.Invoke();
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    public static void ForceGridUpdates(this GridLayoutGroup grid)
+    {
+        grid.CalculateLayoutInputHorizontal();
+        grid.CalculateLayoutInputVertical();
+        grid.SetLayoutHorizontal();
+        grid.SetLayoutVertical();
     }
 
 }

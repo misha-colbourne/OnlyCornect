@@ -17,10 +17,12 @@ namespace OnlyCornect
         [Space]
 
         [HideInInspector] public const int GLYPH_COUNT = 2;
+        [HideInInspector] public int GROUP_COUNT = 4;
         [HideInInspector] public int GROUP_SIZE = 4;
         private const int LIVES_COUNT = 3;
 
         public GridLayoutGroup ClueGrid;
+        public GameObject TimeAndLivesContainer;
         public TimeBoxUI TimeBox;
         public GameObject LivesContainer;
         public List<Image> Lives;
@@ -73,6 +75,8 @@ namespace OnlyCornect
                 Clues[i].Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
             }
 
+            TimeAndLivesContainer.SetVisible(true);
+
             livesRemaining = LIVES_COUNT;
             LivesContainer.SetVisible(LIVES_DISABLED_ALPHA);
             foreach (var life in Lives)
@@ -111,6 +115,9 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void OnClueClicked(WallClueUI clue)
         {
+            if (!timeBarRunning)
+                return;
+
             clue.tweenShrinkOnClick.Begin();
 
             if (clue.ToggleButton.isOn)
@@ -140,54 +147,25 @@ namespace OnlyCornect
                                                                  .OrderBy(x => x.transform.GetSiblingIndex())
                                                                  .ToList();
 
-                        // Set new clue container sibling indices to have group move to the top, store From position for move tween
-                        int switchoverIndex = selectedClues.Count + remainingClues.Count - GROUP_SIZE;
-                        for (int i = 0; i < selectedClues.Count + remainingClues.Count; i++)
-                        {
-                            if (i < switchoverIndex)
-                            {
-                                remainingClues[i].tweenMoveOnCorrectGroupFound.From = remainingClues[i].transform.position;
-                                remainingClues[i].transform.parent.SetSiblingIndex(i);
-                            }
-                            else
-                            {
-                                selectedClues[i - switchoverIndex].tweenMoveOnCorrectGroupFound.From = selectedClues[i - switchoverIndex].transform.position;
-                                selectedClues[i - switchoverIndex].transform.parent.SetSiblingIndex(i);
-                            }
-                        }
+                        MoveCluesToNewPositions(selectedClues, remainingClues);
 
-                        // Force clue grid layout to update new positions pre-tween
-                        ClueGrid.CalculateLayoutInputHorizontal();
-                        ClueGrid.CalculateLayoutInputVertical();
-                        ClueGrid.SetLayoutHorizontal();
-                        ClueGrid.SetLayoutVertical();
-
-                        // Assignment of To position for move tween and start tween anim
-                        foreach (var clueToMove in selectedClues.Concat(remainingClues))
-                        {
-                            clueToMove.tweenMoveOnCorrectGroupFound.To = clueToMove.transform.position;
-                            clueToMove.transform.position = clueToMove.tweenMoveOnCorrectGroupFound.From;
-                            clueToMove.tweenMoveOnCorrectGroupFound.Begin();
-                        }
-
-                        currentGroupIndex++;
-
+                        // Activate final pair's three lives remaining
                         if (remainingClues.Count == GROUP_SIZE * 2)
                         {
                             onFinalPair = true;
                             foreach (var tween in LivesContainer.GetComponents<TweenHandler>())
                                 tween.Begin();
                         }
+                        // Also fill second group when correct first of final pair entered
                         else if (remainingClues.Count == GROUP_SIZE)
                         {
                             StopTimeBar();
                             MarkAsCorrectGroup(remainingClues);
                         }
                     }
-                    // Invalid selected group
                     else
                     {
-                        // Clear selected clues
+                        // Clear invalid selected group
                         StartCoroutine(ResetClues());
                     }
                 }
@@ -200,7 +178,7 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        private void MarkAsCorrectGroup(List<WallClueUI> clues)
+        private void MarkAsCorrectGroup(IEnumerable<WallClueUI> clues)
         {
             // Mark as found and lock in group colours
             foreach (var clue in clues)
@@ -220,6 +198,82 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
+        private void MoveCluesToNewPositions(List<WallClueUI> selectedClues, List<WallClueUI> remainingClues)
+        {
+            // Set new clue container sibling indices to have group move to the top, store From position for move tween
+            int switchoverIndex = selectedClues.Count + remainingClues.Count - GROUP_SIZE;
+            for (int i = 0; i < selectedClues.Count + remainingClues.Count; i++)
+            {
+                if (i < switchoverIndex)
+                {
+                    remainingClues[i].tweenMoveOnCorrectGroupFound.From = remainingClues[i].transform.position;
+                    remainingClues[i].transform.parent.SetSiblingIndex(i);
+                }
+                else
+                {
+                    selectedClues[i - switchoverIndex].tweenMoveOnCorrectGroupFound.From = selectedClues[i - switchoverIndex].transform.position;
+                    selectedClues[i - switchoverIndex].transform.parent.SetSiblingIndex(i);
+                }
+            }
+
+            // Force clue grid layout to update new positions pre-tween
+            ClueGrid.ForceGridUpdates();
+
+            // Assignment of To position for move tween and start tween anim
+            foreach (var clueToMove in selectedClues.Concat(remainingClues))
+            {
+                clueToMove.tweenMoveOnCorrectGroupFound.To = clueToMove.transform.position;
+                clueToMove.transform.position = clueToMove.tweenMoveOnCorrectGroupFound.From;
+                clueToMove.tweenMoveOnCorrectGroupFound.Begin();
+            }
+
+            currentGroupIndex++;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void ResolveWall()
+        {
+            if (timeBarRunning)
+                StopTimeBar();
+
+            foreach (var tween in TimeAndLivesContainer.GetComponents<TweenHandler>())
+                tween.Begin();
+
+            List<WallClueUI> ungroupedClues = Clues.Where(x => !x.GroupFound).ToList();
+
+            if (ungroupedClues.Count > 0)
+            {
+                List<WallClueUI> remainingClues = new List<WallClueUI>();
+
+                // Reverse order in which groups are coloured due to backwards order of grid hierarchy
+                currentGroupIndex = GROUP_COUNT - 1;
+                foreach (string connection in ungroupedClues.Select(x => x.Connection).Distinct())
+                {
+                    var group = ungroupedClues.Where(x => x.Connection == connection);
+                    MarkAsCorrectGroup(group);
+                    remainingClues.AddRange(group);
+
+                    currentGroupIndex--;
+                }
+
+                for (int i = 0; i < remainingClues.Count; i++)
+                {
+                    remainingClues[i].tweenMoveOnCorrectGroupFound.From = remainingClues[i].transform.position;
+                    remainingClues[i].transform.parent.SetSiblingIndex(i);
+                }
+
+                ClueGrid.ForceGridUpdates();
+
+                foreach (var clueToMove in remainingClues)
+                {
+                    clueToMove.tweenMoveOnCorrectGroupFound.To = clueToMove.transform.position;
+                    clueToMove.transform.position = clueToMove.tweenMoveOnCorrectGroupFound.From;
+                    clueToMove.tweenMoveOnCorrectGroupFound.Begin();
+                }
+            }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
         private IEnumerator ResetClues()
         {
             yield return new WaitForSeconds(INCORRECT_GROUP_CLEAR_DELAY);
@@ -235,6 +289,9 @@ namespace OnlyCornect
             {
                 Lives[LIVES_COUNT - livesRemaining].gameObject.SetVisible(false);
                 livesRemaining--;
+
+                if (livesRemaining == 0)
+                    StopTimeBar();
             }
 
             yield return null;

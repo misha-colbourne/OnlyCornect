@@ -4901,6 +4901,7 @@ MonoBehaviour:
   INCORRECT_GROUP_CLEAR_DELAY: 0.33
   LIVES_DISABLED_ALPHA: 0.2
   GROUP_FOUND_SCALE_DELTA: {x: 0.1, y: 0.1, z: 0.1}
+  GROUP_COUNT: 4
   GROUP_SIZE: 4
   ClueGrid: {fileID: 1462123175}
   TimeBox: {fileID: 1360429567}
@@ -6957,6 +6958,40 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1328498151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7264881512196825189, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
+  m_PrefabInstance: {fileID: 1360429565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1328498152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328498151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Wall resolved time bar fade out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 1
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &1330014345
 GameObject:
   m_ObjectHideFlags: 0
@@ -7340,7 +7375,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8260284159984579919, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
   m_PrefabInstance: {fileID: 1360429565}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1328498151}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebe605f1002418a44a76375448f967d0, type: 3}

@@ -145,34 +145,34 @@ SequencesRound:
 # --------------------------------------------------------------------------------------------------------------------------------------
 WallRound:
 
-    # Wall 1
-    -   - Connection: a
-          Clues:
-            - aaaaaaa
-            - aaaaaaa
-            - aaaaaaa
-            - aaaaaaa
+    # # Wall 1
+    # -   - Connection: a
+    #       Clues:
+    #         - aaaaaaa
+    #         - aaaaaaa
+    #         - aaaaaaa
+    #         - aaaaaaa
 
-        - Connection: b
-          Clues:
-            - bbbbb
-            - bbbbb
-            - bbbbb
-            - bbbbb
+    #     - Connection: b
+    #       Clues:
+    #         - bbbbb
+    #         - bbbbb
+    #         - bbbbb
+    #         - bbbbb
 
-        - Connection: c
-          Clues:
-            - ccc
-            - ccc
-            - ccc
-            - ccc
+    #     - Connection: c
+    #       Clues:
+    #         - ccc
+    #         - ccc
+    #         - ccc
+    #         - ccc
 
-        - Connection: d
-          Clues:
-            - z
-            - z
-            - z
-            - z
+    #     - Connection: d
+    #       Clues:
+    #         - z
+    #         - z
+    #         - z
+    #         - z
 
     # Wall 1
     -   - Connection: Star ____
@@ -198,9 +198,9 @@ WallRound:
 
         - Connection: Constellations
           Clues:
-            - Taurus
+            - Leo
             - Hercules
-            - Draco
+            - Cygnus
             - Pegasus
 
     # Wall 2

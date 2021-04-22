@@ -310,6 +310,10 @@ namespace OnlyCornect
                     break;
                 case EPhase.WallQuestion:
                     {
+                        if (Input.GetKeyDown(KeyCode.A))
+                        {
+                            WallRoundScreen.ResolveWall();
+                        }
                     }
                     break;
                 //case EPhase.MissingVowelsQuestion:
