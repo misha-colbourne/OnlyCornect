@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -10,15 +11,16 @@ namespace OnlyCornect
 {
     public class WallRoundUI : MonoBehaviour
     {
-        public float INCORRECT_GROUP_CLEAR_DELAY = 0.33f;
-        public float LIVES_DISABLED_ALPHA = 0.2f;
+        public float INCORRECT_GROUP_CLEAR_DELAY;
+        public float CLUE_DISABLED_ALPHA;
+        public float LIVES_DISABLED_ALPHA;
         public Vector3 GROUP_FOUND_SCALE_DELTA = new Vector3(0.1f, 0.1f, 0.1f);
 
         [Space]
 
         [HideInInspector] public const int GLYPH_COUNT = 2;
         [HideInInspector] public int GROUP_COUNT = 4;
-        [HideInInspector] public int GROUP_SIZE = 4;
+        [HideInInspector] public int CLUES_PER_GROUP = 4;
         private const int LIVES_COUNT = 3;
 
         public GridLayoutGroup ClueGrid;
@@ -26,6 +28,8 @@ namespace OnlyCornect
         public TimeBoxUI TimeBox;
         public GameObject LivesContainer;
         public List<Image> Lives;
+        public GameObject AnswerContainer;
+        public TMP_Text AnswerText;
 
         public List<WallClueUI> Clues;
         public List<Sprite> SelectedSprites;
@@ -36,6 +40,7 @@ namespace OnlyCornect
         private bool timeBarRunning;
         private bool onFinalPair;
         private int livesRemaining;
+        private bool ontoAnswers;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void Awake()
@@ -52,17 +57,20 @@ namespace OnlyCornect
             this.wallQuestions = wallQuestions;
             currentGroupIndex = 0;
             onFinalPair = false;
+            ontoAnswers = false;
 
             int clueToSet = 0;
             foreach (WallQuestion wallQuestion in wallQuestions)
             {
                 foreach (string clue in wallQuestion.Clues)
                 {
+                    Clues[clueToSet].Text.text = clue;
+                    Clues[clueToSet].Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
+                    Clues[clueToSet].Connection = wallQuestion.Connection;
                     Clues[clueToSet].ToggleButton.SetIsOnWithoutNotify(false);
                     Clues[clueToSet].ToggleButton.interactable = true;
-                    Clues[clueToSet].Connection = wallQuestion.Connection;
-                    Clues[clueToSet].Text.text = clue;
                     Clues[clueToSet].GroupFound = false;
+                    Clues[clueToSet].gameObject.SetVisible(true);
                     clueToSet++;
                 }
             }
@@ -72,7 +80,6 @@ namespace OnlyCornect
             for (int i = 0; i < Clues.Count; i++)
             {
                 Clues[i].transform.parent.SetSiblingIndex(i);
-                Clues[i].Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
             }
 
             TimeAndLivesContainer.SetVisible(true);
@@ -83,8 +90,11 @@ namespace OnlyCornect
                 life.gameObject.SetVisible(true);
 
             timeBarRunning = false;
+            TimeBox.gameObject.SetVisible(true);
             TimeBox.FillBar.transform.localPosition = Vector3.zero;
             TimeBox.Text.Hide();
+
+            AnswerContainer.SetActive(false);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -93,21 +103,28 @@ namespace OnlyCornect
             timeBarRunning = true;
             var fillTween = TimeBox.FillBar.GetComponent<TweenHandler>();
             fillTween.From = new Vector3(-TimeBox.GetComponent<LayoutElement>().preferredWidth, 0, 0);
-            fillTween.Begin(StopTimeBar);
+            fillTween.Begin(onComplete: delegate { StopTimeBar(); });
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void StopTimeBar()
+        public void StopTimeBar(bool outOfLives = false)
         {
             timeBarRunning = false;
             var fillTween = TimeBox.FillBar.GetComponent<TweenHandler>();
 
-            if (TimeBox.FillBar.LeanIsTweening())
+            if (outOfLives)
+            {
+                fillTween.Cancel();
+                TimeBox.Text.text = "Out of lives!";
+                TimeBox.Text.Show();
+            }
+            else if (TimeBox.FillBar.LeanIsTweening())
             {
                 fillTween.Cancel();
             }
             else
             {
+                TimeBox.Text.text = "Time is up!";
                 TimeBox.Text.Show();
             }
         }
@@ -134,7 +151,7 @@ namespace OnlyCornect
 
                 // Selected group of four
                 List<WallClueUI> selectedClues = Clues.Where(x => x.ToggleButton.isOn).ToList();
-                if (selectedClues.Count >= GROUP_SIZE)
+                if (selectedClues.Count >= CLUES_PER_GROUP)
                 {
                     // If all clues have the same connection, thus a valid group
                     if (selectedClues.All(x => x.Connection == clue.Connection))
@@ -150,17 +167,19 @@ namespace OnlyCornect
                         MoveCluesToNewPositions(selectedClues, remainingClues);
 
                         // Activate final pair's three lives remaining
-                        if (remainingClues.Count == GROUP_SIZE * 2)
+                        if (remainingClues.Count == CLUES_PER_GROUP * 2)
                         {
                             onFinalPair = true;
                             foreach (var tween in LivesContainer.GetComponents<TweenHandler>())
                                 tween.Begin();
                         }
                         // Also fill second group when correct first of final pair entered
-                        else if (remainingClues.Count == GROUP_SIZE)
+                        else if (remainingClues.Count == CLUES_PER_GROUP)
                         {
                             StopTimeBar();
                             MarkAsCorrectGroup(remainingClues);
+                            ontoAnswers = true;
+                            currentGroupIndex = 0;
                         }
                     }
                     else
@@ -201,7 +220,7 @@ namespace OnlyCornect
         private void MoveCluesToNewPositions(List<WallClueUI> selectedClues, List<WallClueUI> remainingClues)
         {
             // Set new clue container sibling indices to have group move to the top, store From position for move tween
-            int switchoverIndex = selectedClues.Count + remainingClues.Count - GROUP_SIZE;
+            int switchoverIndex = selectedClues.Count + remainingClues.Count - CLUES_PER_GROUP;
             for (int i = 0; i < selectedClues.Count + remainingClues.Count; i++)
             {
                 if (i < switchoverIndex)
@@ -271,6 +290,8 @@ namespace OnlyCornect
                     clueToMove.tweenMoveOnCorrectGroupFound.Begin();
                 }
             }
+
+            ontoAnswers = true;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -291,7 +312,7 @@ namespace OnlyCornect
                 livesRemaining--;
 
                 if (livesRemaining == 0)
-                    StopTimeBar();
+                    StopTimeBar(outOfLives: true);
             }
 
             yield return null;
@@ -300,7 +321,6 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void ResetClueColours(WallClueUI clue)
         {
-
             clue.GetComponent<Image>().sprite = UtilitiesForUI.Instance.BOX_LIGHT;
             clue.Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
             clue.Overlay.color = UtilitiesForUI.Instance.OVERLAY_LIGHT;
@@ -309,6 +329,73 @@ namespace OnlyCornect
             ss.highlightedSprite = UtilitiesForUI.Instance.BOX_SELECTED;
             ss.pressedSprite = UtilitiesForUI.Instance.BOX_SELECTED;
             clue.ToggleButton.spriteState = ss;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void NextAnswer()
+        {
+            if (!ontoAnswers)
+                return;
+
+            if (!AnswerContainer.activeInHierarchy)
+            {
+                TimeAndLivesContainer.SetVisible(true);
+                TimeBox.gameObject.SetVisible(false);
+                LivesContainer.gameObject.SetVisible(false);
+
+                Clues = GetComponentsInChildren<WallClueUI>().ToList();
+
+                currentGroupIndex = GROUP_COUNT - 1;
+                string firstConnection = Clues[currentGroupIndex * CLUES_PER_GROUP].Connection;
+
+                AnswerContainer.SetActive(true);
+                foreach (var tween in AnswerContainer.GetComponents<TweenHandler>())
+                    tween.Begin(onComplete: delegate {
+                        foreach (var clue in Clues.Where(x => x.Connection != firstConnection))
+                        {
+                            var clueFadeTween = clue.transform.parent.GetComponent<TweenHandler>();
+                            clueFadeTween.To.x = CLUE_DISABLED_ALPHA;
+                            clueFadeTween.Begin();
+                        }
+                    });
+
+                AnswerText.text = firstConnection;
+                AnswerText.gameObject.SetActive(false);
+                AnswerText.gameObject.SetVisible(false);
+            }
+            else
+            {
+                if (!AnswerText.gameObject.activeInHierarchy)
+                {
+                    AnswerText.gameObject.SetActive(true);
+                    AnswerText.GetComponent<TweenHandler>().Begin();
+
+                    if (currentGroupIndex == 0)
+                        ontoAnswers = false;
+                }
+                else
+                {
+                    currentGroupIndex--;
+                    string currentConnection = Clues[currentGroupIndex * CLUES_PER_GROUP].Connection;
+
+                    foreach (var clue in Clues)
+                    {
+                        var clueFadeTween = clue.transform.parent.GetComponent<TweenHandler>();
+
+                        if (clue.Connection == currentConnection)
+                            clueFadeTween.To.x = 1;
+                        else
+                            clueFadeTween.To.x = CLUE_DISABLED_ALPHA;
+
+                        clueFadeTween.Begin();
+                    }
+
+                    AnswerText.GetComponent<TweenHandler>().Begin(reverse: true, onComplete: delegate {
+                        AnswerText.text = currentConnection;
+                        AnswerText.gameObject.SetActive(false);
+                    });
+                }
+            }
         }
     }
 }

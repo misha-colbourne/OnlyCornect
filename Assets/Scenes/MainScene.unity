@@ -999,6 +999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 121364794}
   - component: {fileID: 121364795}
+  - component: {fileID: 121364796}
   m_Layer: 5
   m_Name: ClueContainer (12)
   m_TagString: Untagged
@@ -1046,6 +1047,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &121364796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121364793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1001 &164410775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1499,6 +1529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 249952831}
   - component: {fileID: 249952832}
+  - component: {fileID: 249952833}
   m_Layer: 5
   m_Name: ClueContainer (1)
   m_TagString: Untagged
@@ -1546,6 +1577,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &249952833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249952830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &263851083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,6 +2020,150 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &313601376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 313601377}
+  - component: {fileID: 313601378}
+  - component: {fileID: 313601379}
+  - component: {fileID: 313601380}
+  - component: {fileID: 313601381}
+  m_Layer: 5
+  m_Name: Answer Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &313601377
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313601376}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 765791963}
+  m_Father: {fileID: 1497449169}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &313601378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313601376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &313601379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313601376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 16
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &313601380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313601376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answer container move in
+  ObjectsToTween: []
+  TweenProperty: 4
+  EaseType: 2
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 1
+  Delay: 0
+  useSpecifiedFrom: 1
+  From: {x: 0, y: -200, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
+--- !u!114 &313601381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313601376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answer container fade in
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 3
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 1
+  Delay: 0
+  useSpecifiedFrom: 1
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 1, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &336584438
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,6 +2774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 506013720}
   - component: {fileID: 506013721}
+  - component: {fileID: 506013722}
   m_Layer: 5
   m_Name: ClueContainer (11)
   m_TagString: Untagged
@@ -2617,6 +2822,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &506013722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506013719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &535093959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2757,6 +2991,170 @@ MonoBehaviour:
   TeamContainerB: {fileID: 298731778}
   TeamNameEntryB: {fileID: 21543407}
   StartQuizButton: {fileID: 265999881}
+--- !u!1 &590165152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 590165153}
+  - component: {fileID: 590165155}
+  - component: {fileID: 590165154}
+  - component: {fileID: 590165156}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &590165153
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590165152}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 765791963}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &590165154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590165152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: New Text
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 57b917a634f3bbb48851aad64406a2b3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 05369ba25d2abdc4ca0bd7bdc015a76a, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 72
+  m_fontSizeBase: 72
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 32
+  m_VerticalAlignment: 8192
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 20, y: 0, z: 20, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &590165155
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590165152}
+  m_CullTransparentMesh: 0
+--- !u!114 &590165156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590165152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answer text fade in
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.5
+  Delay: 0
+  useSpecifiedFrom: 1
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 1, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &594611069
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,6 +4327,165 @@ MonoBehaviour:
   To: {x: 1.1, y: 1.1, z: 1.1}
   Loop: 0
   PingPong: 1
+--- !u!1 &765791962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 765791963}
+  - component: {fileID: 765791968}
+  - component: {fileID: 765791967}
+  - component: {fileID: 765791966}
+  - component: {fileID: 765791965}
+  - component: {fileID: 765791964}
+  m_Layer: 5
+  m_Name: Answer Box
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &765791963
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765791962}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1096783947}
+  - {fileID: 590165153}
+  m_Father: {fileID: 313601377}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 687, y: -64}
+  m_SizeDelta: {x: 1374, y: 96}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &765791964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765791962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answer reveal text scale to match size increase
+  ObjectsToTween:
+  - {fileID: 590165152}
+  TweenProperty: 39
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.15
+  Delay: 0
+  useSpecifiedFrom: 1
+  From: {x: 1, y: 0, z: 0}
+  To: {x: 1, y: 1, z: 0}
+  Loop: 0
+  PingPong: 0
+--- !u!114 &765791965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765791962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answer reveal size increase from 0
+  ObjectsToTween: []
+  TweenProperty: 49
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.15
+  Delay: 0
+  useSpecifiedFrom: 1
+  From: {x: -1, y: 0, z: 0}
+  To: {x: -1, y: 100, z: 0}
+  Loop: 0
+  PingPong: 0
+--- !u!114 &765791966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765791962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
+--- !u!114 &765791967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765791962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: bb7ee74276123cd41b6563954bd4b8d3, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &765791968
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765791962}
+  m_CullTransparentMesh: 0
 --- !u!1 &767231750
 GameObject:
   m_ObjectHideFlags: 0
@@ -3939,6 +4496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 767231751}
   - component: {fileID: 767231752}
+  - component: {fileID: 767231753}
   m_Layer: 5
   m_Name: ClueContainer (10)
   m_TagString: Untagged
@@ -3986,6 +4544,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &767231753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767231750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &770213718
 GameObject:
   m_ObjectHideFlags: 0
@@ -3996,6 +4583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 770213719}
   - component: {fileID: 770213720}
+  - component: {fileID: 770213721}
   m_Layer: 5
   m_Name: ClueContainer (6)
   m_TagString: Untagged
@@ -4043,6 +4631,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &770213721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770213718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &779098727
 GameObject:
   m_ObjectHideFlags: 0
@@ -4899,17 +5516,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   INCORRECT_GROUP_CLEAR_DELAY: 0.33
+  CLUE_DISABLED_ALPHA: 0.4
   LIVES_DISABLED_ALPHA: 0.2
   GROUP_FOUND_SCALE_DELTA: {x: 0.1, y: 0.1, z: 0.1}
   GROUP_COUNT: 4
-  GROUP_SIZE: 4
+  CLUES_PER_GROUP: 4
   ClueGrid: {fileID: 1462123175}
+  TimeAndLivesContainer: {fileID: 1497449168}
   TimeBox: {fileID: 1360429567}
   LivesContainer: {fileID: 764098348}
   Lives:
   - {fileID: 430721059}
   - {fileID: 336584441}
   - {fileID: 1747952346}
+  AnswerContainer: {fileID: 313601376}
+  AnswerText: {fileID: 590165154}
   Clues:
   - {fileID: 1724263635}
   - {fileID: 1110920293}
@@ -5015,6 +5636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951764556}
   - component: {fileID: 951764557}
+  - component: {fileID: 951764558}
   m_Layer: 5
   m_Name: ClueContainer (5)
   m_TagString: Untagged
@@ -5062,6 +5684,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &951764558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951764555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!114 &954174756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7940861776006022763, guid: 30d08969422463f4cb39f1f2a7bb95a3, type: 3}
@@ -5907,6 +6558,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088656900}
   m_CullTransparentMesh: 0
+--- !u!1 &1096783946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096783947}
+  - component: {fileID: 1096783950}
+  - component: {fileID: 1096783949}
+  - component: {fileID: 1096783948}
+  m_Layer: 5
+  m_Name: Overlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1096783947
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096783946}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 765791963}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1096783948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096783946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 28eeac489472b1143b7473f818af01d9, type: 2}
+  radius: 39
+--- !u!114 &1096783949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096783946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 28eeac489472b1143b7473f818af01d9, type: 2}
+  m_Color: {r: 0.10980393, g: 0.14117648, b: 0.16078432, a: 0.1254902}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: cfa7a24354c1adc4294f641eb6b8006a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1096783950
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096783946}
+  m_CullTransparentMesh: 0
 --- !u!1 &1097182024
 GameObject:
   m_ObjectHideFlags: 0
@@ -6240,6 +6981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1162375048}
   - component: {fileID: 1162375049}
+  - component: {fileID: 1162375050}
   m_Layer: 5
   m_Name: ClueContainer (9)
   m_TagString: Untagged
@@ -6287,6 +7029,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1162375050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162375047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!114 &1188775144 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7249930236018158124, guid: 7ce0e52850dbb834aa2cd452174e90ef, type: 3}
@@ -6319,6 +7090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1213569405}
   - component: {fileID: 1213569406}
+  - component: {fileID: 1213569407}
   m_Layer: 5
   m_Name: ClueContainer (14)
   m_TagString: Untagged
@@ -6366,6 +7138,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1213569407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213569404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &1217785370
 GameObject:
   m_ObjectHideFlags: 0
@@ -6848,6 +7649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1292333776}
   - component: {fileID: 1292333777}
+  - component: {fileID: 1292333778}
   m_Layer: 5
   m_Name: ClueContainer (8)
   m_TagString: Untagged
@@ -6895,87 +7697,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!1 &1302887689
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1302887690}
-  - component: {fileID: 1302887691}
-  m_Layer: 5
-  m_Name: Boxes Container
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1302887690
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302887689}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1462123174}
-  m_Father: {fileID: 1575404187}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1302887691
+--- !u!114 &1292333778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302887689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 24
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
---- !u!1 &1328498151 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7264881512196825189, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
-  m_PrefabInstance: {fileID: 1360429565}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1328498152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328498151}
+  m_GameObject: {fileID: 1292333775}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TweenDescription: Wall resolved time bar fade out
+  TweenDescription: Answering fade in/out
   ObjectsToTween: []
   TweenProperty: 23
   EaseType: 0
@@ -6985,7 +7719,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Duration: 1
+  Duration: 0.8
   Delay: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
@@ -7136,6 +7870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1348713482}
   - component: {fileID: 1348713483}
+  - component: {fileID: 1348713484}
   m_Layer: 5
   m_Name: ClueContainer (2)
   m_TagString: Untagged
@@ -7183,6 +7918,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1348713484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348713481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1001 &1360429565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7375,7 +8139,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8260284159984579919, guid: c8cb7c1e8b1a7b74c971fc7ac6c76c5e, type: 3}
   m_PrefabInstance: {fileID: 1360429565}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328498151}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebe605f1002418a44a76375448f967d0, type: 3}
@@ -7738,7 +8502,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462123173}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7758,7 +8522,7 @@ RectTransform:
   - {fileID: 2088308433}
   - {fileID: 1213569405}
   - {fileID: 1744469883}
-  m_Father: {fileID: 1302887690}
+  m_Father: {fileID: 1575404187}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7820,6 +8584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1497449169}
   - component: {fileID: 1497449170}
+  - component: {fileID: 1497449171}
   m_Layer: 5
   m_Name: Time/Lives Container
   m_TagString: Untagged
@@ -7840,6 +8605,7 @@ RectTransform:
   m_Children:
   - {fileID: 764098349}
   - {fileID: 1515674539}
+  - {fileID: 313601377}
   m_Father: {fileID: 1575404187}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7874,6 +8640,35 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1497449171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497449168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Wall resolved footer fade out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 1
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &1515674538
 GameObject:
   m_ObjectHideFlags: 0
@@ -8209,7 +9004,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1302887690}
+  - {fileID: 1462123174}
   - {fileID: 1497449169}
   m_Father: {fileID: 923625314}
   m_RootOrder: 0
@@ -8248,7 +9043,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 8
+    m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 0
@@ -8727,6 +9522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1725856579}
   - component: {fileID: 1725856580}
+  - component: {fileID: 1725856581}
   m_Layer: 5
   m_Name: ClueContainer (3)
   m_TagString: Untagged
@@ -8774,6 +9570,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1725856581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725856578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &1726383602
 GameObject:
   m_ObjectHideFlags: 0
@@ -8939,6 +9764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1744469883}
   - component: {fileID: 1744469884}
+  - component: {fileID: 1744469885}
   m_Layer: 5
   m_Name: ClueContainer (15)
   m_TagString: Untagged
@@ -8986,6 +9812,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1744469885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744469882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &1747952343
 GameObject:
   m_ObjectHideFlags: 0
@@ -9359,6 +10214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1833383292}
   - component: {fileID: 1833383293}
+  - component: {fileID: 1833383294}
   m_Layer: 5
   m_Name: ClueContainer (7)
   m_TagString: Untagged
@@ -9406,6 +10262,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1833383294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833383291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &1844427376
 GameObject:
   m_ObjectHideFlags: 0
@@ -9888,6 +10773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922175022}
   - component: {fileID: 1922175023}
+  - component: {fileID: 1922175024}
   m_Layer: 5
   m_Name: ClueContainer (4)
   m_TagString: Untagged
@@ -9935,6 +10821,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1922175024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922175021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &1959500232
 GameObject:
   m_ObjectHideFlags: 0
@@ -10686,6 +11601,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088308433}
   - component: {fileID: 2088308434}
+  - component: {fileID: 2088308435}
   m_Layer: 5
   m_Name: ClueContainer (13)
   m_TagString: Untagged
@@ -10733,6 +11649,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2088308435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088308432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &2089453652
 GameObject:
   m_ObjectHideFlags: 0
@@ -10931,6 +11876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2094210539}
   - component: {fileID: 2094210540}
+  - component: {fileID: 2094210541}
   m_Layer: 5
   m_Name: ClueContainer
   m_TagString: Untagged
@@ -10978,6 +11924,35 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2094210541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094210538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: Answering fade in/out
+  ObjectsToTween: []
+  TweenProperty: 23
+  EaseType: 0
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 0.8
+  Delay: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: 0, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &2098970016
 GameObject:
   m_ObjectHideFlags: 0

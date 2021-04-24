@@ -34,6 +34,7 @@ public class TweenHandler : MonoBehaviour
     public int PingPong;
 
     private LTDescr _tweenObject;
+    private bool reverse;
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     private void Awake()
@@ -44,8 +45,11 @@ public class TweenHandler : MonoBehaviour
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public void Begin(Action onComplete = null)
+    public void Begin(bool reverse = false, Action onComplete = null)
     {
+        if (reverse)
+            SwapFromTo();
+
         foreach (var toTween in ObjectsToTween)
         {
             switch (TweenProperty)
@@ -94,7 +98,18 @@ public class TweenHandler : MonoBehaviour
                 if (onComplete != null)
                     _tweenObject.setOnComplete(onComplete);
             }
+
+            if (reverse)
+                SwapFromTo();
         }
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    private void SwapFromTo()
+    {
+        var temp = From;
+        From = To;
+        To = temp;
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------

@@ -314,6 +314,11 @@ namespace OnlyCornect
                         {
                             WallRoundScreen.ResolveWall();
                         }
+
+                        if (Input.GetKeyDown(KeyCode.RightArrow))
+                        {
+                            WallRoundScreen.NextAnswer();
+                        }
                     }
                     break;
                 //case EPhase.MissingVowelsQuestion:

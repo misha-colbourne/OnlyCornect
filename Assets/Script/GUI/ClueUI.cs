@@ -24,7 +24,6 @@ namespace OnlyCornect
         public virtual void OnButtonClick()
         {
             Selected = true;
-            Overlay.color = UtilitiesForUI.Instance.OVERLAY_DARK;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -44,6 +43,7 @@ namespace OnlyCornect
             }
 
             flashing = flash;
+            Overlay.color = UtilitiesForUI.Instance.OVERLAY_DARK;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------

@@ -695,6 +695,7 @@ GameObject:
   - component: {fileID: 7264881512327356327}
   - component: {fileID: 7264881512327356325}
   - component: {fileID: 7264881512327356326}
+  - component: {fileID: 265215866071630515}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -741,7 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 6dcc2ba678f02b64ba18ae4226a25c3f, type: 2}
+  m_Material: {fileID: 2100000, guid: e6a1807dbfba3a044b1aca1286ab9676, type: 2}
   m_Color: {r: 0.35978103, g: 0.7603295, b: 0.990566, a: 0.09411765}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -759,6 +760,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &265215866071630515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264881512327356320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: e6a1807dbfba3a044b1aca1286ab9676, type: 2}
+  radius: 36
 --- !u!1 &8196792851663649716
 GameObject:
   m_ObjectHideFlags: 0

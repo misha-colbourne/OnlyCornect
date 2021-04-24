@@ -76,6 +76,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 265215866071630515, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
+      propertyPath: material
+      value: 
+      objectReference: {fileID: 2100000, guid: e6a1807dbfba3a044b1aca1286ab9676, type: 2}
     - target: {fileID: 1748534021353447629, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: To.y
       value: 1
@@ -274,15 +278,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706353877269039368, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: To.x
-      value: 0.95
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 3706353877269039368, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: To.y
-      value: 0.95
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 3706353877269039368, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: To.z
-      value: 0.95
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 3706353877269039368, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: From.x
@@ -432,6 +436,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7264881512327356326, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: e6a1807dbfba3a044b1aca1286ab9676, type: 2}
     - target: {fileID: 8898290469793127050, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: To.x
       value: 0

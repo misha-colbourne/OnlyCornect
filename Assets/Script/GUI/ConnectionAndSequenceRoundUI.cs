@@ -101,7 +101,7 @@ namespace OnlyCornect
             showingAnswer = false;
 
             TimeBarRunning = true;
-            TimeBox.FillBar.GetComponent<TweenHandler>().Begin(StopTimeBar);
+            TimeBox.FillBar.GetComponent<TweenHandler>().Begin(onComplete: StopTimeBar);
 
             NextClue();
         }
