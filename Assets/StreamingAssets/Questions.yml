@@ -78,8 +78,8 @@ SequencesRound:
 
     - Connection: Pirates of the Caribbean titles last word synonyms
       Clues:
-        - "Unfamiliar oceanic ebb<br>and flow"
-        - "Planetary conclusion"
+        - "In unfamiliar oceanic ebb<br>and flow"
+        - "Having reached planetary conclusion"
         - "Deceased male's treasure box"
         - "e.g. Hex of the dark spherical mollusc-byproduct"
 
@@ -123,7 +123,7 @@ SequencesRound:
         - The Police
         - e.g. The White Stripes
 
-    - Connection: One fewer A each time
+    - Connection: One fewer 'A' each time
       Clues:
         - Taramasalata
         - Bananarama
@@ -213,10 +213,10 @@ WallRound:
 
         - Connection: Lists
           Clues:
-            - Bullet
             - Hit
-            - Check
+            - Wish
             - Bucket
+            - White
 
         - Connection: Seas
           Clues:

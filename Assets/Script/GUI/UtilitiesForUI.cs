@@ -31,13 +31,16 @@ public class UtilitiesForUI : MonoBehaviour
     public Color OVERLAY_TEAM;
     public Color OVERLAY_DARK;
 
+    public Sprite BOX_LIGHT;
+    public Sprite BOX_SELECTED;
+    public Sprite BOX_TEAM;
+    public Sprite BOX_DARK;
+
     public Color TEXT_NORMAL_COLOUR;
 
     public Sprite TEAM_BOX_A;
     public Sprite TEAM_BOX_B;
 
-    public Sprite BOX_LIGHT;
-    public Sprite BOX_SELECTED;
 
     public static Dictionary<string, Sprite> Pictures = new Dictionary<string, Sprite>();
 

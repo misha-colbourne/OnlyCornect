@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace OnlyCornect
 {
     public class GlyphSelectionUI : MonoBehaviour
     {
-        [SerializeField] private float DISABLED_ALPHA = 1.0f;
+        public const float ALREADY_CHOSEN_ALPHA = 0.8f;
         
         public List<ClueUI> GlyphBoxes;
 
@@ -26,6 +28,24 @@ namespace OnlyCornect
         private void OnEnable()
         {
             SelectionMade = false;
+            foreach (var gbox in GlyphBoxes)
+            {
+                if (gbox.Selected)
+                {
+                    gbox.SelectableButton.interactable = false;
+                    gbox.Overlay.color = UtilitiesForUI.Instance.OVERLAY_LIGHT;
+                    SpriteState ss = gbox.SelectableButton.spriteState;
+                    ss.disabledSprite = UtilitiesForUI.Instance.BOX_LIGHT;
+                    gbox.SelectableButton.spriteState = ss;
+
+                    CanvasGroup cg = gbox.GetComponent<CanvasGroup>();
+                    cg.alpha = gbox.Selected ? ALREADY_CHOSEN_ALPHA : 1;
+                }
+                else
+                {
+                    gbox.SelectableButton.interactable = true;
+                }
+            }
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -49,10 +69,13 @@ namespace OnlyCornect
                     gbox.transform.parent.gameObject.SetActive(true);
                     gbox.Selected = false;
                     gbox.SelectableButton.interactable = true;
-                    gbox.Overlay.color = gbox.Selected ? UtilitiesForUI.Instance.OVERLAY_LIGHT : UtilitiesForUI.Instance.OVERLAY_DARK;
+                    gbox.Overlay.color = UtilitiesForUI.Instance.OVERLAY_DARK;
+                    SpriteState ss = gbox.SelectableButton.spriteState;
+                    ss.disabledSprite = UtilitiesForUI.Instance.BOX_DARK;
+                    gbox.SelectableButton.spriteState = ss;
 
                     CanvasGroup cg = gbox.GetComponent<CanvasGroup>();
-                    cg.alpha = gbox.Selected ? DISABLED_ALPHA : 1;
+                    cg.alpha = 1;
                 }
                 else
                 {
@@ -63,10 +86,16 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void GlyphSelected(ClueUI gbox)
+        public void GlyphSelected(ClueUI selectedGbox)
         {
-            SelectionMade = true;
-            gbox.SetFlash(true);
+            if (!SelectionMade)
+            {
+                SelectionMade = true;
+                selectedGbox.SetFlash(true);
+
+                foreach (var gbox in GlyphBoxes)
+                    gbox.SelectableButton.interactable = false;
+            }
         }
     }
 }

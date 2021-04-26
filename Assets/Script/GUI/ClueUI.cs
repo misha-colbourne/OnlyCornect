@@ -23,7 +23,8 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public virtual void OnButtonClick()
         {
-            Selected = true;
+            if (SelectableButton.interactable)
+                Selected = true;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -31,13 +32,13 @@ namespace OnlyCornect
         {
             if (flash)
             {
-                FlashLayer.gameObject.SetActive(true);
+                FlashLayer.Show();
                 foreach (var tween in FlashLayer.GetComponents<TweenHandler>())
                     tween.Begin();
             }
             else if (flashing)
             {
-                FlashLayer.gameObject.SetActive(false);
+                FlashLayer.Hide();
                 foreach (var tween in FlashLayer.GetComponents<TweenHandler>())
                     tween.Cancel();
             }
@@ -49,14 +50,14 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            if (!Selected && IsGlyph)
+            if (!Selected && IsGlyph && SelectableButton.interactable)
                 Overlay.color = UtilitiesForUI.Instance.OVERLAY_TIME;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public virtual void OnPointerExit(PointerEventData eventData)
         {
-            if (!Selected && IsGlyph)
+            if (!Selected && IsGlyph && SelectableButton.interactable)
                 Overlay.color = UtilitiesForUI.Instance.OVERLAY_DARK;
         }
     }

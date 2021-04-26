@@ -18,10 +18,12 @@ namespace OnlyCornect
 
         [Space]
 
-        [HideInInspector] public const int GLYPH_COUNT = 2;
-        [HideInInspector] public int GROUP_COUNT = 4;
-        [HideInInspector] public int CLUES_PER_GROUP = 4;
-        private const int LIVES_COUNT = 3;
+        public const int GLYPH_COUNT = 2;
+        public const int GROUP_COUNT = 4;
+        public const int CLUES_PER_GROUP = 4;
+        public const int LIVES_COUNT = 3;
+        public const int ALL_GROUPS_AND_CONNECTIONS_SCORE = 8;
+        public const int ALL_GROUPS_AND_CONNECTIONS_BONUS = 2;
 
         public GridLayoutGroup ClueGrid;
         public GameObject TimeAndLivesContainer;
@@ -30,17 +32,21 @@ namespace OnlyCornect
         public List<Image> Lives;
         public GameObject AnswerContainer;
         public TMP_Text AnswerText;
+        public GameObject TicksContainer;
 
         public List<WallClueUI> Clues;
         public List<Sprite> SelectedSprites;
         public List<Color> SelectedOverlays;
+
+        [HideInInspector] public int Score;
 
         private List<WallQuestion> wallQuestions;
         private int currentGroupIndex;
         private bool timeBarRunning;
         private bool onFinalPair;
         private int livesRemaining;
-        private bool ontoAnswers;
+        private bool ontoConnections;
+        private bool awardedPointsForCurrentGroup;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void Awake()
@@ -57,7 +63,8 @@ namespace OnlyCornect
             this.wallQuestions = wallQuestions;
             currentGroupIndex = 0;
             onFinalPair = false;
-            ontoAnswers = false;
+            ontoConnections = false;
+            Score = 0;
 
             int clueToSet = 0;
             foreach (WallQuestion wallQuestion in wallQuestions)
@@ -65,12 +72,13 @@ namespace OnlyCornect
                 foreach (string clue in wallQuestion.Clues)
                 {
                     Clues[clueToSet].Text.text = clue;
-                    Clues[clueToSet].Text.color = UtilitiesForUI.Instance.TEXT_NORMAL_COLOUR;
                     Clues[clueToSet].Connection = wallQuestion.Connection;
                     Clues[clueToSet].ToggleButton.SetIsOnWithoutNotify(false);
                     Clues[clueToSet].ToggleButton.interactable = true;
                     Clues[clueToSet].GroupFound = false;
                     Clues[clueToSet].gameObject.SetVisible(true);
+                    Clues[clueToSet].transform.parent.gameObject.SetVisible(true);
+                    ResetClueColours(Clues[clueToSet]);
                     clueToSet++;
                 }
             }
@@ -95,6 +103,8 @@ namespace OnlyCornect
             TimeBox.Text.Hide();
 
             AnswerContainer.SetActive(false);
+            foreach (var tick in TicksContainer.GetComponentsInChildren<Image>())
+                tick.gameObject.SetVisible(false);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -109,6 +119,9 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void StopTimeBar(bool outOfLives = false)
         {
+            if (!timeBarRunning)
+                return;
+
             timeBarRunning = false;
             var fillTween = TimeBox.FillBar.GetComponent<TweenHandler>();
 
@@ -157,6 +170,7 @@ namespace OnlyCornect
                     if (selectedClues.All(x => x.Connection == clue.Connection))
                     {
                         MarkAsCorrectGroup(selectedClues);
+                        Score++;
 
                         // Ensure ordering of selected and remaining clues matches hierarchy
                         selectedClues.OrderBy(x => x.transform.GetSiblingIndex());
@@ -178,7 +192,9 @@ namespace OnlyCornect
                         {
                             StopTimeBar();
                             MarkAsCorrectGroup(remainingClues);
-                            ontoAnswers = true;
+                            Score++;
+
+                            ontoConnections = true;
                             currentGroupIndex = 0;
                         }
                     }
@@ -252,6 +268,9 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void ResolveWall()
         {
+            if (ontoConnections)
+                return;
+
             if (timeBarRunning)
                 StopTimeBar();
 
@@ -291,7 +310,7 @@ namespace OnlyCornect
                 }
             }
 
-            ontoAnswers = true;
+            ontoConnections = true;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -334,7 +353,7 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void NextAnswer()
         {
-            if (!ontoAnswers)
+            if (!ontoConnections)
                 return;
 
             if (!AnswerContainer.activeInHierarchy)
@@ -371,7 +390,7 @@ namespace OnlyCornect
                     AnswerText.GetComponent<TweenHandler>().Begin();
 
                     if (currentGroupIndex == 0)
-                        ontoAnswers = false;
+                        ontoConnections = false;
                 }
                 else
                 {
@@ -394,7 +413,21 @@ namespace OnlyCornect
                         AnswerText.text = currentConnection;
                         AnswerText.gameObject.SetActive(false);
                     });
+
+                    awardedPointsForCurrentGroup = false;
                 }
+            }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void AwardPointsForCurrentAnswer()
+        {
+            if (!awardedPointsForCurrentGroup && ontoConnections)
+            {
+                Score++;
+                awardedPointsForCurrentGroup = true;
+                int clueIndexInverted = GROUP_COUNT - currentGroupIndex - 1;
+                TicksContainer.transform.GetChild(clueIndexInverted).gameObject.SetVisible(true);
             }
         }
     }
