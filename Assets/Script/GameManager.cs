@@ -46,7 +46,7 @@ namespace OnlyCornect
         public EORTeamScoresUI EORTeamScoresScreen;
         public ConnectionAndSequenceRoundUI ConnectionAndSequencesRoundScreen;
         public WallRoundUI WallRoundScreen;
-
+        public MissingVowelsRoundUI MissingVowelsRoundScreen;
         public ScorePopupUI ScorePopup;
 
         [SerializeField] private bool skipTeamNaming;
@@ -74,12 +74,13 @@ namespace OnlyCornect
             wasHandedOver = false;
             scoreHasBeenGrantedThisQuestion = false;
 
-            GlyphSelectionScreen.Hide();
-            RoundNameScreen.Hide();
-            TeamNameEntryScreen.Hide();
-            EORTeamScoresScreen.Hide();
-            ConnectionAndSequencesRoundScreen.Hide();
-            WallRoundScreen.Hide();
+            GlyphSelectionScreen.SetInactive();
+            RoundNameScreen.SetInactive();
+            TeamNameEntryScreen.SetInactive();
+            EORTeamScoresScreen.SetInactive();
+            ConnectionAndSequencesRoundScreen.SetInactive();
+            WallRoundScreen.SetInactive();
+            MissingVowelsRoundScreen.SetInactive();
 
             teamA = new Team();
             teamB = new Team();
@@ -87,7 +88,7 @@ namespace OnlyCornect
 
             if (skipTeamNaming)
             {
-                currentRound = ERound.SequencesRound;
+                currentRound = ERound.WallRound;
                 teamA.Name = "Team A";
                 teamB.Name = "Team B";
                 StartCoroutine(Utilities.WaitAFrameThenRun(MoveToNextRoundNameScreen));
@@ -116,7 +117,7 @@ namespace OnlyCornect
                     break;
                 case EPhase.TeamNameEntry:
                     {
-                        TeamNameEntryScreen.Hide();
+                        TeamNameEntryScreen.SetInactive();
                         TeamNameEntryScreen.SetTeamNames(teamA, teamB);
 
                         MoveToNextRoundNameScreen();
@@ -124,22 +125,29 @@ namespace OnlyCornect
                     break;
                 case EPhase.RoundNameScreen:
                     {
-                        RoundNameScreen.Hide();
-                        GlyphSelectionScreen.Init(currentRound == ERound.WallRound);
+                        RoundNameScreen.SetInactive();
 
-                        MoveToQuestionSelection();
+                        if (currentRound != ERound.MissingVowelsRound)
+                        {
+                            GlyphSelectionScreen.Init(currentRound == ERound.WallRound);
+                            MoveToQuestionSelection();
+                        }
+                        else
+                        {
+                            MoveToNextQuestion();
+                        }
                     }
                     break;
                 case EPhase.GlyphSelection:
                     {
-                        GlyphSelectionScreen.Hide();
+                        GlyphSelectionScreen.SetInactive();
                         MoveToNextQuestion();
                     }
                     break;
                 case EPhase.ConnectionQuestion:
                 case EPhase.SequencesQuestion:
                     {
-                        ConnectionAndSequencesRoundScreen.Hide();
+                        ConnectionAndSequencesRoundScreen.SetInactive();
 
                         if (GlyphSelectionScreen.GlyphBoxes.Any(x => !x.Selected))
                             MoveToQuestionSelection();
@@ -149,7 +157,7 @@ namespace OnlyCornect
                     break;
                 case EPhase.WallQuestion:
                     {
-                        WallRoundScreen.Hide();
+                        WallRoundScreen.SetInactive();
 
                         if (GlyphSelectionScreen.GlyphBoxes.Any(x => !x.Selected))
                         {
@@ -164,11 +172,12 @@ namespace OnlyCornect
                     break;
                 case EPhase.MissingVowelsQuestion:
                     {
+                        MissingVowelsRoundScreen.SetInactive();
                     }
                     break;
                 case EPhase.EORTeamScoresScreen:
                     {
-                        EORTeamScoresScreen.Hide();
+                        EORTeamScoresScreen.SetInactive();
                         MoveToNextRoundNameScreen();
                     }
                     break;
@@ -184,7 +193,7 @@ namespace OnlyCornect
         public void MoveToTeamNameEntry()
         {
             currentPhase = EPhase.TeamNameEntry;
-            TeamNameEntryScreen.Show();
+            TeamNameEntryScreen.SetActive();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -206,10 +215,11 @@ namespace OnlyCornect
                     WallRoundScreen.Init(quizData.WallRound[0]);
                     break;
                 case ERound.MissingVowelsRound:
+                    MissingVowelsRoundScreen.Init(quizData.MissingVowelsRound, teamA, teamB);
                     break;
             }
 
-            RoundNameScreen.Show();
+            RoundNameScreen.SetActive();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -218,7 +228,7 @@ namespace OnlyCornect
             currentPhase = EPhase.GlyphSelection;
             SwapActiveTeam();
 
-            GlyphSelectionScreen.Show();
+            GlyphSelectionScreen.SetActive();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -231,15 +241,21 @@ namespace OnlyCornect
                 else if (currentRound == ERound.SequencesRound)
                     currentPhase = EPhase.SequencesQuestion;
 
-                ConnectionAndSequencesRoundScreen.Show();
+                ConnectionAndSequencesRoundScreen.SetActive();
                 ConnectionAndSequencesRoundScreen.NextQuestion();
             }
             else if (currentRound == ERound.WallRound)
             {
                 currentPhase = EPhase.WallQuestion;
 
-                WallRoundScreen.Show();
+                WallRoundScreen.SetActive();
                 WallRoundScreen.StartTimeBar();
+            }
+            else if (currentRound == ERound.MissingVowelsRound)
+            {
+                currentPhase = EPhase.MissingVowelsQuestion;
+
+                MissingVowelsRoundScreen.SetActive();
             }
         }
 
@@ -248,7 +264,7 @@ namespace OnlyCornect
         {
             currentPhase = EPhase.EORTeamScoresScreen;
             EORTeamScoresScreen.SetNamesAndScores(teamA, teamB);
-            EORTeamScoresScreen.Show();
+            EORTeamScoresScreen.SetActive();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -361,10 +377,14 @@ namespace OnlyCornect
                         }
                     }
                     break;
-                //case EPhase.MissingVowelsQuestion:
-                //    {
-                //    }
-                //    break;
+                case EPhase.MissingVowelsQuestion:
+                    {
+                        if (Input.GetKeyDown(KeyCode.RightArrow))
+                        {
+                            MissingVowelsRoundScreen.Next();
+                        }
+                    }
+                    break;
                 //case EPhase.EORTeamScoresScreen:
                 //    {
                 //    }

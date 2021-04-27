@@ -10,13 +10,13 @@ using UnityEngine.UI;
 public static class Utilities
 {
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public static void Show(this MonoBehaviour mb)
+    public static void SetActive(this MonoBehaviour mb)
     {
         mb.gameObject.SetActive(true);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public static void Hide(this MonoBehaviour mb)
+    public static void SetInactive(this MonoBehaviour mb)
     {
         mb.gameObject.SetActive(false);
     }

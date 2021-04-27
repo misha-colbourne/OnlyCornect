@@ -238,10 +238,15 @@ MissingVowelsRound:
     - Connection: London Underground stations
       Clues:
         - "Paddington"
-        - "Tottenham Court Road"
-        - "Oval"
         - "Euston"
+        - "Tooting Bec"
         - "Heathrow Terminal Five"
+
+    - Connection: Two overlapping film titles
+      Clues:
+        - "Million Dollar Baby Driver"
+        - "The Hateful Eight-Legged Freaks"
+        - "The Spy Who Loved Me, Myself and Irene"
 
     - Connection: Quotes from Peep Show
       Clues:
@@ -251,29 +256,21 @@ MissingVowelsRound:
         - "I've accidentally run to Windsor"
         - "You're a fuckhead! That's what you are - a fucking shithead!"
 
-    - Connection: Two overlapping film titles
+    - Connection: Wonders of the World
       Clues:
-        - "Million Dollar Baby Driver"
-        - "The Hateful Eight-Legged Freaks"
-        - "The Spy Who Loved Me, Myself and Irene"
+        - "Hagia Sophia"
+        - "Great Pyramid of Giza"
+        - "Machu Picchu"
+        - "Hanging Gardens of Babylon"
 
     - Connection: Three overlapping film titles
       Clues:
         - "American Beauty and the Beast of Eden"
         - "Dr. No Time To Die Another Day"
-        - "The Dark Knight of the Living Dead Poet's Society"
 
     - Connection: Four overlapping film titles
       Clues:
         - "The Railway Children of Men in Black Hawk Down"
-
-    - Connection: Wonders of the World
-      Clues:
-        - "Hagia Sophia"
-        - "Great Pyramid of Giza"
-        - "Angkor Wat"
-        - "Machu Picchu"
-        - "Hanging Gardens of Babylon"
 
     - Connection: Song titles with the wrong colours
       Clues:

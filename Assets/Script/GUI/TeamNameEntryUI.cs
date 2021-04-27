@@ -20,7 +20,10 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void Update()
         {
-            StartQuizButton.interactable = TeamNameEntryA.text.Length > 0 && TeamNameEntryB.text.Length > 0;
+            StartQuizButton.interactable = 
+                TeamNameEntryA.text.Length > 0 && 
+                TeamNameEntryB.text.Length > 0 &&
+                TeamNameEntryA.text != TeamNameEntryB.text;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
