@@ -25,12 +25,12 @@ namespace OnlyCornect
 
         [HideInInspector] public bool ShowingAnswer;
         [HideInInspector] public bool OutOfQuestions;
+        [HideInInspector] public bool ShowingTiebreaker;
 
         private List<MissingVowelsQuestion> questions;
         private MissingVowelsQuestion tiebreaker;
         private int currentCategory;
         private int currentClue;
-        private bool showingTiebreaker;
 
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -45,6 +45,8 @@ namespace OnlyCornect
             ShowingAnswer = false;
             OutOfQuestions = false;
 
+            CategoryBox.SetVisible(false);
+            ClueBox.SetVisible(false);
             CategoryText.gameObject.SetVisible(false);
             ClueText.gameObject.SetVisible(false);
         }
@@ -62,13 +64,27 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void Next(bool showTiebreaker = false)
         {
+            if (!CategoryBox.IsVisible())
+            {
+                foreach (var tween in CategoryBox.GetComponents<TweenHandler>())
+                    tween.Begin();
+                return;
+            }
+            
+            if (CategoryText.gameObject.IsVisible() && !ClueBox.gameObject.IsVisible())
+            {
+                foreach (var tween in ClueBox.GetComponents<TweenHandler>())
+                    tween.Begin();
+                return;
+            }
+
             if (showTiebreaker)
             {
-                if (!showingTiebreaker)
+                if (!ShowingTiebreaker)
                 {
                     NextCategory(TIEBREAKER_CATEGORY_TEXT);
                     NextQuestion(tiebreaker.Clues[0]);
-                    showingTiebreaker = true;
+                    ShowingTiebreaker = true;
                 }
                 else
                     RevealAnswer(tiebreaker.Clues[0]);

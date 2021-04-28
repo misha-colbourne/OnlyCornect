@@ -70,7 +70,7 @@ namespace OnlyCornect
             Application.targetFrameRate = TARGET_FRAME_RATE;
 
             quizData = YmlParser.ParseQuiz();
-            //UtilitiesForUI.LoadPictures(quizData);
+            UtilitiesForUI.LoadPictures(quizData);
 
             wasHandedOver = false;
             scoreHasBeenGrantedThisQuestion = false;
@@ -78,7 +78,7 @@ namespace OnlyCornect
 
             teamA = new Team();
             teamB = new Team();
-            activeTeam = teamA;
+            activeTeam = teamB;
 
             GlyphSelectionScreen.SetInactive();
             RoundNameScreen.SetInactive();
@@ -90,9 +90,6 @@ namespace OnlyCornect
 
             if (skipTeamNaming)
             {
-                currentRound = ERound.WallRound;
-                teamA.Name = "Team A";
-                teamB.Name = "Team B";
                 StartCoroutine(Utilities.WaitAFrameThenRun(MoveToNextRoundNameScreen));
             }
             else
@@ -394,7 +391,7 @@ namespace OnlyCornect
                             }
                             else
                             {
-                                if (teamA.Score == teamB.Score)
+                                if (teamA.Score == teamB.Score || (MissingVowelsRound.ShowingTiebreaker && !MissingVowelsRound.ShowingAnswer))
                                 {
                                     MissingVowelsRound.Next(showTiebreaker: true);
                                 }

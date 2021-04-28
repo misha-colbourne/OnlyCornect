@@ -36,6 +36,13 @@ public static class Utilities
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
+    public static bool IsVisible(this GameObject go)
+    {
+        CanvasGroup cg = go.GetComponent<CanvasGroup>();
+        return cg != null && cg.alpha > 0;
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public static RectTransform GetRectTransform(this GameObject go)
     {
         return go.transform as RectTransform;
