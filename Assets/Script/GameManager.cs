@@ -40,13 +40,13 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private const int TARGET_FRAME_RATE = 120;
 
-        public GlyphSelectionUI GlyphSelectionScreen;
+        public TeamNameEntryUI TeamNameEntry;
         public RoundNameScreenUI RoundNameScreen;
-        public TeamNameEntryUI TeamNameEntryScreen;
-        public EORTeamScoresUI EORTeamScoresScreen;
-        public ConnectionAndSequenceRoundUI ConnectionAndSequencesRoundScreen;
-        public WallRoundUI WallRoundScreen;
-        public MissingVowelsRoundUI MissingVowelsRoundScreen;
+        public GlyphSelectionUI GlyphSelectionScreen;
+        public EORTeamScoresUI EORTeamScores;
+        public ConnectionAndSequenceRoundUI ConnectionAndSequencesRound;
+        public WallRoundUI WallRound;
+        public MissingVowelsRoundUI MissingVowelsRound;
         public ScorePopupUI ScorePopup;
 
         [SerializeField] private bool skipTeamNaming;
@@ -61,6 +61,7 @@ namespace OnlyCornect
 
         private bool wasHandedOver;
         private bool scoreHasBeenGrantedThisQuestion;
+        private bool finished;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         // Start is called before the first frame update
@@ -73,18 +74,19 @@ namespace OnlyCornect
 
             wasHandedOver = false;
             scoreHasBeenGrantedThisQuestion = false;
-
-            GlyphSelectionScreen.SetInactive();
-            RoundNameScreen.SetInactive();
-            TeamNameEntryScreen.SetInactive();
-            EORTeamScoresScreen.SetInactive();
-            ConnectionAndSequencesRoundScreen.SetInactive();
-            WallRoundScreen.SetInactive();
-            MissingVowelsRoundScreen.SetInactive();
+            finished = false;
 
             teamA = new Team();
             teamB = new Team();
             activeTeam = teamA;
+
+            GlyphSelectionScreen.SetInactive();
+            RoundNameScreen.SetInactive();
+            TeamNameEntry.SetInactive();
+            EORTeamScores.SetInactive();
+            ConnectionAndSequencesRound.SetInactive();
+            WallRound.SetInactive();
+            MissingVowelsRound.SetInactive();
 
             if (skipTeamNaming)
             {
@@ -117,8 +119,8 @@ namespace OnlyCornect
                     break;
                 case EPhase.TeamNameEntry:
                     {
-                        TeamNameEntryScreen.SetInactive();
-                        TeamNameEntryScreen.SetTeamNames(teamA, teamB);
+                        TeamNameEntry.SetInactive();
+                        TeamNameEntry.SetTeamNames(teamA, teamB);
 
                         MoveToNextRoundNameScreen();
                     }
@@ -147,7 +149,7 @@ namespace OnlyCornect
                 case EPhase.ConnectionQuestion:
                 case EPhase.SequencesQuestion:
                     {
-                        ConnectionAndSequencesRoundScreen.SetInactive();
+                        ConnectionAndSequencesRound.SetInactive();
 
                         if (GlyphSelectionScreen.GlyphBoxes.Any(x => !x.Selected))
                             MoveToQuestionSelection();
@@ -157,11 +159,11 @@ namespace OnlyCornect
                     break;
                 case EPhase.WallQuestion:
                     {
-                        WallRoundScreen.SetInactive();
+                        WallRound.SetInactive();
 
                         if (GlyphSelectionScreen.GlyphBoxes.Any(x => !x.Selected))
                         {
-                            WallRoundScreen.Init(quizData.WallRound[1]);
+                            WallRound.Init(quizData.WallRound[1]);
                             MoveToQuestionSelection();
                         }
                         else
@@ -172,13 +174,18 @@ namespace OnlyCornect
                     break;
                 case EPhase.MissingVowelsQuestion:
                     {
-                        MissingVowelsRoundScreen.SetInactive();
+                        MissingVowelsRound.SetInactive();
+                        finished = true;
+                        MoveToEORTeamScores();
                     }
                     break;
                 case EPhase.EORTeamScoresScreen:
                     {
-                        EORTeamScoresScreen.SetInactive();
-                        MoveToNextRoundNameScreen();
+                        if (!finished)
+                        {
+                            EORTeamScores.SetInactive();
+                            MoveToNextRoundNameScreen();
+                        }
                     }
                     break;
                 default:
@@ -193,7 +200,7 @@ namespace OnlyCornect
         public void MoveToTeamNameEntry()
         {
             currentPhase = EPhase.TeamNameEntry;
-            TeamNameEntryScreen.SetActive();
+            TeamNameEntry.SetActive();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -206,16 +213,16 @@ namespace OnlyCornect
             switch (currentRound)
             {
                 case ERound.ConnectionRound:
-                    ConnectionAndSequencesRoundScreen.Init(quizData.ConnectionRound);
+                    ConnectionAndSequencesRound.Init(quizData.ConnectionRound);
                     break;
                 case ERound.SequencesRound:
-                    ConnectionAndSequencesRoundScreen.Init(quizData.SequencesRound);
+                    ConnectionAndSequencesRound.Init(quizData.SequencesRound);
                     break;
                 case ERound.WallRound:
-                    WallRoundScreen.Init(quizData.WallRound[0]);
+                    WallRound.Init(quizData.WallRound[0]);
                     break;
                 case ERound.MissingVowelsRound:
-                    MissingVowelsRoundScreen.Init(quizData.MissingVowelsRound, teamA, teamB);
+                    MissingVowelsRound.Init(quizData.MissingVowelsRound, teamA, teamB);
                     break;
             }
 
@@ -241,21 +248,21 @@ namespace OnlyCornect
                 else if (currentRound == ERound.SequencesRound)
                     currentPhase = EPhase.SequencesQuestion;
 
-                ConnectionAndSequencesRoundScreen.SetActive();
-                ConnectionAndSequencesRoundScreen.NextQuestion();
+                ConnectionAndSequencesRound.SetActive();
+                ConnectionAndSequencesRound.NextQuestion();
             }
             else if (currentRound == ERound.WallRound)
             {
                 currentPhase = EPhase.WallQuestion;
 
-                WallRoundScreen.SetActive();
-                WallRoundScreen.StartTimeBar();
+                WallRound.SetActive();
+                WallRound.StartTimeBar();
             }
             else if (currentRound == ERound.MissingVowelsRound)
             {
                 currentPhase = EPhase.MissingVowelsQuestion;
 
-                MissingVowelsRoundScreen.SetActive();
+                MissingVowelsRound.SetActive();
             }
         }
 
@@ -263,8 +270,8 @@ namespace OnlyCornect
         public void MoveToEORTeamScores()
         {
             currentPhase = EPhase.EORTeamScoresScreen;
-            EORTeamScoresScreen.SetNamesAndScores(teamA, teamB);
-            EORTeamScoresScreen.SetActive();
+            EORTeamScores.SetNamesAndScores(teamA, teamB, finished);
+            EORTeamScores.SetActive();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -286,7 +293,7 @@ namespace OnlyCornect
                     {
                         if (Input.GetKeyDown(KeyCode.Tab))
                         {
-                            TeamNameEntryScreen.SwitchInputFocus();
+                            TeamNameEntry.SwitchInputFocus();
                         }
                     }
                     break;
@@ -311,35 +318,35 @@ namespace OnlyCornect
                     {
                         if (Input.GetKeyDown(KeyCode.RightArrow))
                         {
-                            ConnectionAndSequencesRoundScreen.NextClue();
+                            ConnectionAndSequencesRound.NextClue();
                         }
 
                         if (Input.GetKeyDown(KeyCode.Space))
                         {
-                            ConnectionAndSequencesRoundScreen.StopTimeBar();
+                            ConnectionAndSequencesRound.StopTimeBar();
                         }
 
                         if (Input.GetKeyDown(KeyCode.UpArrow))
                         {
                             SwapActiveTeam();
                             wasHandedOver = true;
-                            ConnectionAndSequencesRoundScreen.HandOverToOtherTeam();
+                            ConnectionAndSequencesRound.HandOverToOtherTeam();
                         }
 
                         if (Input.GetKeyDown(KeyCode.A))
                         {
-                            StartCoroutine(ConnectionAndSequencesRoundScreen.ShowAnswer());
+                            StartCoroutine(ConnectionAndSequencesRound.ShowAnswer());
                         }
 
                         if (Input.GetKeyDown(KeyCode.P))
                         {
-                            if (!scoreHasBeenGrantedThisQuestion && !ConnectionAndSequencesRoundScreen.TimeBarRunning)
+                            if (!scoreHasBeenGrantedThisQuestion && !ConnectionAndSequencesRound.TimeBarRunning)
                                 HandleScoring();
                         }
 
                         if (Input.GetKeyDown(KeyCode.Backspace))
                         {
-                            ConnectionAndSequencesRoundScreen.StopTimeBar();
+                            ConnectionAndSequencesRound.StopTimeBar();
                             scoreHasBeenGrantedThisQuestion = false;
                             NextPhase();
                         }
@@ -349,17 +356,17 @@ namespace OnlyCornect
                     {
                         if (Input.GetKeyDown(KeyCode.A))
                         {
-                            WallRoundScreen.ResolveWall();
+                            WallRound.ResolveWall();
                         }
 
                         if (Input.GetKeyDown(KeyCode.RightArrow))
                         {
-                            WallRoundScreen.NextAnswer();
+                            WallRound.NextAnswer();
                         }
 
                         if (Input.GetKeyDown(KeyCode.P))
                         {
-                            WallRoundScreen.AwardPointsForCurrentAnswer();
+                            WallRound.AwardPointsForCurrentAnswer();
                         }
 
                         if (Input.GetKeyDown(KeyCode.Backspace))
@@ -370,7 +377,7 @@ namespace OnlyCornect
                             }
                             else
                             {
-                                WallRoundScreen.StopTimeBar();
+                                WallRound.StopTimeBar();
                                 scoreHasBeenGrantedThisQuestion = false;
                                 NextPhase();
                             }
@@ -381,7 +388,21 @@ namespace OnlyCornect
                     {
                         if (Input.GetKeyDown(KeyCode.RightArrow))
                         {
-                            MissingVowelsRoundScreen.Next();
+                            if (!MissingVowelsRound.OutOfQuestions)
+                            {
+                                MissingVowelsRound.Next();
+                            }
+                            else
+                            {
+                                if (teamA.Score == teamB.Score)
+                                {
+                                    MissingVowelsRound.Next(showTiebreaker: true);
+                                }
+                                else
+                                {
+                                    NextPhase();
+                                }
+                            }
                         }
                     }
                     break;
@@ -395,8 +416,37 @@ namespace OnlyCornect
                         {
                             NextPhase();
                         }
+
+                        if (Input.GetKeyDown(KeyCode.Escape))
+                        {
+                            Application.Quit();
+                        }
                     }
                     break;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.Equals) ||
+                Input.GetKeyDown(KeyCode.LeftBracket) || Input.GetKeyDown(KeyCode.RightBracket))
+            {
+                if (Input.GetKeyDown(KeyCode.Minus))
+                {
+                    teamA.Score--;
+                }
+                if (Input.GetKeyDown(KeyCode.Equals))
+                {
+                    teamA.Score++;
+                }
+                if (Input.GetKeyDown(KeyCode.LeftBracket))
+                {
+                    teamB.Score--;
+                }
+                if (Input.GetKeyDown(KeyCode.RightBracket))
+                {
+                    teamB.Score++;
+                }
+
+                if (currentRound == ERound.MissingVowelsRound)
+                    MissingVowelsRound.SetTeamScores(teamA, teamB);
             }
         }
 
@@ -410,12 +460,12 @@ namespace OnlyCornect
                 case EPhase.ConnectionQuestion:
                 case EPhase.SequencesQuestion:
                     {
-                        score = ConnectionAndSequencesRoundScreen.ScoreForCurrentQuestion;
+                        score = ConnectionAndSequencesRound.ScoreForCurrentQuestion;
                     }
                     break;
                 case EPhase.WallQuestion:
                     {
-                        score = WallRoundScreen.Score;
+                        score = WallRound.Score;
                         if (score == WallRoundUI.ALL_GROUPS_AND_CONNECTIONS_SCORE)
                             score += WallRoundUI.ALL_GROUPS_AND_CONNECTIONS_BONUS;
                     }

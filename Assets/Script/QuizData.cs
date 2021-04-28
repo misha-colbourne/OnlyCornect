@@ -39,5 +39,6 @@ namespace OnlyCornect
 
     public class MissingVowelsQuestion : Question
     {
+        public bool Tiebreaker;
     }
 }

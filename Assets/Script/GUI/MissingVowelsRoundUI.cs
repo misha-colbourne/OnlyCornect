@@ -8,7 +8,8 @@ namespace OnlyCornect
 {
     public class MissingVowelsRoundUI : MonoBehaviour
     {
-        public const int CHARS_PER_SPACE_DELTA = 4;
+        public const int CHARS_PER_SPACE_DELTA = 5;
+        public const string TIEBREAKER_CATEGORY_TEXT = "Tiebreaker";
 
         public TMP_Text TeamAName;
         public TMP_Text TeamAScore;
@@ -22,68 +23,95 @@ namespace OnlyCornect
 
         public bool IsOutOfCluesForCurrentQuestion { get { return ShowingAnswer && (currentClue >= questions[currentCategory].Clues.Count - 1); } }
 
-        public bool ShowingAnswer;
+        [HideInInspector] public bool ShowingAnswer;
+        [HideInInspector] public bool OutOfQuestions;
 
         private List<MissingVowelsQuestion> questions;
+        private MissingVowelsQuestion tiebreaker;
         private int currentCategory;
         private int currentClue;
+        private bool showingTiebreaker;
 
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void Init(List<MissingVowelsQuestion> questions, GameManager.Team teamA, GameManager.Team teamB)
         {
-            TeamAName.text = teamA.Name;
-            TeamAScore.text = teamA.Score.ToString();
-
-            TeamBName.text = teamB.Name;
-            TeamBScore.text = teamB.Score.ToString();
-
-            this.questions = questions;
+            SetTeamScores(teamA, teamB);
+            this.questions = questions.Where(x => !x.Tiebreaker).ToList();
+            tiebreaker = questions.FirstOrDefault(x => x.Tiebreaker);
 
             currentCategory = -1;
             currentClue = -1;
             ShowingAnswer = false;
+            OutOfQuestions = false;
 
             CategoryText.gameObject.SetVisible(false);
             ClueText.gameObject.SetVisible(false);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void Next()
+        public void SetTeamScores(GameManager.Team teamA, GameManager.Team teamB)
         {
-            if (currentCategory == -1 || IsOutOfCluesForCurrentQuestion)
+            TeamAName.text = teamA.Name;
+            TeamAScore.text = teamA.Score.ToString();
+
+            TeamBName.text = teamB.Name;
+            TeamBScore.text = teamB.Score.ToString();
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public void Next(bool showTiebreaker = false)
+        {
+            if (showTiebreaker)
             {
-                NextCategory();
-            }
-            else if (currentClue == -1 || ShowingAnswer)
-            {
-                NextQuestion();
+                if (!showingTiebreaker)
+                {
+                    NextCategory(TIEBREAKER_CATEGORY_TEXT);
+                    NextQuestion(tiebreaker.Clues[0]);
+                    showingTiebreaker = true;
+                }
+                else
+                    RevealAnswer(tiebreaker.Clues[0]);
             }
             else
             {
-                RevealAnswer();
+                if (currentCategory == -1 || IsOutOfCluesForCurrentQuestion)
+                {
+                    if (currentCategory + 1 >= questions.Count)
+                        OutOfQuestions = true;
+                    else
+                        NextCategory();
+                }
+                else if (currentClue == -1 || ShowingAnswer)
+                {
+                    NextQuestion();
+                }
+                else
+                {
+                    RevealAnswer();
+                }
             }
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        private void NextCategory()
+        private void NextCategory(string categoryOverride = null)
         {
             currentCategory++;
             currentClue = -1;
 
-            CategoryText.text = questions[currentCategory].Connection;
+            CategoryText.text = categoryOverride ?? questions[currentCategory].Connection;
 
             CategoryText.gameObject.SetVisible(true);
             ClueText.gameObject.SetVisible(false);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        private void NextQuestion()
+        private void NextQuestion(string clueOverride = null)
         {
             currentClue++;
             ShowingAnswer = false;
 
-            string clue = questions[currentCategory].Clues[currentClue];
+            string clue = clueOverride ?? questions[currentCategory].Clues[currentClue];
             clue = clue.ToUpper();
             clue = Regex.Replace(clue, "[^A-Z]+", "");
             clue = Regex.Replace(clue, "[AEIOU]+", "");
@@ -97,7 +125,7 @@ namespace OnlyCornect
 
                 for (int i = 0; i < numberOfSpacesToAdd; i++)
                 {
-                    List<int> possibleSpaceIndices = Enumerable.Range(2, clue.Length - 3).ToList();
+                    List<int> possibleSpaceIndices = Enumerable.Range(1, clue.Length - 2).ToList();
 
                     possibleSpaceIndices = possibleSpaceIndices.Where(x =>
                         (x - 2 < 0 || clue[x - 2] != ' ') &&
@@ -124,9 +152,10 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        private void RevealAnswer()
+        private void RevealAnswer(string overrideAnswer = null)
         {
-            ClueText.text = questions[currentCategory].Clues[currentClue].ToUpper();
+            ClueText.text = overrideAnswer ?? questions[currentCategory].Clues[currentClue];
+            ClueText.text = ClueText.text.ToUpper();
             ShowingAnswer = true;
         }
     }

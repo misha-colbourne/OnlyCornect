@@ -145,35 +145,6 @@ SequencesRound:
 # --------------------------------------------------------------------------------------------------------------------------------------
 WallRound:
 
-    # # Wall 1
-    # -   - Connection: a
-    #       Clues:
-    #         - aaaaaaa
-    #         - aaaaaaa
-    #         - aaaaaaa
-    #         - aaaaaaa
-
-    #     - Connection: b
-    #       Clues:
-    #         - bbbbb
-    #         - bbbbb
-    #         - bbbbb
-    #         - bbbbb
-
-    #     - Connection: c
-    #       Clues:
-    #         - ccc
-    #         - ccc
-    #         - ccc
-    #         - ccc
-
-    #     - Connection: d
-    #       Clues:
-    #         - z
-    #         - z
-    #         - z
-    #         - z
-
     # Wall 1
     -   - Connection: Star ____
           Clues:
@@ -241,27 +212,21 @@ MissingVowelsRound:
         - "Euston"
         - "Tooting Bec"
         - "Heathrow Terminal Five"
+        - "Oval"
+
+    - Connection: Quotes from Peep Show
+      Clues:
+        - "Four naan, Jeremy? Four? That's insane"
+        - "I'm not on the child protection register... yet!"
+        - "This is outrageous, this is contagious"
+        - "I've accidentally run to Windsor"
+        - "You're a fuckhead! That's what you are - a fucking shithead!"
 
     - Connection: Two overlapping film titles
       Clues:
         - "Million Dollar Baby Driver"
         - "The Hateful Eight-Legged Freaks"
         - "The Spy Who Loved Me, Myself and Irene"
-
-    - Connection: Quotes from Peep Show
-      Clues:
-        - "Four naan, Jeremy? Four? That's insane"
-        - "I'm not on the child protection register... yet!"
-        - "This is outrageous! This is contagious!"
-        - "I've accidentally run to Windsor"
-        - "You're a fuckhead! That's what you are - a fucking shithead!"
-
-    - Connection: Wonders of the World
-      Clues:
-        - "Hagia Sophia"
-        - "Great Pyramid of Giza"
-        - "Machu Picchu"
-        - "Hanging Gardens of Babylon"
 
     - Connection: Three overlapping film titles
       Clues:
@@ -279,3 +244,14 @@ MissingVowelsRound:
         - "White White Wine"
         - "Supermassive Brown Hole"
         - "Welcome to the Pink Parade"
+
+    - Tiebreaker: True
+      Clues:
+        - "Welcome to Jurassic Park"
+
+    # - Connection: Wonders of the World
+    #   Clues:
+    #     - "Hagia Sophia"
+    #     - "Great Pyramid of Giza"
+    #     - "Machu Picchu"
+    #     - "Hanging Gardens of Babylon"
