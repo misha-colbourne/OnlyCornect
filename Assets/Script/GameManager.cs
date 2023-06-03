@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlyCornect;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,35 @@ namespace OnlyCornect
 {
     public class GameManager : MonoBehaviour
     {
+        public static class InputKeys
+        {
+            public const KeyCode TeamNameEntry_SwitchInputFocus = KeyCode.Tab;
+
+            public const KeyCode GlyphSelection_SelectGlyph = KeyCode.Mouse0;
+
+            public const KeyCode ConnectionAndSequences_NextClue = KeyCode.RightArrow;
+            public const KeyCode ConnectionAndSequences_StopTimeBar = KeyCode.Space;
+            public const KeyCode ConnectionAndSequences_HandOver = KeyCode.UpArrow;
+            public const KeyCode ConnectionAndSequences_ShowAnswer = KeyCode.A;
+            public const KeyCode ConnectionAndSequences_HandleScoring = KeyCode.P;
+            public const KeyCode ConnectionAndSequences_NextPhase = KeyCode.Backspace;
+
+            public const KeyCode WallQuestion_ResolveWall = KeyCode.A;
+            public const KeyCode WallQuestion_NextAnswer = KeyCode.RightArrow;
+            public const KeyCode WallQuestion_AwardPoints = KeyCode.P;
+            public const KeyCode WallQuestion_NextPhase = KeyCode.Backspace;
+
+            public const KeyCode MissingVowelsQuestion_Next = KeyCode.RightArrow;
+
+            public const KeyCode Default_NextPhase = KeyCode.Mouse0;
+            public const KeyCode Default_Quit = KeyCode.Escape;
+
+            public const KeyCode Scores_TeamA_MinusOne = KeyCode.Minus;
+            public const KeyCode Scores_TeamA_PlusOne = KeyCode.Equals;
+            public const KeyCode Scores_TeamB_MinusOne = KeyCode.LeftBracket;
+            public const KeyCode Scores_TeamB_PlusOne = KeyCode.RightBracket;
+        }
+
         public enum EPhase
         {
             None,
@@ -280,6 +310,7 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void HandleInput()
         {
+
             switch (currentPhase)
             {
                 //case EPhase.MainMenu:
@@ -288,7 +319,7 @@ namespace OnlyCornect
                 //    break;
                 case EPhase.TeamNameEntry:
                     {
-                        if (Input.GetKeyDown(KeyCode.Tab))
+                        if (Input.GetKeyDown(InputKeys.TeamNameEntry_SwitchInputFocus))
                         {
                             TeamNameEntry.SwitchInputFocus();
                         }
@@ -300,7 +331,7 @@ namespace OnlyCornect
                 //    break;
                 case EPhase.GlyphSelection:
                     {
-                        if (Input.GetKeyDown(KeyCode.Mouse0))
+                        if (Input.GetKeyDown(InputKeys.GlyphSelection_SelectGlyph))
                         {
                             if (GlyphSelectionScreen.SelectionMade)
                             {
@@ -313,35 +344,35 @@ namespace OnlyCornect
                 case EPhase.ConnectionQuestion:
                 case EPhase.SequencesQuestion:
                     {
-                        if (Input.GetKeyDown(KeyCode.RightArrow))
+                        if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_NextClue))
                         {
                             ConnectionAndSequencesRound.NextClue();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_StopTimeBar))
                         {
                             ConnectionAndSequencesRound.StopTimeBar();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.UpArrow))
+                        if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_HandOver))
                         {
                             SwapActiveTeam();
                             wasHandedOver = true;
                             ConnectionAndSequencesRound.HandOverToOtherTeam();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.A))
+                        if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_ShowAnswer))
                         {
                             StartCoroutine(ConnectionAndSequencesRound.ShowAnswer());
                         }
 
-                        if (Input.GetKeyDown(KeyCode.P))
+                        if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_HandleScoring))
                         {
                             if (!scoreHasBeenGrantedThisQuestion && !ConnectionAndSequencesRound.TimeBarRunning)
                                 HandleScoring();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.Backspace))
+                        if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_NextPhase))
                         {
                             ConnectionAndSequencesRound.StopTimeBar();
                             scoreHasBeenGrantedThisQuestion = false;
@@ -351,22 +382,22 @@ namespace OnlyCornect
                     break;
                 case EPhase.WallQuestion:
                     {
-                        if (Input.GetKeyDown(KeyCode.A))
+                        if (Input.GetKeyDown(InputKeys.WallQuestion_ResolveWall))
                         {
                             WallRound.ResolveWall();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.RightArrow))
+                        if (Input.GetKeyDown(InputKeys.WallQuestion_NextAnswer))
                         {
                             WallRound.NextAnswer();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.P))
+                        if (Input.GetKeyDown(InputKeys.WallQuestion_AwardPoints))
                         {
                             WallRound.AwardPointsForCurrentAnswer();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.Backspace))
+                        if (Input.GetKeyDown(InputKeys.WallQuestion_NextPhase))
                         {
                             if (!scoreHasBeenGrantedThisQuestion)
                             {
@@ -383,7 +414,7 @@ namespace OnlyCornect
                     break;
                 case EPhase.MissingVowelsQuestion:
                     {
-                        if (Input.GetKeyDown(KeyCode.RightArrow))
+                        if (Input.GetKeyDown(InputKeys.MissingVowelsQuestion_Next))
                         {
                             if (!MissingVowelsRound.OutOfQuestions)
                             {
@@ -409,12 +440,12 @@ namespace OnlyCornect
                 //    break;
                 default:
                     {
-                        if (Input.GetKeyDown(KeyCode.Mouse0))
+                        if (Input.GetKeyDown(InputKeys.Default_NextPhase))
                         {
                             NextPhase();
                         }
 
-                        if (Input.GetKeyDown(KeyCode.Escape))
+                        if (Input.GetKeyDown(InputKeys.Default_Quit))
                         {
                             Application.Quit();
                         }
@@ -422,22 +453,22 @@ namespace OnlyCornect
                     break;
             }
 
-            if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.Equals) ||
-                Input.GetKeyDown(KeyCode.LeftBracket) || Input.GetKeyDown(KeyCode.RightBracket))
+            if (Input.GetKeyDown(InputKeys.Scores_TeamA_MinusOne) || Input.GetKeyDown(InputKeys.Scores_TeamA_PlusOne) ||
+                Input.GetKeyDown(InputKeys.Scores_TeamB_MinusOne) || Input.GetKeyDown(InputKeys.Scores_TeamB_PlusOne))
             {
-                if (Input.GetKeyDown(KeyCode.Minus))
+                if (Input.GetKeyDown(InputKeys.Scores_TeamA_MinusOne))
                 {
                     teamA.Score--;
                 }
-                if (Input.GetKeyDown(KeyCode.Equals))
+                if (Input.GetKeyDown(InputKeys.Scores_TeamA_PlusOne))
                 {
                     teamA.Score++;
                 }
-                if (Input.GetKeyDown(KeyCode.LeftBracket))
+                if (Input.GetKeyDown(InputKeys.Scores_TeamB_MinusOne))
                 {
                     teamB.Score--;
                 }
-                if (Input.GetKeyDown(KeyCode.RightBracket))
+                if (Input.GetKeyDown(InputKeys.Scores_TeamB_PlusOne))
                 {
                     teamB.Score++;
                 }
