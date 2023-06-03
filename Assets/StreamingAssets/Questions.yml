@@ -1,257 +1,295 @@
 # Place pictures as .png files in /Pictures, ideally as 1680x960
-# --------------------------------------------------------------------------------------------------------------------------------------
+
+# EXAMPLE QUESTION
+
+# - Connection: Wonders of the World
+#   Clues:
+#     - "Hagia Sophia"
+#     - "Great Pyramid of Giza"
+#     - "Machu Picchu"
+#     - "Hanging Gardens of Babylon"
+
+# ================================================================================================================================================
 ConnectionRound:
 
-    - Connection: Fates of Sean Bean characters
-      Clues:
-        - Quartered by horses
-        - Beheaded
-        - Three arrows to the chest
-        - Crushed by a burning antenna
+# (1) ----------------------------------------------------------------
+- Connection: "You may remember Troy McClure from..."
+  Clues: 
+    - The Pulverizer
+    - "Man Versus Nature: The Road to Victory"
+    - "Firecrackers: The Silent Killer"
+    - The Erotic Adventures of Hercules
 
-    - Connection: Hope
-      Clues:
-        - Cape of Good Hope
-        - Hope Diamond
-        - Bob Hope
-        - "Star Wars: Episode IV - <nobr>A New Hope</nobr>"
-      Pictures:
-        - Hope_Cape
-        - Hope_Diamond
-        - Hope_Bob
-        - Hope_StarWars
+# (2) ----------------------------------------------------------------
+- Connection: Windows XP Profile Pictures
+  IsPictureQuestion: True
+  Clues:
+    - XP_Snowflake
+    - XP_Chess
+    - XP_Astronaut
+    - XP_Duck
+  Answers:
+    - Snowflake
+    - Chess
+    - Astronaut
+    - Rubber Duck
 
-    - Connection: Channel Island anagrams
-      Clues:
-        - Nantes
-        - US Energy
-        - J Reyes
-        - Arks
+# (3) ----------------------------------------------------------------
+- Connection: Deep Rock Galactic classes
+  Clues:
+    - London-based "music" maker, perhaps
+    - The type of trooper you'd find on Endor
+    - Fan of prehistoric football team
+    - "Mechanical, Electronic,\nCivil, etc"
+  Answers:
+    - Driller
+    - Scout
+    - Gunner
+    - Engineer
 
-    - Connection: Towns/Cities in the original Pokémon games
-      Clues:
-        - Fuchsia City
-        - Pewter City
-        - Lavender Town
-        - Pallet Town
-      Pictures:
-        - Pokemon_Fuschia
-        - Pokemon_Pewter
-        - Pokemon_Lavender
-        - Pokemon_Pallet
+# (4) ----------------------------------------------------------------
+- Connection: "Contain Magic: The Gathering basic land types"
+  Clues:
+    - Expanse between the Rockies and Mississippi
+    - 2010 Martin Scorsese film
+    - AONB between Southampton and Bournemouth
+    - The majority of Estonia, apparently
+  Answers:
+    - The Great Plains
+    - Shutter Island
+    - The New Forest
+    - (97%) Swamp
 
-    - Connection: Synonyms of card games
-      Clues:
-        - Sovereignty
-        - One
-        - Japanese cuisine depart!
-        - "Sorcery: The Congregation"
+# (5) ----------------------------------------------------------------
+- Connection: Anagrams of each other
+  IsPictureQuestion: True
+  Clues:
+    - Anagram_Alpen
+    - Anagram_Nepal
+    - Anagram_Plane
+    - Anagram_Panel
+  Answers:
+    - Alpen
+    - Nepal
+    - Plane
+    - Panel
 
-    - Connection: Means of initiating time travel
-      Clues:
-        - Dialing a<br>number
-        - Turning over the necklace core
-        - Removing or replacing sword in pedestal
-        - Reaching 88 miles per hour
+# (6) ----------------------------------------------------------------
+- Connection: Robots in film, and the year of the film
+  Clues:
+    - Maria (1927)
+    - Roy Batty (1982)
+    - TARS (2014)
+    - IG-88 (1980)
 
-    - Connection: Neapolitan
-      Clues:
-        - Neapolitan Chord
-        - Neapolitan Mastiff
-        - Neapolitan Ice Cream
-        - Naples
-      Pictures:
-        - Neapolitan_Chord
-        - Neapolitan_Mastiff
-        - Neapolitan_IceCream
-        - Neapolitan_Naples
+# (7) ----------------------------------------------------------------
+- Connection: Generative AI Models
+  Clues:
+    - Spreading out one's horse enclosures
+    - William Shakespeare
+    - "Bon Jovi\nchorus lyric"
+    - "French cat,\n4x4, alien"
+  Answers:
+    - Stable Diffusion
+    - Bard
+    - Midjourney
+    - ChatGPT
 
-    - Connection: Fools/Jesters
-      Clues:
-        - First (or last)<br>of the Major Arcana
-        - Puck
-        - Falconhoof's unpopular associate
-        - Roland the<br>Farter
+# (8) ----------------------------------------------------------------
+- Connection: Roman Numerals
+  IsPictureQuestion: True
+  Clues:
+    - Numerals_Radii
+    - Numerals_Steelix
+    - Numerals_Diver
+    - Numerals_Miis
+  Answers:
+    - "Radii\n(502 = DII)"
+    - "Steelix\n(59 = LIX)"
+    - "Diver\n(504 = DIV)"
+    - "Miis\n(1002 = MII)"
 
-# --------------------------------------------------------------------------------------------------------------------------------------
+# ================================================================================================================================================
 SequencesRound:
 
-    - Connection: Pirates of the Caribbean titles last word synonyms
-      Clues:
-        - "In unfamiliar oceanic ebb<br>and flow"
-        - "Having reached planetary conclusion"
-        - "Deceased male's treasure box"
-        - "e.g. Hex of the dark spherical mollusc-byproduct"
+# (1) ----------------------------------------------------------------
+- Connection: James Bond actors' last films paraphrased
+  Clues:
+    - Inadequate duration for expiry
+    - Pass away at a later date
+    - Termination permit
+    - An observation to one's demise
+  Answers:
+    - No Time to Die
+    - Die Another Day
+    - License to Kill
+    - A View to a Kill
 
-    - Connection: "'cester Towns with decreasing prefix lengths"
-      Clues:
-        - Cirencester
-        - Gloucester
-        - Leicester
-        - e.g. Bicester
-      Pictures:
-        - Cester_Cirencester
-        - Cester_Gloucester
-        - Cester_Leicester
-        - Cester_Bicester
+# (2) ----------------------------------------------------------------
+- Connection: Alfred the Great's older brothers, all named Æthel_
+  Clues:
+    - stan
+    - bald
+    - berht
+    - red
 
-    - Connection: First four Monopoly properties and their costs in £
-      Clues:
-        - TAI 100
-        - KCS 200
-        - WR 60
-        - OKR 60
+# (3) ----------------------------------------------------------------
+- Connection: Countries with increasing numbers of As
+  IsPictureQuestion: True
+  Clues:
+    - Countries_Chad
+    - Countries_Japan
+    - Countries_Panama
+    - Countries_Madagascar
+  Answers:
+    - Chad
+    - Japan
+    - Panama
+    - Madagascar
 
-    - Connection: The Simpsons characters with increasing numbers of <i>real</i> eyes
-      Clues:
-        - Horatio McAllister (technically)
-        - Kang
-        - Seymour<br>Skinner
-        - Blinky
+# (4) ----------------------------------------------------------------
+- Connection: The Simpsons "Das Bus" Fruit Race in launch order
+  Clues:
+    - Orange (2nd/3rd)
+    - Apple (2nd/3rd)
+    - Banana (DNF)
+    - Grapefruit (1st)
 
-    - Connection: Countries word chain
-      Clues:
-        - Moldova<line-height=80%><br><size=150%>→</size></voffset><br>Vanuatu
-        - Vanuatu<line-height=80%><br><size=150%>→</size></voffset><br>Turkmenistan
-        - Turkmenistan<line-height=80%><br><size=150%>→</size></voffset><br>Angola
-        - Angola<line-height=80%><br><size=150%>→</size></voffset><br>Laos/Latvia
+# (5) ----------------------------------------------------------------
+- Connection: 1st -> 4th books from various series
+  Clues:
+    - Killing Floor
+    - "The Dark Tower: The Drawing of the Three"
+    - The Amber Spyglass
+    - A Feast for Crows
 
-    - Connection: Bands with 5/4/3/2 members
-      Clues:
-        - The Spice Girls
-        - Queen
-        - The Police
-        - e.g. The White Stripes
+# (6) ----------------------------------------------------------------
+- Connection: Songs with colours in their titles, in ROYGBIV order
+  Clues:
+    - My uncle has a country place, that no one knows about
+    - Follow me, don't follow me, I've got my spine, I've got my
+    - Look at the stars, look how they shine for you
+    - Well, take me back down where cool water flows, yeah
+  Answers:
+    - Rush - Red Barchetta
+    - REM - Orange Crush
+    - Coldplay - Yellow
+    - Creedence Clearwater Revival - Green River
 
-    - Connection: One fewer 'A' each time
-      Clues:
-        - Taramasalata
-        - Bananarama
-        - Balaclava
-        - e.g. Maracas
-      Pictures:
-        - As_Taramasalata
-        - As_Bananarama
-        - As_Balaclava
-        - As_Maracas
+# (7) ----------------------------------------------------------------
+- Connection: "Seven-segment display segments required per #"
+  Clues:
+    - 4 = 4/7
+    - 2,3,5 = 5/7
+    - 0,6,9 = 6/7
+    - 8 = 7/7
 
-    - Connection: Planetary Greek/Roman god equivalents
-      Clues:
-        - "8: Poseidon"
-        - "7: Caelus"
-        - "6: Cronus"
-        - "5: Zeus"
+# (8) ----------------------------------------------------------------
+- Connection: Ae, Ei, Io, Ou
+  IsPictureQuestion: True
+  Clues:
+    - Aegean Sea
+    - Einstein
+    - Io
+    - Ouagadougou
+  Answers:
+    - Vowels_AegeanSea
+    - Vowels_Einstein
+    - Vowels_Io
+    - Vowels_Ouagadougou
         
-# --------------------------------------------------------------------------------------------------------------------------------------
+# ================================================================================================================================================
 WallRound:
 
-    # Wall 1
-    -   - Connection: Star ____
-          Clues:
-            - Gate
-            - Girl
-            - Trek
-            - Fox
+# Wall 1
+-   - Connection: Skateboarding Moves
+      Clues: 
+        - Smith
+        - Madonna
+        - Melon
+        - Pop
 
-        - Connection: Chocolate bars with rotated letters
-          Clues:
-            - Liou
-            - Wars
-            - Freppo
-            - Todic
+-   - Connection: Rocket League Bots
+      Clues:
+        - Tusk
+        - Viper
+        - Caveman
+        - Slider
 
-        - Connection: Models of Ford cars
-          Clues:
-            - Galaxy
-            - Orion
-            - Focus
-            - Puma
+-   - Connection: Palindromes
+      Clues:
+        - Otto
+        - Rotor
+        - Deified
+        - ABBA
 
-        - Connection: Constellations
-          Clues:
-            - Leo
-            - Hercules
-            - Cygnus
-            - Pegasus
+-   - Connection: _corn
+      Clues:
+        - A
+        - Pepper
+        - Capri
+        - Uni
 
-    # Wall 2
-    -   - Connection: ____ Point
-          Clues:
-            - Lizard
-            - Vanishing
-            - Match
-            - Bodkin
+# Wall 2
+-   - Connection: DotA Hero Anagrams
+      Clues:
+        - Gamer Goi
+        - Charles
+        - Respect
+        - Amused
 
-        - Connection: Lists
-          Clues:
-            - Hit
-            - Wish
-            - Bucket
-            - White
+-   - Connection: "Ends in \"The ___\" bands"
+      Clues:
+        - Chives
+        - Obscure
+        - Blacksmiths
+        - Erasmus
 
-        - Connection: Seas
-          Clues:
-            - Red
-            - Black
-            - North
-            - Dead
+-   - Connection: Things that can be baked
+      Clues:
+        - Bean
+        - Alaska
+        - Stoner
+        - Lightmaps
 
-        - Connection: Hidden computer keys
-          Clues:
-            - Land's End
-            - Baltic
-            - Shapeshifter
-            - Tableau
+-   - Connection: "\"Gun\" ammo"
+      Clues:
+        - Potato
+        - Nail
+        - Cap
+        - Elastic Band
 
-# --------------------------------------------------------------------------------------------------------------------------------------
+# ================================================================================================================================================
 MissingVowelsRound:
 
-    - Connection: London Underground stations
-      Clues:
-        - "Paddington"
-        - "Euston"
-        - "Tooting Bec"
-        - "Heathrow Terminal Five"
-        - "Oval"
+- Connection: Spaceships and their franchise
+  Clues:
+    - Nostromo and Alien
+    - TIE Fighter and Star Wars
+    - Ishimura and Dead Space
+    - Serenity and Firefly
 
-    - Connection: Quotes from Peep Show
-      Clues:
-        - "Four naan, Jeremy? Four? That's insane"
-        - "I'm not on the child protection register... yet!"
-        - "This is outrageous, this is contagious"
-        - "I've accidentally run to Windsor"
-        - "You're a fuckhead! That's what you are - a fucking shithead!"
+- Connection: Cereals that don't exist and shouldn't
+  Clues:
+    - Ordinary K
+    - Vegetable and Fibre
+    - Just Wrong
+    - Curiously Turmeric
 
-    - Connection: Two overlapping film titles
-      Clues:
-        - "Million Dollar Baby Driver"
-        - "The Hateful Eight-Legged Freaks"
-        - "The Spy Who Loved Me, Myself and Irene"
+- Connection: Peep Show quotes
+  Clues:
+    - If our feet touch we fuck, obviously
+    - Those trees are not real trees
+    - The secret ingredient is crime
+    - Hitler promised not to invade Czechoslovakia, Jeremy. Welcome to the real world!
 
-    - Connection: Three overlapping film titles
-      Clues:
-        - "American Beauty and the Beast of Eden"
-        - "Dr. No Time To Die Another Day"
+- Connection: Answer Smash - Three video games
+  Clues:
+    - Super Mario Kartifactorio
+    - Redfalloutlast
+    - Tropicompany of Heroes of Might and Magic
+    - "The Elder Scrolls V: Skyrimworld of Tanks"
 
-    - Connection: Four overlapping film titles
-      Clues:
-        - "The Railway Children of Men in Black Hawk Down"
-
-    - Connection: Song titles with the wrong colours
-      Clues:
-        - "Goodbye Grey Brick Road"
-        - "Orange Submarine"
-        - "White White Wine"
-        - "Supermassive Brown Hole"
-        - "Welcome to the Pink Parade"
-
-    - Tiebreaker: True
-      Clues:
-        - "Welcome to Jurassic Park"
-
-    # - Connection: Wonders of the World
-    #   Clues:
-    #     - "Hagia Sophia"
-    #     - "Great Pyramid of Giza"
-    #     - "Machu Picchu"
-    #     - "Hanging Gardens of Babylon"
+- Tiebreaker: True
+  Clues:
+    - "It was the best of times, it was the blurst of times"

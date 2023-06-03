@@ -20,12 +20,12 @@ namespace OnlyCornect
             public const KeyCode ConnectionAndSequences_HandOver = KeyCode.UpArrow;
             public const KeyCode ConnectionAndSequences_ShowAnswer = KeyCode.A;
             public const KeyCode ConnectionAndSequences_HandleScoring = KeyCode.P;
-            public const KeyCode ConnectionAndSequences_NextPhase = KeyCode.Backspace;
+            public const KeyCode ConnectionAndSequences_NextPhase = KeyCode.BackQuote;
 
             public const KeyCode WallQuestion_ResolveWall = KeyCode.A;
             public const KeyCode WallQuestion_NextAnswer = KeyCode.RightArrow;
             public const KeyCode WallQuestion_AwardPoints = KeyCode.P;
-            public const KeyCode WallQuestion_NextPhase = KeyCode.Backspace;
+            public const KeyCode WallQuestion_NextPhase = KeyCode.BackQuote;
 
             public const KeyCode MissingVowelsQuestion_Next = KeyCode.RightArrow;
 
@@ -356,9 +356,12 @@ namespace OnlyCornect
 
                         if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_HandOver))
                         {
-                            SwapActiveTeam();
-                            wasHandedOver = true;
-                            ConnectionAndSequencesRound.HandOverToOtherTeam();
+                            if (!wasHandedOver && !ConnectionAndSequencesRound.ShowingAnswer)
+                            {
+                                SwapActiveTeam();
+                                wasHandedOver = true;
+                                ConnectionAndSequencesRound.HandOverToOtherTeam();
+                            }
                         }
 
                         if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_ShowAnswer))
@@ -368,8 +371,7 @@ namespace OnlyCornect
 
                         if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_HandleScoring))
                         {
-                            if (!scoreHasBeenGrantedThisQuestion && !ConnectionAndSequencesRound.TimeBarRunning)
-                                HandleScoring();
+                            HandleScoring();
                         }
 
                         if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_NextPhase))
@@ -481,6 +483,9 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void HandleScoring()
         {
+            if (scoreHasBeenGrantedThisQuestion || ConnectionAndSequencesRound.TimeBarRunning)
+                return;
+
             int score = 0;
 
             switch (currentPhase)

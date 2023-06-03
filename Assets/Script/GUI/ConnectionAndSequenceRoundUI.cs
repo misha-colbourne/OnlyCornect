@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using OnlyCornect;
 using TMPro;
 using UnityEngine;
@@ -26,16 +27,16 @@ namespace OnlyCornect
         [SerializeField] private List<int> scores;
 
         [HideInInspector] public bool TimeBarRunning;
+        [HideInInspector] public bool ShowingAnswer;
         [HideInInspector] public int ScoreForCurrentQuestion;
 
-        public bool IsOutOfCluesForCurrentQuestion { get { return currentClue >= Clues.Count - (isSequenceRound ? 1 : 0); } }
-
-        private List<Question> questions;
         private bool isSequenceRound;
-        private bool isPictureQuestion;
-        private int currentQuestion;
-        private int currentClue;
-        private bool showingAnswer;
+        private List<Question> questions;
+        private Question currentQuestion;
+        private int currentQuestionIndex;
+        private int currentClueIndex;
+
+        public bool IsOutOfCluesForCurrentQuestion { get { return currentClueIndex >= Clues.Count - (isSequenceRound ? 1 : 0); } }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void Init(List<ConnectionQuestion> questions)
@@ -54,51 +55,54 @@ namespace OnlyCornect
 
         private void InitShared()
         {
-            currentQuestion = 0;
-            currentClue = 0;
+            currentQuestionIndex = 0;
+            currentClueIndex = 0;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void NextQuestion()
         {
-            Question question = questions[currentQuestion];
-            isPictureQuestion = false;
-
-            for (int i = 0; i < question.Clues.Count; i++)
+            if (currentQuestionIndex > questions.Count)
             {
-                Clues[i].gameObject.SetVisible(false);
-                Clues[i].FlashLayer.gameObject.SetActive(false);
-                Clues[i].Text.text = question.Clues[i];
-                Clues[i].Text.gameObject.SetActive(!isSequenceRound || i != question.Clues.Count - 1);
+                throw new Exception("Question index overflow");
+            }
 
-                if (question is PictureQuestion picQuestion && 
-                    picQuestion.Pictures != null && 
-                    i < picQuestion.Pictures.Count && 
-                    UtilitiesForUI.Pictures.ContainsKey(picQuestion.Pictures[i]))
+            currentQuestion = questions[currentQuestionIndex];
+
+            for (int i = 0; i < currentQuestion.Clues.Count; i++)
+            {
+                var clue = Clues[i];
+                clue.gameObject.SetVisible(false);
+                clue.FlashLayer.gameObject.SetActive(false);
+                clue.Text.text = currentQuestion.Clues[i];
+                clue.Text.gameObject.SetActive(!isSequenceRound || i != currentQuestion.Clues.Count - 1);
+
+                if (currentQuestion.IsPictureQuestion && 
+                    UtilitiesForUI.Pictures.ContainsKey(currentQuestion.Clues[i]))
                 {
-                    Clues[i].Picture.gameObject.SetActive(!isSequenceRound || i != question.Clues.Count - 1);
-                    Clues[i].Picture.sprite = UtilitiesForUI.Pictures[picQuestion.Pictures[i]];
-                    Clues[i].Text.gameObject.SetActive(false);
-                    isPictureQuestion = true;
+                    clue.Picture.gameObject.SetActive(!isSequenceRound || i != currentQuestion.Clues.Count - 1);
+                    clue.Picture.sprite = UtilitiesForUI.Pictures[currentQuestion.Clues[i]];
+                    clue.Text.text = currentQuestion.Answers[i]; // temp
+                    clue.Text.gameObject.SetActive(false);
                 }
                 else
                 {
-                    Clues[i].Picture.gameObject.SetActive(false);
+                    clue.Picture.gameObject.SetActive(false);
                 }
             }
 
             AnswerContainer.SetActive(false);
-            AnswerText.text = question.Connection;
+            AnswerText.text = currentQuestion.Connection;
 
             // Set big pic container to on if picture round
-            BigPictureContainer.SetActive(isPictureQuestion);
-            BigPictureContainer.SetVisible(isPictureQuestion);
+            BigPictureContainer.SetActive(currentQuestion.IsPictureQuestion);
+            BigPictureContainer.SetVisible(currentQuestion.IsPictureQuestion);
             QuestionMark.SetInactive();
             QuestionMark.gameObject.SetVisible(true);
 
-            currentQuestion++;
-            currentClue = 0;
-            showingAnswer = false;
+            currentQuestionIndex++;
+            currentClueIndex = 0;
+            ShowingAnswer = false;
 
             TimeBarRunning = true;
             TimeBox.FillBar.GetComponent<TweenHandler>().Begin(onComplete: StopTimeBar);
@@ -109,11 +113,11 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void NextClue()
         {
-            if (!IsOutOfCluesForCurrentQuestion && !showingAnswer)
+            if (!IsOutOfCluesForCurrentQuestion)
             {
                 RevealNextClueAnim();
                 MoveTimeBoxAlong();
-                currentClue++;
+                currentClueIndex++;
 
                 // Show question mark over last clue along with penultimate clue for sequence round
                 if (IsOutOfCluesForCurrentQuestion && isSequenceRound && !QuestionMark.gameObject.activeInHierarchy)
@@ -129,13 +133,13 @@ namespace OnlyCornect
         private void RevealNextClueAnim()
         {
             // New clue anim start and position
-            Clues[currentClue].gameObject.SetVisible(true);
-            foreach (var tween in Clues[currentClue].GetComponents<TweenHandler>())
+            Clues[currentClueIndex].gameObject.SetVisible(true);
+            foreach (var tween in Clues[currentClueIndex].GetComponents<TweenHandler>())
                 tween.Begin();
 
-            if (Clues[currentClue].Picture.gameObject.activeInHierarchy)
+            if (Clues[currentClueIndex].Picture.gameObject.activeInHierarchy)
             {
-                BigPicture.sprite = Clues[currentClue].Picture.sprite;
+                BigPicture.sprite = Clues[currentClueIndex].Picture.sprite;
             }
         }
 
@@ -145,17 +149,17 @@ namespace OnlyCornect
             if (!AnswerContainer.activeInHierarchy)
             {
                 // Reposition timebox to new clue
-                var clueContainerPos = Clues[currentClue].transform.parent.position;
+                var clueContainerPos = Clues[currentClueIndex].transform.parent.position;
                 TimeBox.transform.position = new Vector3(clueContainerPos.x, TimeBox.transform.position.y, clueContainerPos.z);
 
                 // Animate moving of timebox to new clue
-                if (currentClue > 0)
+                if (currentClueIndex > 0)
                 {
                     TimeBox.gameObject.SetVisible(false);
                     TimeBox.GetComponent<TweenHandler>().Begin();
                 }
 
-                ScoreForCurrentQuestion = scores[currentClue];
+                ScoreForCurrentQuestion = scores[currentClueIndex];
                 TimeBox.Text.text = ScoreForCurrentQuestion + " Point" + (ScoreForCurrentQuestion != 1 ? "s" : "");
             }
         }
@@ -185,44 +189,46 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public IEnumerator ShowAnswer()
         {
-            if (!TimeBarRunning)
+            if (!TimeBarRunning && !ShowingAnswer)
             {
-                if (isPictureQuestion)
+                ShowingAnswer = true;
+
+                if (currentQuestion.IsPictureQuestion)
                     yield return ShrinkBigPic();
 
                 AnswerContainer.SetActive(true);
                 while (!IsOutOfCluesForCurrentQuestion)
                     NextClue();
 
-                showingAnswer = true;
-
                 if (isSequenceRound)
                 {
+                    var lastClueUI = Clues[Clues.Count - 1];
+
                     if (QuestionMark.gameObject.activeInHierarchy)
                     {
                         QuestionMark.GetComponent<TweenHandler>().Begin(onComplete: delegate
                         {
-                            Clues[Clues.Count - 1].Text.gameObject.SetActive(true);
-                            foreach (var tween in Clues[Clues.Count - 1].Text.GetComponents<TweenHandler>())
+                            lastClueUI.Text.gameObject.SetActive(true);
+                            foreach (var tween in lastClueUI.Text.GetComponents<TweenHandler>())
                                 tween.Begin();
 
-                            if (isPictureQuestion)
+                            lastClueUI.Picture.gameObject.SetActive(currentQuestion.IsPictureQuestion);
+                            if (currentQuestion.IsPictureQuestion)
                             {
-                                Clues[Clues.Count - 1].Picture.gameObject.SetActive(true);
-                                foreach (var tween in Clues[Clues.Count - 1].Picture.GetComponents<TweenHandler>())
+                                foreach (var tween in lastClueUI.Picture.GetComponents<TweenHandler>())
                                     tween.Begin();
                             }
                         });
                     }
                     else
                     {
-                        Clues[Clues.Count - 1].Text.gameObject.SetActive(true);
+                        lastClueUI.Text.gameObject.SetActive(true);
                     }
                 }
 
                 yield return AnswerReveal();
 
-                if (isPictureQuestion)
+                if (currentQuestion.IsPictureQuestion)
                 {
                     foreach (var clue in Clues)
                     {
@@ -257,23 +263,18 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private IEnumerator AnswerReveal()
         {
-            bool first = true;
-            foreach (var tween in AnswerBox.GetComponents<TweenHandler>())
+            Action onCompleteDelegate = delegate
             {
-                if (first)
-                {
-                    tween.Begin(onComplete: delegate
-                    {
-                        foreach (var tween2 in CluesAndTimeBoxContainer.GetComponents<TweenHandler>())
-                        {
-                            tween2.Begin();
-                        }
-                    });
-                }
-                else
+                foreach (var tween in CluesAndTimeBoxContainer.GetComponents<TweenHandler>())
                 {
                     tween.Begin();
                 }
+            };
+
+            bool first = true;
+            foreach (var tween in AnswerBox.GetComponents<TweenHandler>())
+            {
+                tween.Begin(onComplete: first ? onCompleteDelegate : null);
                 first = false;
             }
 

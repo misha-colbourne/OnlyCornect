@@ -16,20 +16,17 @@ namespace OnlyCornect
     public class Question
     {
         public string Connection { get; set; }
-        public List<string> Clues { get; set; } 
-    }
-
-    public class PictureQuestion : Question
-    {
-        public List<string> Pictures { get; set; }
+        public List<string> Clues { get; set; }
+        public List<string> Answers { get; set; }
+        public bool IsPictureQuestion { get; set; }
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public class ConnectionQuestion : PictureQuestion
+    public class ConnectionQuestion : Question
     {
     }
 
-    public class SequenceQuestion : PictureQuestion
+    public class SequenceQuestion : Question
     {
     }
 
@@ -39,6 +36,6 @@ namespace OnlyCornect
 
     public class MissingVowelsQuestion : Question
     {
-        public bool Tiebreaker;
+        public bool Tiebreaker { get; set; }
     }
 }

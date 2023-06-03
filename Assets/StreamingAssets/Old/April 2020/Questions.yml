@@ -1,0 +1,257 @@
+# Place pictures as .png files in /Pictures, ideally as 1680x960
+# --------------------------------------------------------------------------------------------------------------------------------------
+ConnectionRound:
+
+    - Connection: Fates of Sean Bean characters
+      Clues:
+        - Quartered by horses
+        - Beheaded
+        - Three arrows to the chest
+        - Crushed by a burning antenna
+
+    - Connection: Hope
+      Clues:
+        - Cape of Good Hope
+        - Hope Diamond
+        - Bob Hope
+        - "Star Wars: Episode IV - <nobr>A New Hope</nobr>"
+      Pictures:
+        - Hope_Cape
+        - Hope_Diamond
+        - Hope_Bob
+        - Hope_StarWars
+
+    - Connection: Channel Island anagrams
+      Clues:
+        - Nantes
+        - US Energy
+        - J Reyes
+        - Arks
+
+    - Connection: Towns/Cities in the original Pokémon games
+      Clues:
+        - Fuchsia City
+        - Pewter City
+        - Lavender Town
+        - Pallet Town
+      Pictures:
+        - Pokemon_Fuschia
+        - Pokemon_Pewter
+        - Pokemon_Lavender
+        - Pokemon_Pallet
+
+    - Connection: Synonyms of card games
+      Clues:
+        - Sovereignty
+        - One
+        - Japanese cuisine depart!
+        - "Sorcery: The Congregation"
+
+    - Connection: Means of initiating time travel
+      Clues:
+        - Dialing a<br>number
+        - Turning over the necklace core
+        - Removing or replacing sword in pedestal
+        - Reaching 88 miles per hour
+
+    - Connection: Neapolitan
+      Clues:
+        - Neapolitan Chord
+        - Neapolitan Mastiff
+        - Neapolitan Ice Cream
+        - Naples
+      Pictures:
+        - Neapolitan_Chord
+        - Neapolitan_Mastiff
+        - Neapolitan_IceCream
+        - Neapolitan_Naples
+
+    - Connection: Fools/Jesters
+      Clues:
+        - First (or last)<br>of the Major Arcana
+        - Puck
+        - Falconhoof's unpopular associate
+        - Roland the<br>Farter
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+SequencesRound:
+
+    - Connection: Pirates of the Caribbean titles last word synonyms
+      Clues:
+        - "In unfamiliar oceanic ebb<br>and flow"
+        - "Having reached planetary conclusion"
+        - "Deceased male's treasure box"
+        - "e.g. Hex of the dark spherical mollusc-byproduct"
+
+    - Connection: "'cester Towns with decreasing prefix lengths"
+      Clues:
+        - Cirencester
+        - Gloucester
+        - Leicester
+        - e.g. Bicester
+      Pictures:
+        - Cester_Cirencester
+        - Cester_Gloucester
+        - Cester_Leicester
+        - Cester_Bicester
+
+    - Connection: First four Monopoly properties and their costs in £
+      Clues:
+        - TAI 100
+        - KCS 200
+        - WR 60
+        - OKR 60
+
+    - Connection: The Simpsons characters with increasing numbers of <i>real</i> eyes
+      Clues:
+        - Horatio McAllister (technically)
+        - Kang
+        - Seymour<br>Skinner
+        - Blinky
+
+    - Connection: Countries word chain
+      Clues:
+        - Moldova<line-height=80%><br><size=150%>→</size></voffset><br>Vanuatu
+        - Vanuatu<line-height=80%><br><size=150%>→</size></voffset><br>Turkmenistan
+        - Turkmenistan<line-height=80%><br><size=150%>→</size></voffset><br>Angola
+        - Angola<line-height=80%><br><size=150%>→</size></voffset><br>Laos/Latvia
+
+    - Connection: Bands with 5/4/3/2 members
+      Clues:
+        - The Spice Girls
+        - Queen
+        - The Police
+        - e.g. The White Stripes
+
+    - Connection: One fewer 'A' each time
+      Clues:
+        - Taramasalata
+        - Bananarama
+        - Balaclava
+        - e.g. Maracas
+      Pictures:
+        - As_Taramasalata
+        - As_Bananarama
+        - As_Balaclava
+        - As_Maracas
+
+    - Connection: Planetary Greek/Roman god equivalents
+      Clues:
+        - "8: Poseidon"
+        - "7: Caelus"
+        - "6: Cronus"
+        - "5: Zeus"
+        
+# --------------------------------------------------------------------------------------------------------------------------------------
+WallRound:
+
+    # Wall 1
+    -   - Connection: Star ____
+          Clues:
+            - Gate
+            - Girl
+            - Trek
+            - Fox
+
+        - Connection: Chocolate bars with rotated letters
+          Clues:
+            - Liou
+            - Wars
+            - Freppo
+            - Todic
+
+        - Connection: Models of Ford cars
+          Clues:
+            - Galaxy
+            - Orion
+            - Focus
+            - Puma
+
+        - Connection: Constellations
+          Clues:
+            - Leo
+            - Hercules
+            - Cygnus
+            - Pegasus
+
+    # Wall 2
+    -   - Connection: ____ Point
+          Clues:
+            - Lizard
+            - Vanishing
+            - Match
+            - Bodkin
+
+        - Connection: Lists
+          Clues:
+            - Hit
+            - Wish
+            - Bucket
+            - White
+
+        - Connection: Seas
+          Clues:
+            - Red
+            - Black
+            - North
+            - Dead
+
+        - Connection: Hidden computer keys
+          Clues:
+            - Land's End
+            - Baltic
+            - Shapeshifter
+            - Tableau
+
+# --------------------------------------------------------------------------------------------------------------------------------------
+MissingVowelsRound:
+
+    - Connection: London Underground stations
+      Clues:
+        - "Paddington"
+        - "Euston"
+        - "Tooting Bec"
+        - "Heathrow Terminal Five"
+        - "Oval"
+
+    - Connection: Quotes from Peep Show
+      Clues:
+        - "Four naan, Jeremy? Four? That's insane"
+        - "I'm not on the child protection register... yet!"
+        - "This is outrageous, this is contagious"
+        - "I've accidentally run to Windsor"
+        - "You're a fuckhead! That's what you are - a fucking shithead!"
+
+    - Connection: Two overlapping film titles
+      Clues:
+        - "Million Dollar Baby Driver"
+        - "The Hateful Eight-Legged Freaks"
+        - "The Spy Who Loved Me, Myself and Irene"
+
+    - Connection: Three overlapping film titles
+      Clues:
+        - "American Beauty and the Beast of Eden"
+        - "Dr. No Time To Die Another Day"
+
+    - Connection: Four overlapping film titles
+      Clues:
+        - "The Railway Children of Men in Black Hawk Down"
+
+    - Connection: Song titles with the wrong colours
+      Clues:
+        - "Goodbye Grey Brick Road"
+        - "Orange Submarine"
+        - "White White Wine"
+        - "Supermassive Brown Hole"
+        - "Welcome to the Pink Parade"
+
+    - Tiebreaker: True
+      Clues:
+        - "Welcome to Jurassic Park"
+
+    # - Connection: Wonders of the World
+    #   Clues:
+    #     - "Hagia Sophia"
+    #     - "Great Pyramid of Giza"
+    #     - "Machu Picchu"
+    #     - "Hanging Gardens of Babylon"
