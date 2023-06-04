@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using YamlDotNet.Core.Tokens;
 
 public class TweenHandler : MonoBehaviour
 {
@@ -15,7 +17,8 @@ public class TweenHandler : MonoBehaviour
         Rotate = TweenAction.ROTATE_LOCAL,
         Scale = TweenAction.SCALE,
         Fade = TweenAction.CANVAS_ALPHA,
-        Size = TweenAction.CANVAS_SIZEDELTA
+        Size = TweenAction.CANVAS_SIZEDELTA,
+        PreferredSize = 50
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
@@ -77,6 +80,9 @@ public class TweenHandler : MonoBehaviour
                     break;
                 case ETweenProperty.Size:
                     Size(toTween);
+                    break;
+                case ETweenProperty.PreferredSize:
+                    PreferredSize(toTween);
                     break;
             }
 
@@ -183,16 +189,45 @@ public class TweenHandler : MonoBehaviour
             (To.y == -1) ? rt.sizeDelta.y : To.y
         );
 
+        Vector2 from = From;
         if (useSpecifiedFrom)
         {
-            Vector2 from = new Vector2(
+            from = new Vector2(
                 (From.x == -1) ? rt.sizeDelta.x : From.x,
                 (From.y == -1) ? rt.sizeDelta.y : From.y
             );
-
-            rt.sizeDelta = from;
         }
 
-        _tweenObject = LeanTween.size(rt, to, Duration);
+        _tweenObject = LeanTween.size(rt, to, Duration).setFrom(from);
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    public void PreferredSize(GameObject toTween)
+    {
+        var le = toTween.GetComponent<LayoutElement>();
+
+        Vector3 from = From;
+        if (useSpecifiedFrom)
+        {
+            from = new Vector3(
+                (From.x == -1) ? le.preferredWidth : From.x,
+                (From.y == -1) ? le.preferredHeight : From.y
+            );
+        }
+
+        Vector3 to = new Vector3(
+            (To.x == -1) ? le.preferredWidth : To.x,
+            (To.y == -1) ? le.preferredHeight : To.y
+        );
+
+        void callback(Vector3 value)
+        {
+            var le = toTween.GetComponent<LayoutElement>();
+            le.preferredWidth = value.x;
+            le.preferredHeight = value.y;
+        }
+
+        _tweenObject = LeanTween.value(toTween, callback, from, to, Duration);
     }
 }
+

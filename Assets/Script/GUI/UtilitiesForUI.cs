@@ -24,7 +24,7 @@ public class UtilitiesForUI : MonoBehaviour
     public const int CLUE_PICTURE_WIDTH = 1680;
     public const int CLUE_PICTURE_HEIGHT = 960;
 
-    public const float PICTURE_ANSWER_OVERLAY_ALPHA = 0.65f;
+    public const float ANSWER_OVERLAY_ALPHA = 0.65f;
 
     public Color OVERLAY_LIGHT;
     public Color OVERLAY_TIME;

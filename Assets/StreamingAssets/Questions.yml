@@ -11,6 +11,18 @@
 
 # ================================================================================================================================================
 ConnectionRound:
+# (3) ----------------------------------------------------------------
+- Connection: Deep Rock Galactic classes
+  Clues:
+    - London-based "music" maker, perhaps
+    - The type of trooper you'd find on Endor
+    - Fan of prehistoric football team
+    - "Mechanical, Electronic,\nCivil, etc"
+  Answers:
+    - Driller
+    - Scout
+    - Gunner
+    - Engineer
 
 # (1) ----------------------------------------------------------------
 - Connection: "You may remember Troy McClure from..."
@@ -25,27 +37,15 @@ ConnectionRound:
   IsPictureQuestion: True
   Clues:
     - XP_Snowflake
-    - XP_Chess
     - XP_Astronaut
+    - XP_Chess
     - XP_Duck
   Answers:
     - Snowflake
-    - Chess
     - Astronaut
+    - Chess
     - Rubber Duck
 
-# (3) ----------------------------------------------------------------
-- Connection: Deep Rock Galactic classes
-  Clues:
-    - London-based "music" maker, perhaps
-    - The type of trooper you'd find on Endor
-    - Fan of prehistoric football team
-    - "Mechanical, Electronic,\nCivil, etc"
-  Answers:
-    - Driller
-    - Scout
-    - Gunner
-    - Engineer
 
 # (4) ----------------------------------------------------------------
 - Connection: "Contain Magic: The Gathering basic land types"
@@ -65,14 +65,14 @@ ConnectionRound:
   IsPictureQuestion: True
   Clues:
     - Anagram_Alpen
+    - Anagram_Panel
     - Anagram_Nepal
     - Anagram_Plane
-    - Anagram_Panel
   Answers:
     - Alpen
+    - Panel
     - Nepal
     - Plane
-    - Panel
 
 # (6) ----------------------------------------------------------------
 - Connection: Robots in film, and the year of the film
@@ -96,7 +96,7 @@ ConnectionRound:
     - ChatGPT
 
 # (8) ----------------------------------------------------------------
-- Connection: Contain Roman Numerals
+- Connection: Contain the number in Roman Numerals
   IsPictureQuestion: True
   Clues:
     - Numerals_Radii
@@ -126,7 +126,7 @@ SequencesRound:
     - A View to a Kill
 
 # (2) ----------------------------------------------------------------
-- Connection: Alfred the Great's older brothers, all named Æthel_
+- Connection: Alfred the Great's older brothers, all named Æthel___
   Clues:
     - stan
     - bald
@@ -156,7 +156,7 @@ SequencesRound:
     - Grapefruit (1st)
 
 # (5) ----------------------------------------------------------------
-- Connection: 1st -> 4th books from various series
+- Connection: 1st > 4th books from various series
   Clues:
     - Killing Floor
     - "The Dark Tower: The Drawing of the Three"
@@ -209,21 +209,21 @@ WallRound:
         - Melon
         - Pop
 
--   - Connection: Rocket League Bots
+    - Connection: Rocket League Bots
       Clues:
         - Tusk
         - Viper
         - Caveman
         - Slider
 
--   - Connection: Palindromes
+    - Connection: Palindromes
       Clues:
         - Otto
         - Rotor
         - Deified
         - ABBA
 
--   - Connection: _corn
+    - Connection: _corn
       Clues:
         - A
         - Pepper
@@ -238,23 +238,23 @@ WallRound:
         - Respect
         - Amused
 
--   - Connection: "Ends in \"The ___\" bands"
+    - Connection: "Ends in \"The ___\" bands"
       Clues:
         - Chives
         - Obscure
         - Blacksmiths
         - Erasmus
 
--   - Connection: Things that can be baked
+    - Connection: Things that can be baked
       Clues:
         - Bean
         - Alaska
         - Stoner
         - Lightmaps
 
--   - Connection: "\"Gun\" ammo"
+    - Connection: "\"Gun\" ammo"
       Clues:
-        - Potato
+        - Spud
         - Nail
         - Cap
         - Elastic Band

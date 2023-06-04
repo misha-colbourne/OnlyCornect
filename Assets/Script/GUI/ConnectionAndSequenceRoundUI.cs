@@ -19,11 +19,14 @@ namespace OnlyCornect
         public GameObject AnswerBox;
         public TMP_Text AnswerText;
 
+        public GameObject ClarificationPositioner;
+
         public GameObject BigPictureContainer;
         public Image BigPicture;
         public Image QuestionMark;
 
         public List<ClueUI> Clues;
+        public List<ClueUI> Clarifications;
         [SerializeField] private List<int> scores;
 
         [HideInInspector] public bool TimeBarRunning;
@@ -89,8 +92,14 @@ namespace OnlyCornect
                 {
                     clue.Picture.gameObject.SetActive(false);
                 }
+
+                if (currentQuestion.Answers != null && currentQuestion.Answers.Count > 0)
+                {
+                    Clarifications[i].Text.text = currentQuestion.Answers[i];
+                }
             }
 
+            ClarificationPositioner.SetActive(false);
             AnswerContainer.SetActive(false);
             AnswerText.text = currentQuestion.Connection;
 
@@ -201,43 +210,10 @@ namespace OnlyCornect
                     NextClue();
 
                 if (isSequenceRound)
-                {
-                    var lastClueUI = Clues[Clues.Count - 1];
-
-                    if (QuestionMark.gameObject.activeInHierarchy)
-                    {
-                        QuestionMark.GetComponent<TweenHandler>().Begin(onComplete: delegate
-                        {
-                            lastClueUI.Text.gameObject.SetActive(true);
-                            foreach (var tween in lastClueUI.Text.GetComponents<TweenHandler>())
-                                tween.Begin();
-
-                            lastClueUI.Picture.gameObject.SetActive(currentQuestion.IsPictureQuestion);
-                            if (currentQuestion.IsPictureQuestion)
-                            {
-                                foreach (var tween in lastClueUI.Picture.GetComponents<TweenHandler>())
-                                    tween.Begin();
-                            }
-                        });
-                    }
-                    else
-                    {
-                        lastClueUI.Text.gameObject.SetActive(true);
-                    }
-                }
+                    RevealQuestionMarkClue();
 
                 yield return AnswerReveal();
-
-                if (currentQuestion.IsPictureQuestion)
-                {
-                    foreach (var clue in Clues)
-                    {
-                        clue.Text.gameObject.SetActive(true);
-                        clue.FlashLayer.gameObject.SetActive(true);
-                        clue.FlashLayer.gameObject.SetVisible(UtilitiesForUI.PICTURE_ANSWER_OVERLAY_ALPHA);
-                        clue.FlashLayer.transform.parent.GetComponent<TweenHandler>().Begin();
-                    }
-                }
+                ClarifyClues();
             }
 
             yield return null;
@@ -261,6 +237,33 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
+        private void RevealQuestionMarkClue()
+        {
+            var lastClueUI = Clues[Clues.Count - 1];
+
+            if (QuestionMark.gameObject.activeInHierarchy)
+            {
+                QuestionMark.GetComponent<TweenHandler>().Begin(onComplete: delegate
+                {
+                    lastClueUI.Text.gameObject.SetActive(true);
+                    foreach (var tween in lastClueUI.Text.GetComponents<TweenHandler>())
+                        tween.Begin();
+
+                    lastClueUI.Picture.gameObject.SetActive(currentQuestion.IsPictureQuestion);
+                    if (currentQuestion.IsPictureQuestion)
+                    {
+                        foreach (var tween in lastClueUI.Picture.GetComponents<TweenHandler>())
+                            tween.Begin();
+                    }
+                });
+            }
+            else
+            {
+                lastClueUI.Text.gameObject.SetActive(true);
+            }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
         private IEnumerator AnswerReveal()
         {
             Action onCompleteDelegate = delegate
@@ -280,6 +283,31 @@ namespace OnlyCornect
 
             while (AnswerBox.LeanIsTweening() || CluesAndTimeBoxContainer.LeanIsTweening())
                 yield return null;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        private void ClarifyClues()
+        {
+            if (currentQuestion.Answers != null && currentQuestion.Answers.Count > 0)
+            {
+                if (currentQuestion.IsPictureQuestion)
+                {
+                    foreach (var clue in Clues)
+                    {
+                        clue.Text.gameObject.SetActive(true);
+                        clue.FlashLayer.gameObject.SetActive(true);
+                        clue.FlashLayer.gameObject.SetVisible(UtilitiesForUI.ANSWER_OVERLAY_ALPHA);
+                        foreach (var tween in clue.FlashLayer.transform.parent.GetComponents<TweenHandler>())
+                            tween.Begin();
+                    }
+                }
+                else
+                {
+                    foreach (var tween in ClarificationPositioner.GetComponents<TweenHandler>())
+                        tween.Begin();
+                    ClarificationPositioner.SetActive(true);
+                }
+            }
         }
     }
 }
