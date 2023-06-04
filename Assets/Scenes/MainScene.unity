@@ -15607,6 +15607,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -120
       objectReference: {fileID: 0}
+    - target: {fileID: 6516754080243172192, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
+      propertyPath: Delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7321294043760114179, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -96,7 +96,7 @@ ConnectionRound:
     - ChatGPT
 
 # (8) ----------------------------------------------------------------
-- Connection: Roman Numerals
+- Connection: Contain Roman Numerals
   IsPictureQuestion: True
   Clues:
     - Numerals_Radii
@@ -148,7 +148,7 @@ SequencesRound:
     - Madagascar
 
 # (4) ----------------------------------------------------------------
-- Connection: The Simpsons "Das Bus" Fruit Race in launch order
+- Connection: The Simpsons "Das Bus" fruit race in launch order
   Clues:
     - Orange (2nd/3rd)
     - Apple (2nd/3rd)
@@ -161,7 +161,7 @@ SequencesRound:
     - Killing Floor
     - "The Dark Tower: The Drawing of the Three"
     - The Amber Spyglass
-    - A Feast for Crows
+    - e.g. A Feast for Crows
 
 # (6) ----------------------------------------------------------------
 - Connection: Songs with colours in their titles, in ROYGBIV order
@@ -174,7 +174,7 @@ SequencesRound:
     - Rush - Red Barchetta
     - REM - Orange Crush
     - Coldplay - Yellow
-    - Creedence Clearwater Revival - Green River
+    - e.g. Creedence Clearwater Revival - Green River
 
 # (7) ----------------------------------------------------------------
 - Connection: "Seven-segment display segments required per #"
@@ -188,15 +188,15 @@ SequencesRound:
 - Connection: Ae, Ei, Io, Ou
   IsPictureQuestion: True
   Clues:
-    - Aegean Sea
-    - Einstein
-    - Io
-    - Ouagadougou
-  Answers:
     - Vowels_AegeanSea
     - Vowels_Einstein
     - Vowels_Io
     - Vowels_Ouagadougou
+  Answers:
+    - Aegean Sea
+    - Einstein
+    - Io
+    - e.g. Ouagadougou
         
 # ================================================================================================================================================
 WallRound:
