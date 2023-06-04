@@ -11,18 +11,6 @@
 
 # ================================================================================================================================================
 ConnectionRound:
-# (3) ----------------------------------------------------------------
-- Connection: Deep Rock Galactic classes
-  Clues:
-    - London-based "music" maker, perhaps
-    - The type of trooper you'd find on Endor
-    - Fan of prehistoric football team
-    - "Mechanical, Electronic,\nCivil, etc"
-  Answers:
-    - Driller
-    - Scout
-    - Gunner
-    - Engineer
 
 # (1) ----------------------------------------------------------------
 - Connection: "You may remember Troy McClure from..."
@@ -46,9 +34,21 @@ ConnectionRound:
     - Chess
     - Rubber Duck
 
+# (3) ----------------------------------------------------------------
+- Connection: Deep Rock Galactic classes
+  Clues:
+    - London-based "music" maker, perhaps
+    - The type of trooper you'd find on Endor
+    - Fan of prehistoric football team
+    - "Mechanical, Electronic,\nCivil, etc"
+  Answers:
+    - Driller
+    - Scout
+    - Gunner
+    - Engineer
 
 # (4) ----------------------------------------------------------------
-- Connection: "Contain Magic: The Gathering basic land types"
+- Connection: "Magic: The Gathering basic land types"
   Clues:
     - Expanse between the Rockies and Mississippi
     - 2010 Martin Scorsese film
@@ -75,12 +75,12 @@ ConnectionRound:
     - Plane
 
 # (6) ----------------------------------------------------------------
-- Connection: Robots in film, and the year of the film
+- Connection: Logos that feature horses
   Clues:
-    - Maria (1927)
-    - Roy Batty (1982)
-    - TARS (2014)
-    - IG-88 (1980)
+    - Porsche
+    - Ralph Lauren
+    - Lloyds Bank
+    - Ferrari
 
 # (7) ----------------------------------------------------------------
 - Connection: Generative AI Models

@@ -1164,6 +1164,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -1930,6 +1931,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -2474,6 +2476,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 1
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: -200, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -2503,6 +2506,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 1
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
@@ -3260,6 +3264,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.4
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 1, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -3840,6 +3845,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -4147,6 +4153,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.5
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
@@ -5588,6 +5595,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 1.2
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
@@ -5649,6 +5657,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.25
   Delay: 1.25
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 1.1, y: 1.1, z: 1.1}
@@ -5722,6 +5731,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.15
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 1, y: 0, z: 0}
   To: {x: 1, y: 1, z: 0}
@@ -5751,6 +5761,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.15
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: -1, y: 0, z: 0}
   To: {x: -1, y: 100, z: 0}
@@ -5897,6 +5908,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -5985,6 +5997,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -7386,6 +7399,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -8847,6 +8861,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -8957,6 +8972,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -9827,6 +9843,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.4
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 1, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -9915,6 +9932,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -10138,6 +10156,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -10886,6 +10905,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 1
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -11474,6 +11494,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.6
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
@@ -12027,6 +12048,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -12271,6 +12293,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -12864,6 +12887,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -13568,6 +13592,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -14105,6 +14130,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 1.5
   Delay: 1
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
@@ -14349,6 +14375,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.6
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
@@ -14802,6 +14829,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -15080,6 +15108,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.8
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 0
   From: {x: 0, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}

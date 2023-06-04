@@ -29,6 +29,7 @@ public class TweenHandler : MonoBehaviour
     public AnimationCurve Curve;
     public float Duration;
     public float Delay;
+    public float Stagger;
 
     public bool useSpecifiedFrom = true;
     public Vector3 From;
@@ -53,8 +54,10 @@ public class TweenHandler : MonoBehaviour
         if (reverse)
             SwapFromTo();
 
-        foreach (var toTween in ObjectsToTween)
+        for (int i = 0; i < ObjectsToTween.Count; i++)
         {
+            var toTween = ObjectsToTween[i];
+
             switch (TweenProperty)
             {
                 case ETweenProperty.Move:
@@ -88,7 +91,7 @@ public class TweenHandler : MonoBehaviour
 
             if (_tweenObject != null)
             {
-                _tweenObject.setDelay(Delay);
+                _tweenObject.setDelay(Delay + i * Stagger);
                 _tweenObject.setEase(EaseType);
                 if (EaseType == LeanTweenType.animationCurve)
                     _tweenObject.setEase(Curve);
