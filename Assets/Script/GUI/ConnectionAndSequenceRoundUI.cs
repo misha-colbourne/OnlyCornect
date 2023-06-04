@@ -64,7 +64,7 @@ namespace OnlyCornect
         {
             if (currentQuestionIndex > questions.Count)
             {
-                throw new Exception("Question index overflow");
+                throw new Exception("Question index out of bounds");
             }
 
             currentQuestion = questions[currentQuestionIndex];
@@ -82,7 +82,7 @@ namespace OnlyCornect
                 {
                     clue.Picture.gameObject.SetActive(!isSequenceRound || i != currentQuestion.Clues.Count - 1);
                     clue.Picture.sprite = UtilitiesForUI.Pictures[currentQuestion.Clues[i]];
-                    clue.Text.text = currentQuestion.Answers[i]; // temp
+                    clue.Text.text = currentQuestion.Answers[i];
                     clue.Text.gameObject.SetActive(false);
                 }
                 else

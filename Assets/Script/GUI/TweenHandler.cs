@@ -193,6 +193,6 @@ public class TweenHandler : MonoBehaviour
             rt.sizeDelta = from;
         }
 
-        _tweenObject = LeanTween.size(rt, To, Duration);
+        _tweenObject = LeanTween.size(rt, to, Duration);
     }
 }
