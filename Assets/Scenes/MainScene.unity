@@ -795,10 +795,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.65
-  m_fontSizeBase: 100
+  m_fontSize: 42
+  m_fontSizeBase: 42
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 10
   m_fontSizeMax: 36
   m_fontStyle: 1
@@ -4661,8 +4661,9 @@ GameObject:
   - component: {fileID: 708546798}
   - component: {fileID: 708546802}
   - component: {fileID: 708546801}
-  - component: {fileID: 708546800}
   - component: {fileID: 708546799}
+  - component: {fileID: 708546800}
+  - component: {fileID: 708546803}
   m_Layer: 5
   m_Name: Added Score
   m_TagString: Untagged
@@ -4688,7 +4689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -44}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 64, y: 42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &708546799
@@ -4732,7 +4733,7 @@ MonoBehaviour:
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
   Loop: 0
-  PingPong: 0
+  PingPong: 1
 --- !u!114 &708546801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4779,6 +4780,36 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &708546803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708546797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: 
+  ObjectsToTween: []
+  TweenProperty: 4
+  EaseType: 2
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 2
+  Delay: 0
+  Stagger: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: -60, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &710162360
 GameObject:
   m_ObjectHideFlags: 0
@@ -7602,8 +7633,9 @@ GameObject:
   - component: {fileID: 986914556}
   - component: {fileID: 986914560}
   - component: {fileID: 986914559}
-  - component: {fileID: 986914558}
   - component: {fileID: 986914557}
+  - component: {fileID: 986914558}
+  - component: {fileID: 986914561}
   m_Layer: 5
   m_Name: Added Score
   m_TagString: Untagged
@@ -7629,7 +7661,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -44}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 64, y: 42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &986914557
@@ -7673,7 +7705,7 @@ MonoBehaviour:
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
   Loop: 0
-  PingPong: 0
+  PingPong: 1
 --- !u!114 &986914559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7720,6 +7752,36 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &986914561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986914555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TweenDescription: 
+  ObjectsToTween: []
+  TweenProperty: 4
+  EaseType: 2
+  Curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 2
+  Delay: 0
+  Stagger: 0
+  useSpecifiedFrom: 0
+  From: {x: 0, y: 0, z: 0}
+  To: {x: 0, y: -60, z: 0}
+  Loop: 0
+  PingPong: 0
 --- !u!1 &1006481125
 GameObject:
   m_ObjectHideFlags: 0
@@ -8793,10 +8855,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.65
-  m_fontSizeBase: 100
+  m_fontSize: 42
+  m_fontSizeBase: 42
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 10
   m_fontSizeMax: 36
   m_fontStyle: 1

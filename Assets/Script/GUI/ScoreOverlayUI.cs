@@ -30,12 +30,10 @@ public class ScoreOverlayUI : MonoBehaviour
         var addedScoreUI = isTeamA ? AddedScoreA : AddedScoreB;
 
         addedScoreUI.text = (addedScore >= 0 ? "+" : "") + addedScore;
+        scoreUI.text = totalScore.ToString();
 
-        addedScoreUI.GetComponentInParent<TweenHandler>().Begin(onComplete: delegate
-        {
-            scoreUI.text = totalScore.ToString();
-            addedScoreUI.GetComponentInParent<TweenHandler>().Begin(reverse: true);
-        });
+        foreach (var tween in addedScoreUI.GetComponentsInParent<TweenHandler>())
+            tween.Begin();
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
@@ -51,5 +49,12 @@ public class ScoreOverlayUI : MonoBehaviour
             TeamContainerA.SetVisible(0.5f);
             TeamContainerB.SetVisible(1);
         }
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
+    public void SetBothTeamsActive()
+    {
+        TeamContainerA.SetVisible(1);
+        TeamContainerB.SetVisible(1);
     }
 }
