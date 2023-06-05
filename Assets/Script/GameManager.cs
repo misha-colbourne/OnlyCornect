@@ -64,7 +64,7 @@ namespace OnlyCornect
         public class Team
         {
             public string Name;
-            public int Score;
+            public int TotalScore;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ namespace OnlyCornect
         public ConnectionAndSequenceRoundUI ConnectionAndSequencesRound;
         public WallRoundUI WallRound;
         public MissingVowelsRoundUI MissingVowelsRound;
-        public ScorePopupUI ScorePopup;
+        public ScoreOverlayUI ScoreOverlay;
 
         [SerializeField] private bool skipTeamNaming;
 
@@ -108,7 +108,10 @@ namespace OnlyCornect
 
             teamA = new Team();
             teamB = new Team();
-            activeTeam = teamB;
+
+            bool activeTeamIsA = UnityEngine.Random.Range(0, 2) > 0;
+            activeTeam = activeTeamIsA ? teamA : teamB;
+            ScoreOverlay.SetActiveTeam(activeTeamIsA);
 
             GlyphSelectionScreen.SetInactive();
             RoundNameScreen.SetInactive();
@@ -117,6 +120,7 @@ namespace OnlyCornect
             ConnectionAndSequencesRound.SetInactive();
             WallRound.SetInactive();
             MissingVowelsRound.SetInactive();
+            ScoreOverlay.SetInactive();
 
             if (skipTeamNaming)
             {
@@ -148,6 +152,7 @@ namespace OnlyCornect
                     {
                         TeamNameEntry.SetInactive();
                         TeamNameEntry.SetTeamNames(teamA, teamB);
+                        ScoreOverlay.SetTeamNames(teamA.Name, teamB.Name);
 
                         MoveToNextRoundNameScreen();
                     }
@@ -155,6 +160,7 @@ namespace OnlyCornect
                 case EPhase.RoundNameScreen:
                     {
                         RoundNameScreen.SetInactive();
+                        ScoreOverlay.SetActive();
 
                         if (currentRound != ERound.MissingVowelsRound)
                         {
@@ -211,6 +217,7 @@ namespace OnlyCornect
                         if (!finished)
                         {
                             EORTeamScores.SetInactive();
+                            ScoreOverlay.SetActive();
                             MoveToNextRoundNameScreen();
                         }
                     }
@@ -299,12 +306,15 @@ namespace OnlyCornect
             currentPhase = EPhase.EORTeamScoresScreen;
             EORTeamScores.SetNamesAndScores(teamA, teamB, finished);
             EORTeamScores.SetActive();
+            ScoreOverlay.SetInactive();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void SwapActiveTeam()
         {
-            activeTeam = (activeTeam.Name == teamA.Name) ? teamB : teamA;
+            bool activeTeamIsA = ReferenceEquals(activeTeam, teamA);
+            activeTeam = activeTeamIsA ? teamB : teamA; // Note this is swapping them around
+            ScoreOverlay.SetActiveTeam(!activeTeamIsA);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -376,6 +386,12 @@ namespace OnlyCornect
 
                         if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_NextPhase))
                         {
+                            if (wasHandedOver)
+                            {
+                                SwapActiveTeam();
+                                wasHandedOver = false;
+                            }
+
                             ConnectionAndSequencesRound.StopTimeBar();
                             scoreHasBeenGrantedThisQuestion = false;
                             NextPhase();
@@ -424,7 +440,7 @@ namespace OnlyCornect
                             }
                             else
                             {
-                                if (teamA.Score == teamB.Score || (MissingVowelsRound.ShowingTiebreaker && !MissingVowelsRound.ShowingAnswer))
+                                if (teamA.TotalScore == teamB.TotalScore || (MissingVowelsRound.ShowingTiebreaker && !MissingVowelsRound.ShowingAnswer))
                                 {
                                     MissingVowelsRound.Next(showTiebreaker: true);
                                 }
@@ -460,23 +476,24 @@ namespace OnlyCornect
             {
                 if (Input.GetKeyDown(InputKeys.Scores_TeamA_MinusOne))
                 {
-                    teamA.Score--;
+                    teamA.TotalScore--;
+                    ScoreOverlay.UpdateScore(-1, teamA.TotalScore, true);
                 }
                 if (Input.GetKeyDown(InputKeys.Scores_TeamA_PlusOne))
                 {
-                    teamA.Score++;
+                    teamA.TotalScore++;
+                    ScoreOverlay.UpdateScore(1, teamA.TotalScore, true);
                 }
                 if (Input.GetKeyDown(InputKeys.Scores_TeamB_MinusOne))
                 {
-                    teamB.Score--;
+                    teamB.TotalScore--;
+                    ScoreOverlay.UpdateScore(-1, teamB.TotalScore, false);
                 }
                 if (Input.GetKeyDown(InputKeys.Scores_TeamB_PlusOne))
                 {
-                    teamB.Score++;
+                    teamB.TotalScore++;
+                    ScoreOverlay.UpdateScore(1, teamB.TotalScore, false);
                 }
-
-                if (currentRound == ERound.MissingVowelsRound)
-                    MissingVowelsRound.SetTeamScores(teamA, teamB);
             }
         }
 
@@ -486,39 +503,29 @@ namespace OnlyCornect
             if (scoreHasBeenGrantedThisQuestion || ConnectionAndSequencesRound.TimeBarRunning)
                 return;
 
-            int score = 0;
+            int questionScore = 0;
 
             switch (currentPhase)
             {
                 case EPhase.ConnectionQuestion:
                 case EPhase.SequencesQuestion:
                     {
-                        score = ConnectionAndSequencesRound.ScoreForCurrentQuestion;
+                        questionScore = ConnectionAndSequencesRound.ScoreForCurrentQuestion;
                     }
                     break;
                 case EPhase.WallQuestion:
                     {
-                        score = WallRound.Score;
-                        if (score == WallRoundUI.ALL_GROUPS_AND_CONNECTIONS_SCORE)
-                            score += WallRoundUI.ALL_GROUPS_AND_CONNECTIONS_BONUS;
+                        questionScore = WallRound.Score;
+                        if (questionScore == WallRoundUI.ALL_GROUPS_AND_CONNECTIONS_SCORE)
+                            questionScore += WallRoundUI.ALL_GROUPS_AND_CONNECTIONS_BONUS;
                     }
                     break;
             }
 
-            ScorePopup.ShowScoreChange(
-                activeTeam.Name,
-                score,
-                activeTeam.Name == teamA.Name
-            );
-
-            activeTeam.Score += score;
+            activeTeam.TotalScore += questionScore;
+            ScoreOverlay.UpdateScore(questionScore, activeTeam.TotalScore, ReferenceEquals(activeTeam, teamA));
 
             scoreHasBeenGrantedThisQuestion = true;
-            if (wasHandedOver)
-            {
-                SwapActiveTeam();
-                wasHandedOver = false;
-            }
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------

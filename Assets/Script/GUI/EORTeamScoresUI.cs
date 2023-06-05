@@ -22,17 +22,17 @@ namespace OnlyCornect
         public void SetNamesAndScores(GameManager.Team teamA, GameManager.Team teamB, bool finished)
         {
             TeamNameA.text = teamA.Name;
-            ScoreA.text = teamA.Score.ToString();
+            ScoreA.text = teamA.TotalScore.ToString();
 
             TeamNameB.text = teamB.Name;
-            ScoreB.text = teamB.Score.ToString();
+            ScoreB.text = teamB.TotalScore.ToString();
 
             CrownA.SetVisible(false);
             CrownB.SetVisible(false);
 
             if (finished)
             {
-                if (teamA.Score > teamB.Score)
+                if (teamA.TotalScore > teamB.TotalScore)
                     CrownA.SetVisible(true);
                 else
                     CrownB.SetVisible(true);

@@ -13,12 +13,17 @@
 ConnectionRound:
 
 # (1) ----------------------------------------------------------------
-- Connection: "You may remember Troy McClure from..."
-  Clues: 
-    - The Pulverizer
-    - "Man Versus Nature: The Road to Victory"
-    - "Firecrackers: The Silent Killer"
-    - The Erotic Adventures of Hercules
+- Connection: Deep Rock Galactic classes
+  Clues:
+    - London-based "music" maker, perhaps
+    - The type of trooper you'd find on Endor
+    - Fan of football team with a prehistoric mascot
+    - "Mechanical, Electronic,\nCivil, etc"
+  Answers:
+    - Driller
+    - Scout
+    - Gunner
+    - Engineer
 
 # (2) ----------------------------------------------------------------
 - Connection: Windows XP Profile Pictures
@@ -35,17 +40,12 @@ ConnectionRound:
     - Rubber Duck
 
 # (3) ----------------------------------------------------------------
-- Connection: Deep Rock Galactic classes
-  Clues:
-    - London-based "music" maker, perhaps
-    - The type of trooper you'd find on Endor
-    - Fan of prehistoric football team
-    - "Mechanical, Electronic,\nCivil, etc"
-  Answers:
-    - Driller
-    - Scout
-    - Gunner
-    - Engineer
+- Connection: "You may remember Troy McClure from..."
+  Clues: 
+    - The Pulverizer
+    - "Man Versus Nature: The Road to Victory"
+    - "Firecrackers: The Silent Killer"
+    - The Erotic Adventures of Hercules
 
 # (4) ----------------------------------------------------------------
 - Connection: "Magic: The Gathering basic land types"
@@ -77,18 +77,18 @@ ConnectionRound:
 # (6) ----------------------------------------------------------------
 - Connection: Logos that feature horses
   Clues:
-    - Porsche
+    - Godiva Chocolatier
     - Ralph Lauren
-    - Lloyds Bank
     - Ferrari
+    - Lloyds Bank
 
 # (7) ----------------------------------------------------------------
 - Connection: Generative AI Models
   Clues:
     - Spreading out one's horse enclosures
     - William Shakespeare
-    - "Bon Jovi\nchorus lyric"
-    - "French cat,\n4x4, alien"
+    - Where Bon Jovi thinks we are
+    - "French cat +\n4x4 + alien"
   Answers:
     - Stable Diffusion
     - Bard
@@ -126,12 +126,12 @@ SequencesRound:
     - A View to a Kill
 
 # (2) ----------------------------------------------------------------
-- Connection: Alfred the Great's older brothers, all named Æthel___
+- Connection: The Simpsons "Das Bus" fruit race in launch order
   Clues:
-    - stan
-    - bald
-    - berht
-    - red
+    - Orange (2nd/3rd)
+    - Apple (2nd/3rd)
+    - Banana (DNF)
+    - Grapefruit (1st)
 
 # (3) ----------------------------------------------------------------
 - Connection: Countries with increasing numbers of As
@@ -148,19 +148,19 @@ SequencesRound:
     - Madagascar
 
 # (4) ----------------------------------------------------------------
-- Connection: The Simpsons "Das Bus" fruit race in launch order
+- Connection: Alfred the Great's older brothers, all named Æthel___
   Clues:
-    - Orange (2nd/3rd)
-    - Apple (2nd/3rd)
-    - Banana (DNF)
-    - Grapefruit (1st)
+    - stan
+    - bald
+    - berht
+    - red
 
 # (5) ----------------------------------------------------------------
 - Connection: 1st > 4th books from various series
   Clues:
     - Killing Floor
-    - "The Dark Tower: The Drawing of the Three"
-    - The Amber Spyglass
+    - The Subtle Knife
+    - The Voyage of the Dawn Treader
     - e.g. A Feast for Crows
 
 # (6) ----------------------------------------------------------------
@@ -254,7 +254,7 @@ WallRound:
 
     - Connection: "\"Gun\" ammo"
       Clues:
-        - Spud
+        - Potato
         - Nail
         - Cap
         - Elastic Band
@@ -262,7 +262,7 @@ WallRound:
 # ================================================================================================================================================
 MissingVowelsRound:
 
-- Connection: Spaceships and their franchise
+- Connection: Spacecraft and their franchise
   Clues:
     - Nostromo and Alien
     - TIE Fighter and Star Wars

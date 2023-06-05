@@ -11,11 +11,6 @@ namespace OnlyCornect
         public const int CHARS_PER_SPACE_DELTA = 5;
         public const string TIEBREAKER_CATEGORY_TEXT = "Tiebreaker";
 
-        public TMP_Text TeamAName;
-        public TMP_Text TeamAScore;
-        public TMP_Text TeamBName;
-        public TMP_Text TeamBScore;
-
         public GameObject CategoryBox;
         public GameObject ClueBox;
         public TMP_Text CategoryText;
@@ -36,7 +31,6 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         public void Init(List<MissingVowelsQuestion> questions, GameManager.Team teamA, GameManager.Team teamB)
         {
-            SetTeamScores(teamA, teamB);
             this.questions = questions.Where(x => !x.Tiebreaker).ToList();
             tiebreaker = questions.FirstOrDefault(x => x.Tiebreaker);
 
@@ -49,16 +43,6 @@ namespace OnlyCornect
             ClueBox.SetVisible(false);
             CategoryText.gameObject.SetVisible(false);
             ClueText.gameObject.SetVisible(false);
-        }
-
-        // --------------------------------------------------------------------------------------------------------------------------------------
-        public void SetTeamScores(GameManager.Team teamA, GameManager.Team teamB)
-        {
-            TeamAName.text = teamA.Name;
-            TeamAScore.text = teamA.Score.ToString();
-
-            TeamBName.text = teamB.Name;
-            TeamBScore.text = teamB.Score.ToString();
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
