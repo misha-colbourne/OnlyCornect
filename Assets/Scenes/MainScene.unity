@@ -15061,18 +15061,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 779098728}
     m_Modifications:
-    - target: {fileID: 4057665340796728112, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
-      propertyPath: Delay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057665340796728112, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
-      propertyPath: Duration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057665340796728112, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
-      propertyPath: EaseType
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5050189794866747835, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -15456,18 +15444,6 @@ PrefabInstance:
     - target: {fileID: 5050189796815856207, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6477709174896393637, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
-      propertyPath: Delay
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6477709174896393637, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
-      propertyPath: Duration
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6477709174896393637, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
-      propertyPath: EaseType
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6516754080243172192, guid: 3da2d58e775ba7b40885e25013642712, type: 3}
       propertyPath: Delay

@@ -30,13 +30,13 @@ ConnectionRound:
   IsPictureQuestion: True
   Clues:
     - XP_Snowflake
+    - XP_Football
     - XP_Astronaut
-    - XP_Chess
     - XP_Duck
   Answers:
     - Snowflake
+    - Football
     - Astronaut
-    - Chess
     - Rubber Duck
 
 # (3) ----------------------------------------------------------------
@@ -205,8 +205,8 @@ WallRound:
 -   - Connection: Skateboarding Moves
       Clues: 
         - Smith
-        - Casper
-        - Melon
+        - Disaster
+        - Madonna
         - Pop
 
     - Connection: Rocket League Bots
@@ -214,14 +214,14 @@ WallRound:
         - Tusk
         - Viper
         - Caveman
-        - Slider
+        - Mountain
 
-    - Connection: Ghosts
+    - Connection: Start with Footballers
       Clues:
-        - Clyde
-        - Marowak
-        - Banquo
-        - Nicholas de Mimsy-Porpington
+        - Whitehall
+        - Dieretic
+        - Shawarma
+        - Ezekiel
 
     - Connection: _corn
       Clues:
