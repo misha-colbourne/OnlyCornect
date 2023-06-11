@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class TweenHandler : MonoBehaviour
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
+    public bool Disabled;
     public string TweenDescription;
     public List<GameObject> ObjectsToTween;
     public ETweenProperty TweenProperty;
@@ -37,8 +39,9 @@ public class TweenHandler : MonoBehaviour
     public bool Loop;
     public int PingPong;
 
-    private LTDescr _tweenObject;
-    private bool reverse;
+    private LTDescr tweenObject;
+    private Vector3 to;
+    private Vector3 from;
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     private void Awake()
@@ -51,8 +54,14 @@ public class TweenHandler : MonoBehaviour
     // --------------------------------------------------------------------------------------------------------------------------------------
     public void Begin(bool reverse = false, Action onComplete = null)
     {
+        if (Disabled)
+            return;
+
         if (reverse)
             SwapFromTo();
+
+        to = Vector3.zero;
+        from = Vector3.zero;
 
         for (int i = 0; i < ObjectsToTween.Count; i++)
         {
@@ -89,28 +98,33 @@ public class TweenHandler : MonoBehaviour
                     break;
             }
 
-            if (_tweenObject != null)
+            if (tweenObject != null)
             {
-                _tweenObject.setDelay(Delay + i * Stagger);
-                _tweenObject.setEase(EaseType);
+                //if (useSpecifiedFrom)
+                //    tweenObject.setFrom(from);
+
+                float delay = Delay + i * Stagger;
+                tweenObject.setDelay(delay);
+
+                tweenObject.setEase(EaseType);
                 if (EaseType == LeanTweenType.animationCurve)
-                    _tweenObject.setEase(Curve);
+                    tweenObject.setEase(Curve);
 
                 if (Loop)
-                    _tweenObject.setLoopClamp();
+                    tweenObject.setLoopClamp();
 
                 if (PingPong > 0)
-                    _tweenObject.setLoopPingPong(PingPong);
+                    tweenObject.setLoopPingPong(PingPong);
                 else if (PingPong == -1)
-                    _tweenObject.setLoopPingPong();
+                    tweenObject.setLoopPingPong();
 
                 if (onComplete != null)
-                    _tweenObject.setOnComplete(onComplete);
+                    tweenObject.setOnComplete(onComplete);
             }
-
-            if (reverse)
-                SwapFromTo();
         }
+
+        if (reverse)
+            SwapFromTo();
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
@@ -129,44 +143,66 @@ public class TweenHandler : MonoBehaviour
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
+    public void SetToFromValues(Vector3 vec)
+    {
+        SetToFromValues(vec.x, vec.y, vec.z);
+    }
+
+    public void SetToFromValues(float x, float y = 0, float z = 0)
+    {
+        to = new Vector3(
+            (To.x == -1) ? x : To.x,
+            (To.y == -1) ? y : To.y,
+            (To.z == -1) ? z : To.z
+        );
+
+        from = new Vector3(
+            (From.x == -1) ? x : From.x,
+            (From.y == -1) ? y : From.y,
+            (From.z == -1) ? z : From.z
+        );
+    }
+
+    // --------------------------------------------------------------------------------------------------------------------------------------
     public void Move(GameObject toTween)
     {
+        SetToFromValues(toTween.transform.localPosition);
         if (useSpecifiedFrom)
-            toTween.transform.localPosition = From;
+            toTween.transform.localPosition = from;
 
         if (TweenProperty == ETweenProperty.MoveX)
-            _tweenObject = LeanTween.moveLocalX(toTween, To.x, Duration);
+            tweenObject = LeanTween.moveLocalX(toTween, to.x, Duration);
         else if (TweenProperty == ETweenProperty.MoveY)
-            _tweenObject = LeanTween.moveLocalY(toTween, To.y, Duration);
+            tweenObject = LeanTween.moveLocalY(toTween, to.y, Duration);
         else
-            _tweenObject = LeanTween.moveLocal(toTween, To, Duration);
+            tweenObject = LeanTween.moveLocal(toTween, to, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     public void MoveWorld(GameObject toTween)
     {
+        SetToFromValues(toTween.transform.position);
         if (useSpecifiedFrom)
-            toTween.transform.position = From;
-
-        _tweenObject = LeanTween.move(toTween, To, Duration);
+            toTween.transform.position = from;
+        tweenObject = LeanTween.move(toTween, to, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     public void Rotate(GameObject toTween)
     {
+        SetToFromValues(toTween.transform.localEulerAngles);
         if (useSpecifiedFrom)
-            toTween.transform.localEulerAngles = From;
-
-        _tweenObject = LeanTween.rotateLocal(toTween, To, Duration);
+            toTween.transform.localEulerAngles = from;
+        tweenObject = LeanTween.rotateLocal(toTween, to, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     public void Scale(GameObject toTween)
     {
+        SetToFromValues(toTween.transform.localScale);
         if (useSpecifiedFrom)
-            toTween.transform.localScale = From;
-
-        _tweenObject = LeanTween.scale(toTween, To, Duration);
+            toTween.transform.localScale = from;
+        tweenObject = LeanTween.scale(toTween, to, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
@@ -176,52 +212,32 @@ public class TweenHandler : MonoBehaviour
         if (cg == null)
             cg = toTween.AddComponent<CanvasGroup>();
 
+        SetToFromValues(cg.alpha);
         if (useSpecifiedFrom)
-            cg.alpha = From.x;
-
-        _tweenObject = LeanTween.alphaCanvas(toTween.GetComponent<CanvasGroup>(), To.x, Duration);
+            cg.alpha = from.x;
+        tweenObject = LeanTween.alphaCanvas(toTween.GetComponent<CanvasGroup>(), to.x, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     public void Size(GameObject toTween)
     {
-        var rt = toTween.transform as RectTransform;
-
-        Vector2 to = new Vector2(
-            (To.x == -1) ? rt.sizeDelta.x : To.x,
-            (To.y == -1) ? rt.sizeDelta.y : To.y
-        );
-
-        Vector2 from = From;
+        var rt = toTween.GetComponent<RectTransform>();
+        SetToFromValues(rt.sizeDelta);
         if (useSpecifiedFrom)
-        {
-            from = new Vector2(
-                (From.x == -1) ? rt.sizeDelta.x : From.x,
-                (From.y == -1) ? rt.sizeDelta.y : From.y
-            );
-        }
-
-        _tweenObject = LeanTween.size(rt, to, Duration).setFrom(from);
+            rt.sizeDelta = from;
+        tweenObject = LeanTween.size(rt, to, Duration);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------
     public void PreferredSize(GameObject toTween)
     {
         var le = toTween.GetComponent<LayoutElement>();
-
-        Vector3 from = From;
+        SetToFromValues(le.preferredWidth, le.preferredHeight);
         if (useSpecifiedFrom)
         {
-            from = new Vector3(
-                (From.x == -1) ? le.preferredWidth : From.x,
-                (From.y == -1) ? le.preferredHeight : From.y
-            );
+            le.preferredWidth = from.x;
+            le.preferredHeight= from.y;
         }
-
-        Vector3 to = new Vector3(
-            (To.x == -1) ? le.preferredWidth : To.x,
-            (To.y == -1) ? le.preferredHeight : To.y
-        );
 
         void callback(Vector3 value)
         {
@@ -230,7 +246,7 @@ public class TweenHandler : MonoBehaviour
             le.preferredHeight = value.y;
         }
 
-        _tweenObject = LeanTween.value(toTween, callback, from, to, Duration);
+        tweenObject = LeanTween.value(toTween, callback, from, to, Duration);
     }
 }
 

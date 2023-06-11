@@ -100,10 +100,10 @@ RectTransform:
   m_Father: {fileID: 8613165182000684979}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1090, y: -120}
+  m_SizeDelta: {x: 420, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4719875643843802312
 MonoBehaviour:
@@ -373,6 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Big Picture hide on answer reveal
   ObjectsToTween: []
   TweenProperty: 23
@@ -504,6 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Answer reveal size increase from 0
   ObjectsToTween: []
   TweenProperty: 49
@@ -534,6 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Answer reveal text scale to match size increase
   ObjectsToTween:
   - {fileID: 5050189796822502268}
@@ -719,6 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Answer reveal clue/time bounce
   ObjectsToTween:
   - {fileID: 2506231074455389213}
@@ -1276,6 +1280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Post-bigpic-fade pre-answer-reveal move back to centre
   ObjectsToTween: []
   TweenProperty: 4
@@ -1675,6 +1680,7 @@ GameObject:
   - component: {fileID: 639206548762948328}
   - component: {fileID: 6477709174896393637}
   - component: {fileID: 4057665340796728112}
+  - component: {fileID: 6954457091051858810}
   m_Layer: 5
   m_Name: Clarification Positioner
   m_TagString: Untagged
@@ -1735,10 +1741,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: 
   ObjectsToTween: []
   TweenProperty: 50
-  EaseType: 38
+  EaseType: 2
   Curve:
     serializedVersion: 2
     m_Curve:
@@ -1772,8 +1779,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Duration: 2
-  Delay: 0
+  Duration: 1.5
+  Delay: 0.5
   Stagger: 0
   useSpecifiedFrom: 1
   From: {x: -1, y: 0, z: 0}
@@ -1792,28 +1799,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: 
-  ObjectsToTween:
-  - {fileID: 6781023238541636394}
-  - {fileID: 178215431381316056}
-  - {fileID: 612453863854370415}
-  - {fileID: 4658419960108923984}
+  ObjectsToTween: []
   TweenProperty: 23
   EaseType: 2
   Curve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.33750767
+      value: 0.0003430443
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   Duration: 2
-  Delay: 1
+  Delay: 0.5
   Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
   Loop: 0
   PingPong: 0
+--- !u!225 &6954457091051858810
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087920361417257536}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &6548087125994116376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,10 +1890,10 @@ RectTransform:
   m_Father: {fileID: 8613165182000684979}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 210, y: -120}
+  m_SizeDelta: {x: 420, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8804199449867423304
 MonoBehaviour:
@@ -1905,10 +1948,10 @@ RectTransform:
   m_Father: {fileID: 8613165182000684979}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1530, y: -120}
+  m_SizeDelta: {x: 420, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7891752642946949671
 MonoBehaviour:
@@ -1963,10 +2006,10 @@ RectTransform:
   m_Father: {fileID: 8613165182000684979}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 650, y: -120}
+  m_SizeDelta: {x: 420, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4267421339221730899
 MonoBehaviour:
@@ -2077,6 +2120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Question mark answer reveal fade away
   ObjectsToTween: []
   TweenProperty: 23
@@ -2184,6 +2228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Question mark answer reveal fade away
   ObjectsToTween: []
   TweenProperty: 23
@@ -2340,6 +2385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Upon question mark removed answer reveal fade in
   ObjectsToTween: []
   TweenProperty: 23
@@ -2377,11 +2423,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 6dcc2ba678f02b64ba18ae4226a25c3f, type: 2}
   radius: 32
---- !u!1 &4658419960108923984 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7264881512196825189, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
-  m_PrefabInstance: {fileID: 2626728310371703861}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4658419960108923985 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
@@ -2404,6 +2445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Upon question mark removed answer reveal fade in
   ObjectsToTween: []
   TweenProperty: 23
@@ -2531,11 +2573,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
---- !u!1 &6781023238541636394 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7264881512196825189, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
-  m_PrefabInstance: {fileID: 4235920823530689359}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6781023238541636395 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
@@ -2549,10 +2586,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5050189795528455772}
     m_Modifications:
-    - target: {fileID: 5113446378233994862, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
-      propertyPath: m_text
-      value: New Text
-      objectReference: {fileID: 0}
     - target: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2640,10 +2673,6 @@ PrefabInstance:
     - target: {fileID: 7264881512196825189, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
       propertyPath: m_Name
       value: Clue
-      objectReference: {fileID: 0}
-    - target: {fileID: 7264881512196825189, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2819,6 +2848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Upon question mark removed answer reveal fade in
   ObjectsToTween: []
   TweenProperty: 23
@@ -2854,6 +2884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Upon question mark removed answer reveal fade in
   ObjectsToTween: []
   TweenProperty: 23
@@ -3413,11 +3444,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
---- !u!1 &178215431381316056 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7264881512196825189, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
-  m_PrefabInstance: {fileID: 7398058228295307709}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &178215431381316057 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
@@ -3535,10 +3561,5 @@ PrefabInstance:
 --- !u!224 &612453863854370414 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7264881512196825188, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
-  m_PrefabInstance: {fileID: 7831149204571524618}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &612453863854370415 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7264881512196825189, guid: b058cb29f2106af4ea66fa3ad4b423e8, type: 3}
   m_PrefabInstance: {fileID: 7831149204571524618}
   m_PrefabAsset: {fileID: 0}

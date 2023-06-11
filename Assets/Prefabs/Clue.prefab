@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Glyph selection flash loop
   ObjectsToTween: []
   TweenProperty: 23
@@ -115,6 +116,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 1
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 0.8, y: 0, z: 0}
@@ -262,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Picture round fade in over pics
   ObjectsToTween: []
   TweenProperty: 23
@@ -274,6 +277,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 1
   Delay: 1
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}
@@ -504,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Clue reveal
   ObjectsToTween: []
   TweenProperty: 35
@@ -561,6 +566,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.45
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: -50, y: 0, z: 0}
   To: {x: 0, y: 0, z: 0}
@@ -578,6 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Clue reveal
   ObjectsToTween: []
   TweenProperty: 38
@@ -626,6 +633,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.5
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 3, y: -90, z: 3}
   To: {x: 0, y: 0, z: 0}
@@ -643,6 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Clue reveal
   ObjectsToTween: []
   TweenProperty: 39
@@ -655,6 +664,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   Duration: 0.3
   Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0.8, y: 0.8, z: 0.8}
   To: {x: 1, y: 1, z: 1}
@@ -672,6 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a39d6d9c02628540b2217ade6c40843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
   TweenDescription: Clue reveal
   ObjectsToTween: []
   TweenProperty: 23
@@ -683,7 +694,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Duration: 0.3
-  Delay: 0.1
+  Delay: 0
+  Stagger: 0
   useSpecifiedFrom: 1
   From: {x: 0, y: 0, z: 0}
   To: {x: 1, y: 0, z: 0}

@@ -79,7 +79,7 @@ ConnectionRound:
   Clues:
     - Godiva Chocolatier
     - Ralph Lauren
-    - Ferrari
+    - Porsche
     - Lloyds Bank
 
 # (7) ----------------------------------------------------------------
@@ -205,7 +205,7 @@ WallRound:
 -   - Connection: Skateboarding Moves
       Clues: 
         - Smith
-        - Madonna
+        - Casper
         - Melon
         - Pop
 
@@ -216,12 +216,12 @@ WallRound:
         - Caveman
         - Slider
 
-    - Connection: Palindromes
+    - Connection: Ghosts
       Clues:
-        - Otto
-        - Rotor
-        - Deified
-        - ABBA
+        - Clyde
+        - Marowak
+        - Banquo
+        - Nicholas de Mimsy-Porpington
 
     - Connection: _corn
       Clues:
@@ -269,13 +269,6 @@ MissingVowelsRound:
     - Ishimura and Dead Space
     - Serenity and Firefly
 
-- Connection: Cereals that don't exist and shouldn't
-  Clues:
-    - Ordinary K
-    - Vegetable and Fibre
-    - Just Wrong
-    - Curiously Turmeric
-
 - Connection: Peep Show quotes
   Clues:
     - If our feet touch we fuck, obviously
@@ -283,11 +276,18 @@ MissingVowelsRound:
     - The secret ingredient is crime
     - Hitler promised not to invade Czechoslovakia, Jeremy. Welcome to the real world!
 
+- Connection: Cereals that don't exist and shouldn't
+  Clues:
+    - Ordinary K
+    - Vegetable and Fibre
+    - Just Wrong
+    - Curiously Turmeric
+
 - Connection: Answer Smash - Three video games
   Clues:
     - Super Mario Kartifactorio
     - Redfalloutlast
-    - Tropicompany of Heroes of Might and Magic
+    - X-Company of Heroes of Might and Magic
     - "The Elder Scrolls V: Skyrimworld of Tanks"
 
 - Tiebreaker: True

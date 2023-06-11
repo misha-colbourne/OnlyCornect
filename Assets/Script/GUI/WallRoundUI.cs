@@ -388,12 +388,12 @@ namespace OnlyCornect
                 {
                     AnswerText.gameObject.SetActive(true);
                     AnswerText.GetComponent<TweenHandler>().Begin();
-
-                    if (currentGroupIndex == 0)
-                        ontoConnections = false;
                 }
                 else
                 {
+                    if (currentGroupIndex == 0)
+                        return;
+
                     currentGroupIndex--;
                     string currentConnection = Clues[currentGroupIndex * CLUES_PER_GROUP].Connection;
 

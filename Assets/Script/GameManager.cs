@@ -97,6 +97,8 @@ namespace OnlyCornect
         // Start is called before the first frame update
         void Start()
         {
+            //currentRound = ERound.WallRound - 1;
+
             Application.targetFrameRate = TARGET_FRAME_RATE;
 
             quizData = YmlParser.ParseQuiz();
@@ -403,7 +405,8 @@ namespace OnlyCornect
                     {
                         if (Input.GetKeyDown(InputKeys.WallQuestion_ResolveWall))
                         {
-                            WallRound.ResolveWall();
+                            if (!scoreHasBeenGrantedThisQuestion)
+                                WallRound.ResolveWall();
                         }
 
                         if (Input.GetKeyDown(InputKeys.WallQuestion_NextAnswer))

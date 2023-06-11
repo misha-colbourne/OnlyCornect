@@ -74,23 +74,23 @@ namespace OnlyCornect
 
             for (int i = 0; i < currentQuestion.Clues.Count; i++)
             {
-                var clue = Clues[i];
-                clue.gameObject.SetVisible(false);
-                clue.FlashLayer.gameObject.SetActive(false);
-                clue.Text.text = currentQuestion.Clues[i];
-                clue.Text.gameObject.SetActive(!isSequenceRound || i != currentQuestion.Clues.Count - 1);
+                var clueUI = Clues[i];
+                clueUI.gameObject.SetVisible(false);
+                clueUI.FlashLayer.gameObject.SetActive(false);
+                clueUI.Text.text = currentQuestion.Clues[i];
+                clueUI.Text.gameObject.SetActive(!isSequenceRound || i != currentQuestion.Clues.Count - 1);
 
                 if (currentQuestion.IsPictureQuestion && 
                     UtilitiesForUI.Pictures.ContainsKey(currentQuestion.Clues[i]))
                 {
-                    clue.Picture.gameObject.SetActive(!isSequenceRound || i != currentQuestion.Clues.Count - 1);
-                    clue.Picture.sprite = UtilitiesForUI.Pictures[currentQuestion.Clues[i]];
-                    clue.Text.text = currentQuestion.Answers[i];
-                    clue.Text.gameObject.SetActive(false);
+                    clueUI.Picture.gameObject.SetActive(!isSequenceRound || i != currentQuestion.Clues.Count - 1);
+                    clueUI.Picture.sprite = UtilitiesForUI.Pictures[currentQuestion.Clues[i]];
+                    clueUI.Text.text = currentQuestion.Answers[i];
+                    clueUI.Text.gameObject.SetActive(false);
                 }
                 else
                 {
-                    clue.Picture.gameObject.SetActive(false);
+                    clueUI.Picture.gameObject.SetActive(false);
                 }
 
                 if (currentQuestion.Answers != null && currentQuestion.Answers.Count > 0)
@@ -142,13 +142,14 @@ namespace OnlyCornect
         private void RevealNextClueAnim()
         {
             // New clue anim start and position
-            Clues[currentClueIndex].gameObject.SetVisible(true);
-            foreach (var tween in Clues[currentClueIndex].GetComponents<TweenHandler>())
+            var currentClueUI = Clues[currentClueIndex];
+            foreach (var tween in currentClueUI.GetComponents<TweenHandler>())
                 tween.Begin();
+            currentClueUI.gameObject.SetVisible(true);
 
-            if (Clues[currentClueIndex].Picture.gameObject.activeInHierarchy)
+            if (currentClueUI.Picture.gameObject.activeInHierarchy)
             {
-                BigPicture.sprite = Clues[currentClueIndex].Picture.sprite;
+                BigPicture.sprite = currentClueUI.Picture.sprite;
             }
         }
 
