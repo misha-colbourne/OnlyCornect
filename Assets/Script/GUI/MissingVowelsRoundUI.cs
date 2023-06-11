@@ -84,10 +84,12 @@ namespace OnlyCornect
                 }
                 else if (currentClue == -1 || ShowingAnswer)
                 {
+                    ClueText.enableWordWrapping = false;
                     NextQuestion();
                 }
                 else
                 {
+                    ClueText.enableWordWrapping = true;
                     RevealAnswer();
                 }
             }

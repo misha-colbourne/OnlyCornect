@@ -97,7 +97,7 @@ namespace OnlyCornect
         // Start is called before the first frame update
         void Start()
         {
-            //currentRound = ERound.WallRound - 1;
+            currentRound = ERound.MissingVowelsRound - 1;
 
             Application.targetFrameRate = TARGET_FRAME_RATE;
 
