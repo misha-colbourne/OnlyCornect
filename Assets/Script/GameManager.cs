@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace OnlyCornect
@@ -78,6 +79,7 @@ namespace OnlyCornect
         public WallRoundUI WallRound;
         public MissingVowelsRoundUI MissingVowelsRound;
         public ScoreOverlayUI ScoreOverlay;
+        public NetworkManager NetworkManager;
 
         [SerializeField] private bool skipTeamNaming;
 
@@ -85,8 +87,8 @@ namespace OnlyCornect
         private EPhase currentPhase;
         private ERound currentRound;
 
-        private Team teamA;
-        private Team teamB;
+        private Team teamA = new Team();
+        private Team teamB = new Team();
         private Team activeTeam;
 
         private bool wasHandedOver;
@@ -97,8 +99,6 @@ namespace OnlyCornect
         // Start is called before the first frame update
         void Start()
         {
-            currentRound = ERound.MissingVowelsRound - 1;
-
             Application.targetFrameRate = TARGET_FRAME_RATE;
 
             quizData = YmlParser.ParseQuiz();
@@ -108,21 +108,18 @@ namespace OnlyCornect
             scoreHasBeenGrantedThisQuestion = false;
             finished = false;
 
-            teamA = new Team();
-            teamB = new Team();
-
             bool activeTeamIsA = UnityEngine.Random.Range(0, 2) > 0;
             activeTeam = activeTeamIsA ? teamA : teamB;
             ScoreOverlay.SetActiveTeam(activeTeamIsA);
 
-            GlyphSelectionScreen.SetInactive();
-            RoundNameScreen.SetInactive();
-            TeamNameEntry.SetInactive();
-            EORTeamScores.SetInactive();
-            ConnectionAndSequencesRound.SetInactive();
-            WallRound.SetInactive();
-            MissingVowelsRound.SetInactive();
-            ScoreOverlay.SetInactive();
+            GlyphSelectionScreen.SetActive(false);
+            RoundNameScreen.SetActive(false);
+            TeamNameEntry.SetActive(false);
+            EORTeamScores.SetActive(false);
+            ConnectionAndSequencesRound.SetActive(false);
+            WallRound.SetActive(false);
+            MissingVowelsRound.SetActive(false);
+            ScoreOverlay.SetActive(false);
 
             if (skipTeamNaming)
             {
@@ -152,7 +149,7 @@ namespace OnlyCornect
                     break;
                 case EPhase.TeamNameEntry:
                     {
-                        TeamNameEntry.SetInactive();
+                        TeamNameEntry.SetActive(false);
                         TeamNameEntry.SetTeamNames(teamA, teamB);
                         ScoreOverlay.SetTeamNames(teamA.Name, teamB.Name);
 
@@ -161,8 +158,8 @@ namespace OnlyCornect
                     break;
                 case EPhase.RoundNameScreen:
                     {
-                        RoundNameScreen.SetInactive();
-                        ScoreOverlay.SetActive();
+                        RoundNameScreen.SetActive(false);
+                        ScoreOverlay.SetActive(true);
 
                         if (currentRound != ERound.MissingVowelsRound)
                         {
@@ -178,14 +175,14 @@ namespace OnlyCornect
                     break;
                 case EPhase.GlyphSelection:
                     {
-                        GlyphSelectionScreen.SetInactive();
+                        GlyphSelectionScreen.SetActive(false);
                         MoveToNextQuestion();
                     }
                     break;
                 case EPhase.ConnectionQuestion:
                 case EPhase.SequencesQuestion:
                     {
-                        ConnectionAndSequencesRound.SetInactive();
+                        ConnectionAndSequencesRound.SetActive(false);
 
                         if (GlyphSelectionScreen.GlyphBoxes.Any(x => !x.Selected))
                             MoveToQuestionSelection();
@@ -195,7 +192,7 @@ namespace OnlyCornect
                     break;
                 case EPhase.WallQuestion:
                     {
-                        WallRound.SetInactive();
+                        WallRound.SetActive(false);
 
                         if (GlyphSelectionScreen.GlyphBoxes.Any(x => !x.Selected))
                         {
@@ -210,7 +207,7 @@ namespace OnlyCornect
                     break;
                 case EPhase.MissingVowelsQuestion:
                     {
-                        MissingVowelsRound.SetInactive();
+                        MissingVowelsRound.SetActive(false);
                         finished = true;
                         MoveToEORTeamScores();
                     }
@@ -219,8 +216,8 @@ namespace OnlyCornect
                     {
                         if (!finished)
                         {
-                            EORTeamScores.SetInactive();
-                            ScoreOverlay.SetActive();
+                            EORTeamScores.SetActive(false);
+                            ScoreOverlay.SetActive(true);
                             MoveToNextRoundNameScreen();
                         }
                     }
@@ -237,7 +234,7 @@ namespace OnlyCornect
         public void MoveToTeamNameEntry()
         {
             currentPhase = EPhase.TeamNameEntry;
-            TeamNameEntry.SetActive();
+            TeamNameEntry.SetActive(true);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -263,7 +260,7 @@ namespace OnlyCornect
                     break;
             }
 
-            RoundNameScreen.SetActive();
+            RoundNameScreen.SetActive(true);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -272,7 +269,7 @@ namespace OnlyCornect
             currentPhase = EPhase.GlyphSelection;
             SwapActiveTeam();
 
-            GlyphSelectionScreen.SetActive();
+            GlyphSelectionScreen.SetActive(true);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -285,21 +282,21 @@ namespace OnlyCornect
                 else if (currentRound == ERound.SequencesRound)
                     currentPhase = EPhase.SequencesQuestion;
 
-                ConnectionAndSequencesRound.SetActive();
+                ConnectionAndSequencesRound.SetActive(true);
                 ConnectionAndSequencesRound.NextQuestion();
             }
             else if (currentRound == ERound.WallRound)
             {
                 currentPhase = EPhase.WallQuestion;
 
-                WallRound.SetActive();
+                WallRound.SetActive(true);
                 WallRound.StartTimeBar();
             }
             else if (currentRound == ERound.MissingVowelsRound)
             {
                 currentPhase = EPhase.MissingVowelsQuestion;
 
-                MissingVowelsRound.SetActive();
+                MissingVowelsRound.SetActive(true);
             }
         }
 
@@ -308,8 +305,8 @@ namespace OnlyCornect
         {
             currentPhase = EPhase.EORTeamScoresScreen;
             EORTeamScores.SetNamesAndScores(teamA, teamB, finished);
-            EORTeamScores.SetActive();
-            ScoreOverlay.SetInactive();
+            EORTeamScores.SetActive(true);
+            ScoreOverlay.SetActive(false);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------

@@ -106,7 +106,7 @@ namespace OnlyCornect
             // Set big pic container to on if picture round
             BigPictureContainer.SetActive(currentQuestion.IsPictureQuestion);
             BigPictureContainer.SetVisible(currentQuestion.IsPictureQuestion);
-            QuestionMark.SetInactive();
+            QuestionMark.SetActive(false);
             QuestionMark.gameObject.SetVisible(true);
 
             currentQuestionIndex++;
@@ -132,7 +132,7 @@ namespace OnlyCornect
                 if (IsOutOfCluesForCurrentQuestion && isSequenceRound && !QuestionMark.gameObject.activeInHierarchy)
                 {
                     if (!AnswerContainer.activeInHierarchy)
-                        QuestionMark.SetActive();
+                        QuestionMark.SetActive(true);
                     RevealNextClueAnim();
                 }
             }

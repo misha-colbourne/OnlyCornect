@@ -32,13 +32,13 @@ namespace OnlyCornect
         {
             if (flash)
             {
-                FlashLayer.SetActive();
+                FlashLayer.SetActive(true);
                 foreach (var tween in FlashLayer.GetComponents<TweenHandler>())
                     tween.Begin();
             }
             else if (flashing)
             {
-                FlashLayer.SetInactive();
+                FlashLayer.SetActive(false);
                 foreach (var tween in FlashLayer.GetComponents<TweenHandler>())
                     tween.Cancel();
             }

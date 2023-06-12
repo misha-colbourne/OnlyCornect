@@ -13,6 +13,7 @@ namespace OnlyCornect
 {
     class YmlParser : MonoBehaviour
     {
+        // --------------------------------------------------------------------------------------------------------------------------------------
         public static QuizData ParseQuiz()
         {
             string filepath = Application.streamingAssetsPath + "/Questions.yml";
@@ -27,6 +28,29 @@ namespace OnlyCornect
             }
 
             return quiz;
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        public class BuzzerConfig
+        {
+            public string IP;
+            public int Port;
+        }
+
+        public static BuzzerConfig ParseBuzzerConfig()
+        {
+            string filepath = Application.streamingAssetsPath + "/Config.yml";
+            BuzzerConfig config = null;
+
+            using (StreamReader reader = new StreamReader(filepath))
+            {
+                var deserializer = new DeserializerBuilder()
+                    .Build();
+
+                config = deserializer.Deserialize<BuzzerConfig>(reader);
+            }
+
+            return config;
         }
     }
 }

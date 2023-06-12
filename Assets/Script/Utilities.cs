@@ -6,15 +6,9 @@ using UnityEngine.UI;
 public static class Utilities
 {
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public static void SetActive(this MonoBehaviour mb)
+    public static void SetActive(this MonoBehaviour mb, bool active)
     {
-        mb.gameObject.SetActive(true);
-    }
-
-    // --------------------------------------------------------------------------------------------------------------------------------------
-    public static void SetInactive(this MonoBehaviour mb)
-    {
-        mb.gameObject.SetActive(false);
+        mb.gameObject.SetActive(active);
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------

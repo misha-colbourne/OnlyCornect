@@ -100,7 +100,7 @@ namespace OnlyCornect
             timeBarRunning = false;
             TimeBox.gameObject.SetVisible(true);
             TimeBox.FillBar.transform.localPosition = Vector3.zero;
-            TimeBox.Text.SetInactive();
+            TimeBox.Text.SetActive(false);
 
             AnswerContainer.SetActive(false);
             foreach (var tick in TicksContainer.GetComponentsInChildren<Image>())
@@ -129,7 +129,7 @@ namespace OnlyCornect
             {
                 fillTween.Cancel();
                 TimeBox.Text.text = "Out of lives!";
-                TimeBox.Text.SetActive();
+                TimeBox.Text.SetActive(true);
             }
             else if (TimeBox.FillBar.LeanIsTweening())
             {
@@ -138,7 +138,7 @@ namespace OnlyCornect
             else
             {
                 TimeBox.Text.text = "Time is up!";
-                TimeBox.Text.SetActive();
+                TimeBox.Text.SetActive(true);
             }
         }
 

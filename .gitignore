@@ -78,3 +78,6 @@ Assets/StreamingAssets/Pictures/Matt2.png.meta
 Assets/StreamingAssets/Pictures/Matt2.png
 Assets/StreamingAssets/Pictures/Matt1.png.meta
 Assets/StreamingAssets/Pictures/Matt1.png
+Build/
+BuildClient/
+BuildServer/
