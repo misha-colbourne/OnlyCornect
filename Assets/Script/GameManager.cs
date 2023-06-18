@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading;
 using Unity.Netcode;
 using UnityEngine;
@@ -95,12 +96,13 @@ namespace OnlyCornect
         public ScoreOverlayUI ScoreOverlay;
         public BuzzerOverlayUI BuzzerOverlay;
         public NetworkManager NetworkManager;
+        public SoundHandler SoundHandler;
 
         [SerializeField] private bool skipTeamNaming;
 
         private QuizData quizData;
         private EPhase currentPhase;
-        private ERound currentRound;
+        private ERound currentRound; // = ERound.MissingVowelsRound - 1;
 
         public static Team TeamA = new Team();
         public static Team TeamB = new Team();
@@ -112,7 +114,7 @@ namespace OnlyCornect
 
         private bool bz;
         private bool buzzingEnabled { get { return bz; } set { bz = value; Debug.Log("buzzingEnabled = " + bz); } }
-        private (string player, string ip)? buzzToProcess;
+        private (string player, string ip, bool isTeamA)? buzzToProcess;
         private bool buzzWasProcessed;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -174,15 +176,19 @@ namespace OnlyCornect
             if (buzzingEnabled && buzzToProcess == null)
             {
                 bool canBuzz = false;
+                bool isTeamA = true;
                 if (currentPhase == EPhase.BuzzerRegistration)
                     canBuzz = true;
                 else if (TeamA.Players.Any(x => x.IP == ip))
                     canBuzz = TeamA.CanBuzz;
                 else if (TeamB.Players.Any(x => x.IP == ip))
+                {
                     canBuzz = TeamB.CanBuzz;
+                    isTeamA = false;
+                }
 
                 if (canBuzz)
-                    buzzToProcess = (playerName, ip);
+                    buzzToProcess = (playerName, ip, isTeamA);
             }
         }
 
@@ -614,9 +620,20 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void OnBuzz()
         {
-            BuzzerOverlay.Text.text = buzzToProcess?.player;
-            foreach (var tween in BuzzerOverlay.GetComponents<TweenHandler>())
-                tween.Begin();
+            if (buzzToProcess != null)
+            {
+                bool isTeamA = TeamA.Players.Any(x => x.IP == buzzToProcess?.ip);
+                BuzzerOverlay.Show(buzzToProcess?.player, isTeamA);
+            }
+            else
+            {
+                BuzzerOverlay.Show("BUZZ");
+            }
+
+            if (currentRound == ERound.MissingVowelsRound)
+                SoundHandler.PlaySensibleBuzzer();
+            else
+                SoundHandler.PlayNextRandomClip();
 
             buzzWasProcessed = true;
             buzzingEnabled = false;
