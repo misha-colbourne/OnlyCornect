@@ -27,10 +27,10 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void SetTeamNames(GameManager.Team teamA, GameManager.Team teamB)
+        public void StoreEnteredTeamNames()
         {
-            teamA.Name = TeamNameEntryA.text;
-            teamB.Name = TeamNameEntryB.text;
+            GameManager.TeamA.Name = TeamNameEntryA.text;
+            GameManager.TeamB.Name = TeamNameEntryB.text;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------

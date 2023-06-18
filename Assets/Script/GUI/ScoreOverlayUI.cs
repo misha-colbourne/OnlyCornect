@@ -1,3 +1,4 @@
+using OnlyCornect;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,10 +18,10 @@ public class ScoreOverlayUI : MonoBehaviour
     [SerializeField] private TMP_Text AddedScoreB;
 
     // --------------------------------------------------------------------------------------------------------------------------------------
-    public void SetTeamNames(string teamA, string teamB)
+    public void SetTeamNameTexts()
     {
-        TeamNameA.text = teamA;
-        TeamNameB.text = teamB;
+        TeamNameA.text = GameManager.TeamA.Name;
+        TeamNameB.text = GameManager.TeamB.Name;
     }
 
     // --------------------------------------------------------------------------------------------------------------------------------------

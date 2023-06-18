@@ -11,7 +11,9 @@ namespace OnlyCornect
     public class NetworkManager : MonoBehaviour
     {
         // --------------------------------------------------------------------------------------------------------------------------------------
-        private const int serverPort = 8888;
+        public const int ServerPort = 8888;
+
+        public event Action<string, string> MessageReceivedAction;
 
         private Thread listenThread;
         private UdpClient server;
@@ -27,8 +29,8 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void Listen()
         {
-            server = new UdpClient(serverPort);
-            clientEndpoint = new IPEndPoint(IPAddress.Any, serverPort);
+            server = new UdpClient(ServerPort);
+            clientEndpoint = new IPEndPoint(IPAddress.Any, ServerPort);
 
             while (true)
             {
@@ -36,16 +38,24 @@ namespace OnlyCornect
                 {
                     byte[] data = server.Receive(ref clientEndpoint);
                     string message = Encoding.UTF8.GetString(data);
-                    Debug.Log("Listener heard: " + message);
+                    Debug.Log($"Listener heard: {message} - {clientEndpoint.Address}");
+
+                    OnMessageReceived(message, clientEndpoint.Address.ToString());
                 }
                 catch (SocketException ex)
                 {
                     if (ex.ErrorCode != 10060)
-                        Debug.Log("a more serious error " + ex.ErrorCode);
+                        Debug.LogError(ex.ErrorCode + "\n" + ex.StackTrace);
                     else
-                        Debug.Log("expected timeout error");
+                        Debug.LogWarning("Expected timeout error");
                 }
             }
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        private void OnMessageReceived(string message, string ip)
+        {
+            MessageReceivedAction?.Invoke(message, ip);
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace OnlyCornect
         public static class InputKeys
         {
             public const KeyCode TeamNameEntry_SwitchInputFocus = KeyCode.Tab;
+
+            public const KeyCode BuzzerRegistration_NextPhase = KeyCode.RightArrow;
 
             public const KeyCode GlyphSelection_SelectGlyph = KeyCode.Mouse0;
 
@@ -44,6 +47,7 @@ namespace OnlyCornect
             None,
             MainMenu,
             TeamNameEntry,
+            BuzzerRegistration,
             RoundNameScreen,
             GlyphSelection,
             ConnectionQuestion,
@@ -66,12 +70,21 @@ namespace OnlyCornect
         {
             public string Name;
             public int TotalScore;
+            public List<Player> Players = new();
+        }
+
+        public class Player
+        {
+            public string Name;
+            public string IP;
+            public bool IsCaptain;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         private const int TARGET_FRAME_RATE = 120;
 
         public TeamNameEntryUI TeamNameEntry;
+        public BuzzerRegistrationUI BuzzerRegistration;
         public RoundNameScreenUI RoundNameScreen;
         public GlyphSelectionUI GlyphSelectionScreen;
         public EORTeamScoresUI EORTeamScores;
@@ -87,13 +100,15 @@ namespace OnlyCornect
         private EPhase currentPhase;
         private ERound currentRound;
 
-        private Team teamA = new Team();
-        private Team teamB = new Team();
+        public static Team TeamA = new Team();
+        public static Team TeamB = new Team();
         private Team activeTeam;
 
         private bool wasHandedOver;
         private bool scoreHasBeenGrantedThisQuestion;
         private bool finished;
+
+        private (string player, string ip)? lastBuzz;
 
         // --------------------------------------------------------------------------------------------------------------------------------------
         // Start is called before the first frame update
@@ -108,17 +123,20 @@ namespace OnlyCornect
             scoreHasBeenGrantedThisQuestion = false;
             finished = false;
 
+            NetworkManager.MessageReceivedAction += HandleBuzzReceived;
+
             bool activeTeamIsA = UnityEngine.Random.Range(0, 2) > 0;
-            activeTeam = activeTeamIsA ? teamA : teamB;
+            activeTeam = activeTeamIsA ? TeamA : TeamB;
             ScoreOverlay.SetActiveTeam(activeTeamIsA);
 
-            GlyphSelectionScreen.SetActive(false);
-            RoundNameScreen.SetActive(false);
             TeamNameEntry.SetActive(false);
-            EORTeamScores.SetActive(false);
+            BuzzerRegistration.SetActive(false);
+            RoundNameScreen.SetActive(false);
+            GlyphSelectionScreen.SetActive(false);
             ConnectionAndSequencesRound.SetActive(false);
             WallRound.SetActive(false);
             MissingVowelsRound.SetActive(false);
+            EORTeamScores.SetActive(false);
             ScoreOverlay.SetActive(false);
 
             if (skipTeamNaming)
@@ -135,7 +153,34 @@ namespace OnlyCornect
         // Update is called once per frame
         void Update()
         {
+            ProcessBuzzers();
             HandleInput();
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        void HandleBuzzReceived(string playerName, string ip)
+        {
+            Debug.Log($"HandleBuzzReceived: {playerName} - {ip}");
+            if (lastBuzz == null)
+                lastBuzz = (playerName, ip);
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
+        void ProcessBuzzers()
+        {
+            if (lastBuzz == null)
+                return;
+
+            switch (currentPhase)
+            {
+                case EPhase.BuzzerRegistration:
+                    {
+                        BuzzerRegistration.RegisterBuzzer(lastBuzz?.player, lastBuzz?.ip);
+                    }
+                    break;
+            }
+
+            lastBuzz = null;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
@@ -150,9 +195,16 @@ namespace OnlyCornect
                 case EPhase.TeamNameEntry:
                     {
                         TeamNameEntry.SetActive(false);
-                        TeamNameEntry.SetTeamNames(teamA, teamB);
-                        ScoreOverlay.SetTeamNames(teamA.Name, teamB.Name);
+                        TeamNameEntry.StoreEnteredTeamNames();
+                        ScoreOverlay.SetTeamNameTexts();
+                        BuzzerRegistration.SetTeamNameTexts();
 
+                        MoveToBuzzerRegistration();
+                    }
+                    break;
+                case EPhase.BuzzerRegistration:
+                    {
+                        BuzzerRegistration.SetActive(false);
                         MoveToNextRoundNameScreen();
                     }
                     break;
@@ -238,6 +290,13 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
+        public void MoveToBuzzerRegistration()
+        {
+            currentPhase = EPhase.BuzzerRegistration;
+            BuzzerRegistration.SetActive(true);
+        }
+
+        // --------------------------------------------------------------------------------------------------------------------------------------
         public void MoveToNextRoundNameScreen()
         {
             currentPhase = EPhase.RoundNameScreen;
@@ -256,7 +315,7 @@ namespace OnlyCornect
                     WallRound.Init(quizData.WallRound[0]);
                     break;
                 case ERound.MissingVowelsRound:
-                    MissingVowelsRound.Init(quizData.MissingVowelsRound, teamA, teamB);
+                    MissingVowelsRound.Init(quizData.MissingVowelsRound, TeamA, TeamB);
                     break;
             }
 
@@ -304,7 +363,7 @@ namespace OnlyCornect
         public void MoveToEORTeamScores()
         {
             currentPhase = EPhase.EORTeamScoresScreen;
-            EORTeamScores.SetNamesAndScores(teamA, teamB, finished);
+            EORTeamScores.SetNamesAndScores(TeamA, TeamB, finished);
             EORTeamScores.SetActive(true);
             ScoreOverlay.SetActive(false);
         }
@@ -312,8 +371,8 @@ namespace OnlyCornect
         // --------------------------------------------------------------------------------------------------------------------------------------
         private void SwapActiveTeam()
         {
-            bool activeTeamIsA = ReferenceEquals(activeTeam, teamA);
-            activeTeam = activeTeamIsA ? teamB : teamA; // Note this is swapping them around
+            bool activeTeamIsA = ReferenceEquals(activeTeam, TeamA);
+            activeTeam = activeTeamIsA ? TeamB : TeamA; // Note this is swapping them around
             ScoreOverlay.SetActiveTeam(!activeTeamIsA);
         }
 
@@ -330,6 +389,14 @@ namespace OnlyCornect
                 case EPhase.TeamNameEntry:
                     {
                         if (Input.GetKeyDown(InputKeys.TeamNameEntry_SwitchInputFocus))
+                        {
+                            TeamNameEntry.SwitchInputFocus();
+                        }
+                    }
+                    break;
+                case EPhase.BuzzerRegistration:
+                    {
+                        if (Input.GetKeyDown(InputKeys.BuzzerRegistration_NextPhase))
                         {
                             TeamNameEntry.SwitchInputFocus();
                         }
@@ -354,6 +421,10 @@ namespace OnlyCornect
                 case EPhase.ConnectionQuestion:
                 case EPhase.SequencesQuestion:
                     {
+                        if (Input.GetKeyDown(KeyCode.Z))
+                        {
+                        }
+
                         if (Input.GetKeyDown(InputKeys.ConnectionAndSequences_NextClue))
                         {
                             ConnectionAndSequencesRound.NextClue();
@@ -441,7 +512,7 @@ namespace OnlyCornect
                             }
                             else
                             {
-                                if (teamA.TotalScore == teamB.TotalScore || (MissingVowelsRound.ShowingTiebreaker && !MissingVowelsRound.ShowingAnswer))
+                                if (TeamA.TotalScore == TeamB.TotalScore || (MissingVowelsRound.ShowingTiebreaker && !MissingVowelsRound.ShowingAnswer))
                                 {
                                     MissingVowelsRound.Next(showTiebreaker: true);
                                 }
@@ -477,23 +548,23 @@ namespace OnlyCornect
             {
                 if (Input.GetKeyDown(InputKeys.Scores_TeamA_MinusOne))
                 {
-                    teamA.TotalScore--;
-                    ScoreOverlay.UpdateScore(-1, teamA.TotalScore, true);
+                    TeamA.TotalScore--;
+                    ScoreOverlay.UpdateScore(-1, TeamA.TotalScore, true);
                 }
                 if (Input.GetKeyDown(InputKeys.Scores_TeamA_PlusOne))
                 {
-                    teamA.TotalScore++;
-                    ScoreOverlay.UpdateScore(1, teamA.TotalScore, true);
+                    TeamA.TotalScore++;
+                    ScoreOverlay.UpdateScore(1, TeamA.TotalScore, true);
                 }
                 if (Input.GetKeyDown(InputKeys.Scores_TeamB_MinusOne))
                 {
-                    teamB.TotalScore--;
-                    ScoreOverlay.UpdateScore(-1, teamB.TotalScore, false);
+                    TeamB.TotalScore--;
+                    ScoreOverlay.UpdateScore(-1, TeamB.TotalScore, false);
                 }
                 if (Input.GetKeyDown(InputKeys.Scores_TeamB_PlusOne))
                 {
-                    teamB.TotalScore++;
-                    ScoreOverlay.UpdateScore(1, teamB.TotalScore, false);
+                    TeamB.TotalScore++;
+                    ScoreOverlay.UpdateScore(1, TeamB.TotalScore, false);
                 }
             }
         }
@@ -524,7 +595,7 @@ namespace OnlyCornect
             }
 
             activeTeam.TotalScore += questionScore;
-            ScoreOverlay.UpdateScore(questionScore, activeTeam.TotalScore, ReferenceEquals(activeTeam, teamA));
+            ScoreOverlay.UpdateScore(questionScore, activeTeam.TotalScore, ReferenceEquals(activeTeam, TeamA));
 
             scoreHasBeenGrantedThisQuestion = true;
         }

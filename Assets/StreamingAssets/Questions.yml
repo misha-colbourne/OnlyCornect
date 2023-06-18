@@ -88,7 +88,7 @@ ConnectionRound:
     - Spreading out one's horse enclosures
     - William Shakespeare
     - Where Bon Jovi thinks we are
-    - "French cat +\n4x4 + alien"
+    - "Sounds like\nFrench cat +\n4x4 + alien"
   Answers:
     - Stable Diffusion
     - Bard
@@ -204,7 +204,7 @@ WallRound:
 # Wall 1
 -   - Connection: Skateboarding Moves
       Clues: 
-        - Smith
+        - Salad
         - Disaster
         - Madonna
         - Pop
@@ -216,7 +216,7 @@ WallRound:
         - Caveman
         - Mountain
 
-    - Connection: Start with Footballers
+    - Connection: Start with Premier League Footballers
       Clues:
         - Whitehall
         - Dieretic
@@ -238,7 +238,7 @@ WallRound:
         - Respect
         - Amused
 
-    - Connection: "Ends in \"The ___\" bands"
+    - Connection: "End in \"The ___\" bands"
       Clues:
         - Chives
         - Obscure
