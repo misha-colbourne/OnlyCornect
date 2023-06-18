@@ -46,20 +46,22 @@ namespace OnlyCornect
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
-        public void Next(bool showTiebreaker = false)
+        public bool Next(bool showTiebreaker = false)
         {
+            bool readyForBuzzers = false;
+
             if (!CategoryBox.IsVisible())
             {
                 foreach (var tween in CategoryBox.GetComponents<TweenHandler>())
                     tween.Begin();
-                return;
+                return false;
             }
             
             if (CategoryText.gameObject.IsVisible() && !ClueBox.gameObject.IsVisible())
             {
                 foreach (var tween in ClueBox.GetComponents<TweenHandler>())
                     tween.Begin();
-                return;
+                return false;
             }
 
             if (showTiebreaker)
@@ -69,6 +71,7 @@ namespace OnlyCornect
                     NextCategory(TIEBREAKER_CATEGORY_TEXT);
                     NextQuestion(tiebreaker.Clues[0]);
                     ShowingTiebreaker = true;
+                    readyForBuzzers = true;
                 }
                 else
                     RevealAnswer(tiebreaker.Clues[0]);
@@ -86,6 +89,7 @@ namespace OnlyCornect
                 {
                     ClueText.enableWordWrapping = false;
                     NextQuestion();
+                    readyForBuzzers = true;
                 }
                 else
                 {
@@ -93,6 +97,8 @@ namespace OnlyCornect
                     RevealAnswer();
                 }
             }
+
+            return readyForBuzzers;
         }
 
         // --------------------------------------------------------------------------------------------------------------------------------------
